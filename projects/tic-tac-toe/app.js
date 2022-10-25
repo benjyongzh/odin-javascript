@@ -66,9 +66,6 @@ const gameBoard = (() => {
     }
 
     const setMark = (tile, mark) => {
-        //use data attribute to determine if chosen
-        if (!tile.hasAttribute("player-choice")) return;
-
         //use _boardArray, textContent and setAttribute
         tile.textContent = mark;
         tile.setAttribute("player-choice", mark);
@@ -105,6 +102,10 @@ const displayController = (() => {
 
 function placeMark(event) {
     const mark = gameBoard.getCurrentPlayer().sign;
+    
+    //use data attribute to determine if chosen
+    if (event.target.hasAttribute("player-choice")) return;
+    
     gameBoard.setMark(event.target, mark);
 };
 
