@@ -1,21 +1,35 @@
 const gameBoard = (() => {
 
-    let _board = [];
     let _players = [];
     let _playerTurn = 0;
+
+    const _boardComponent = document.querySelector(".gameboard");
+    let _boardArray = [];
     
     const init = () => {
-        _board = [[null, null, null],
-                [null, null, null],
-                [null, null, null]
-                ];
-
         _players = [];
         _playerTurn = 0;
+
+        //renew board tiles
+        _boardArray = [];
+        _boardComponent.replaceChildren();
+        for (let i = 0; i < 3; i++){
+            let boardRow = [];
+            for (let j = 0; j < 3; j++){
+                const boardTile = document.createElement("div");
+                boardTile.classList.add("boardTile");
+                _boardComponent.appendChild(boardTile);
+                boardRow.push(boardTile);
+                //console.log(boardRow);
+            };
+            _boardArray.push(boardRow);
+            //console.log(boardArray)
+        };
+
     };
 
     const showBoard = () => {
-        console.log(_board);
+        console.log(_boardArray);
     }
 
     /* const getPlayerTurn = () => {
@@ -43,6 +57,11 @@ const gameBoard = (() => {
     }
 
     const setMark = (positionX, positionY, mark) => {
+
+        //use class attribute to determine if chosen
+        if (!_board[positionX][positionY] == null) return;
+
+        //use _boardArray, textContent and classList.add
         _board[positionX][positionY] = mark;
         if (_playerTurn >= _players.length-1) {
             _playerTurn = 0;
