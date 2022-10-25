@@ -1,7 +1,7 @@
 
 
 * {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -11,10 +11,13 @@
 :root {
     --color-bg: rgb(226, 231, 235);
     --color-bg-medium: rgb(179, 187, 196);
+    --color-bg-medium-hover: rgb(204, 212, 221);
+    --color-bg-medium-active: rgb(135, 141, 148);
     --color-accent: rgb(108, 165, 212);
-    --color-accent-hover: rgb(129, 182, 224);
-    --color-accent-active: rgb(97, 152, 197);
+    --color-accent-hover: rgb(129, 189, 238);
+    --color-accent-active: rgb(82, 131, 172);
     --color-dark: rgb(39, 43, 46);
+    --box-border: 1px solid var(--color-dark);
     
 }
 
@@ -61,7 +64,7 @@ body {
     display: grid;
     grid-template: auto auto / 1fr;
     justify-items: center;
-    gap: 30px;
+    gap: 35px;
 }
 
 .content>.gameboard {
@@ -69,13 +72,23 @@ body {
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
     height: 300px;
     width: 300px;
+    border: var(--box-border);
 }
 
 .gameboard>.boardTile {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid black;
+    border: var(--box-border);
+    background-color: var(--color-bg-medium);
+}
+
+.gameboard>.boardTile:hover {
+    background-color: var(--color-bg-medium-hover);
+}
+
+.gameboard>.boardTile:active {
+    background-color: var(--color-bg-medium-active);
 }
 
 .content>.content-text {
@@ -94,6 +107,14 @@ body {
     border-radius: 8px;
     background-color: var(--color-accent);
     border: 2px solid var(--color-dark);
+}
+
+.content>button.button-replay:hover {
+    background-color: var(--color-accent-hover);
+}
+
+.content>button.button-replay:active {
+    background-color: var(--color-accent-active);
 }
 
 .footer {
