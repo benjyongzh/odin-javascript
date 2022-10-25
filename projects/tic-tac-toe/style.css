@@ -81,6 +81,7 @@ body {
     justify-content: center;
     border: var(--box-border);
     background-color: var(--color-bg-medium);
+    font-size: 36px;
 }
 
 .gameboard>.boardTile:hover {
