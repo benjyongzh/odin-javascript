@@ -42,11 +42,51 @@ const gameBoard = (() => {
         tile.setAttribute("player-choice", mark);
         _setNextPlayerTurn();
         showBoard();
-        _checkEndgame();
+        _checkEndgame(tile);
     }
 
-    const _checkEndgame = () => {
+    const _checkEndgame = (tile) => {
+        //check each row
+        /* _boardArray.forEach(row => {
+            row.forEach(tile => {
+                if (!tile.hasAttribute("player-choice")) break;
+                if (tile.getAttribute('player-choice'))
+            })
+            return;
+        }) */
 
+        //check that row
+        let rowCorrect = 0;
+        _boardArray[tile.getAttribute('positionX')].forEach(rowTile => {
+            if (rowTile.getAttribute("player-choice") == tile.getAttribute("player-choice")) {
+                rowCorrect += 1;
+            }
+        });
+        console.log(`rowCorrect = ${rowCorrect}`);
+        if (rowCorrect >= 3) {
+            executeEndgame();
+            return;
+        }
+
+        //check each column
+        let columnCorrect = 0;
+        let column = _boardArray.map(row => {
+            return row[tile.getAttribute('positionY')];
+        })
+        column.forEach(columnTile => {
+            if (columnTile.getAttribute('player-choice') == tile.getAttribute('player-choice')) {
+                columnCorrect += 1;
+            }
+        });
+        console.log(`columnCorrect = ${columnCorrect}`);
+        if (columnCorrect >= 3) {
+            executeEndgame();
+            return;
+        }
+    }
+
+    const executeEndgame = () => {
+        console.log("game ended");
     }
 
     const reset = () => {
