@@ -4,6 +4,7 @@ const gameBoard = (() => {
     let _playerTurn = 0;
 
     const _boardComponent = document.querySelector(".gameboard");
+    const _contentText = document.querySelector(".content-text");
     let _boardArray = [];
     
     const init = () => {
@@ -18,6 +19,9 @@ const gameBoard = (() => {
             for (let j = 0; j < 3; j++){
                 const boardTile = document.createElement("div");
                 boardTile.classList.add("boardTile");
+                boardTile.setAttribute('positionX', i);
+                boardTile.setAttribute('positionY', j);
+                boardTile.addEventListener('click', placeMark);
                 _boardComponent.appendChild(boardTile);
                 boardRow.push(boardTile);
                 //console.log(boardRow);
@@ -34,11 +38,16 @@ const gameBoard = (() => {
 
     /* const getPlayerTurn = () => {
         return _playerTurn;
-    }
-
-    const setPlayerTurn = (turn) => {
-        _playerTurn = turn;
     } */
+
+    const _setNextPlayerTurn = () => {
+        if (_playerTurn >= _players.length-1) {
+            _playerTurn = 0;
+        } else {
+            _playerTurn += 1;
+        }
+        _contentText.textContent = `${_players[_playerTurn].name}'s turn...`;
+    }
 
     const getPlayersAll = () => {
         return _players;
@@ -56,18 +65,14 @@ const gameBoard = (() => {
         _players.push(player);
     }
 
-    const setMark = (positionX, positionY, mark) => {
+    const setMark = (tile, mark) => {
+        //use data attribute to determine if chosen
+        if (!tile.hasAttribute("player-choice")) return;
 
-        //use class attribute to determine if chosen
-        if (!_board[positionX][positionY] == null) return;
-
-        //use _boardArray, textContent and classList.add
-        _board[positionX][positionY] = mark;
-        if (_playerTurn >= _players.length-1) {
-            _playerTurn = 0;
-        } else {
-            _playerTurn += 1;
-        }
+        //use _boardArray, textContent and setAttribute
+        tile.textContent = mark;
+        tile.setAttribute("player-choice", mark);
+        _setNextPlayerTurn();
         showBoard();
     }
     
@@ -76,7 +81,6 @@ const gameBoard = (() => {
         init,
         showBoard,
         // getPlayerTurn,
-        // setPlayerTurn,
         getPlayersAll,
         getPlayerByIndex,
         getCurrentPlayer,
@@ -99,15 +103,14 @@ const displayController = (() => {
 
 })();
 
-function placeMark(positionX, positionY) {
-    const mark = this.sign;
-    gameBoard.setMark(positionX, positionY, mark);
+function placeMark(event) {
+    const mark = gameBoard.getCurrentPlayer().sign;
+    gameBoard.setMark(event.target, mark);
 };
 
 const player = (name, sign) => {
     return {name,
         sign,
-        placeMark: placeMark
     };
 };
 
