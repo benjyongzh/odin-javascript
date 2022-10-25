@@ -11,13 +11,13 @@ const gameBoard = (() => {
         console.log(_boardArray);
     }
 
-    const getPlayersAll = () => {
+    /* const getPlayersAll = () => {
         return _players;
-    }
+    } */
 
-    const getPlayerByIndex = (index) => {
+    /* const getPlayerByIndex = (index) => {
         return _players[index];
-    }
+    } */
 
     const getCurrentPlayer = () => {
         return _players[_playerTurn];
@@ -46,16 +46,26 @@ const gameBoard = (() => {
     }
 
     const _checkEndgame = (tile) => {
-        //check each row
-        /* _boardArray.forEach(row => {
-            row.forEach(tile => {
-                if (!tile.hasAttribute("player-choice")) break;
-                if (tile.getAttribute('player-choice'))
-            })
-            return;
-        }) */
-
         //check that row
+        if (_isEndgameRow(tile)) {
+            _executeEndgame();
+            return;
+        }
+
+        //check that column
+        if (_isEndgameColumn(tile)) {
+            _executeEndgame();
+            return;
+        }
+
+        //check diagonals
+        if (_isEndgameDiagonal(tile)) {
+            _executeEndgame();
+            return;
+        }
+    }
+
+    const _isEndgameRow = tile => {
         let rowCorrect = 0;
         _boardArray[tile.getAttribute('positionX')].forEach(rowTile => {
             if (rowTile.getAttribute("player-choice") == tile.getAttribute("player-choice")) {
@@ -64,11 +74,12 @@ const gameBoard = (() => {
         });
         console.log(`rowCorrect = ${rowCorrect}`);
         if (rowCorrect >= 3) {
-            executeEndgame();
-            return;
+            return true;
         }
+        return false;
+    }
 
-        //check each column
+    const _isEndgameColumn = tile => {
         let columnCorrect = 0;
         let column = _boardArray.map(row => {
             return row[tile.getAttribute('positionY')];
@@ -80,12 +91,20 @@ const gameBoard = (() => {
         });
         console.log(`columnCorrect = ${columnCorrect}`);
         if (columnCorrect >= 3) {
-            executeEndgame();
-            return;
+            return true;
         }
+        return false;
     }
 
-    const executeEndgame = () => {
+    const _isEndgameDiagonal = tile => {
+        if (!_boardArray[1][1].getAttribute('player-choice')) return false;
+        
+        //slant down-rightward
+        
+        //slant up-rightward
+    }
+
+    const _executeEndgame = () => {
         console.log("game ended");
     }
 
@@ -121,8 +140,8 @@ const gameBoard = (() => {
         reset,
         init,
         showBoard,
-        getPlayersAll,
-        getPlayerByIndex,
+        //getPlayersAll,
+        //getPlayerByIndex,
         getCurrentPlayer,
         addPlayer,
         setMark,
