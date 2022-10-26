@@ -123,13 +123,20 @@ const gameBoard = (() => {
         });
         console.log(`${direction}: slantSignCorrect = ${slantSignCorrect}`);
         if (slantSignCorrect >= 3) {
+            _highlightWinningTiles(array);
             return true;
         }
         return false;
     }
 
+    const _highlightWinningTiles = array => {
+        array.forEach(tile => {
+            tile.classList.add('winning-tile');
+        })
+    }
+
     const _executeEndgame = () => {
-        let gameOverText = `game ended. ${getCurrentPlayer()} has won!`;
+        let gameOverText = `game ended. ${getCurrentPlayer().name} has won!`;
         console.log(gameOverText);
         _contentText.textContent = gameOverText;
         _gameIsOver = true;
