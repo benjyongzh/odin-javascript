@@ -108,6 +108,15 @@ body {
     border-radius: 8px;
     background-color: var(--color-accent);
     border: 2px solid var(--color-dark);
+    transition: 0.1s ease-in-out;
+}
+
+.content>button.button-replay:not(.game-is-over) {
+    visibility: hidden;
+}
+
+.content>button.button-replay.game-is-over {
+    visibility: visible;
 }
 
 .content>button.button-replay:hover {

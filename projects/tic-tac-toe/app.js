@@ -2,9 +2,11 @@ const gameBoard = (() => {
 
     let _players = [];
     let _playerTurn = 0;
+    let _gameIsOver = false;
 
     const _boardComponent = document.querySelector(".gameboard");
     const _contentText = document.querySelector(".content-text");
+    const _replayButton = document.querySelector(".button-replay");
     let _boardArray = [];
 
     const showBoard = () => {
@@ -40,8 +42,7 @@ const gameBoard = (() => {
         //use _boardArray, textContent and setAttribute
         tile.textContent = mark;
         tile.setAttribute("player-choice", mark);
-        _setNextPlayerTurn();
-        showBoard();
+        //showBoard();
         _checkEndgame(tile);
     }
 
@@ -63,6 +64,8 @@ const gameBoard = (() => {
             _executeEndgame();
             return;
         }
+
+        _setNextPlayerTurn();
     }
 
     const _isEndgameRow = tile => {
@@ -126,16 +129,28 @@ const gameBoard = (() => {
     }
 
     const _executeEndgame = () => {
-        console.log("game ended");
+        let gameOverText = `game ended. ${getCurrentPlayer()} has won!`;
+        console.log(gameOverText);
+        _contentText.textContent = gameOverText;
+        _gameIsOver = true;
+        _replayButton.classList.add('game-is-over');
+
+
+        //switch on play-again button
+
     }
+
+    const checkGameIsOver = () => _gameIsOver;
 
     const reset = () => {
         _players = [];
         _playerTurn = 0;
+        _gameIsOver = false;
 
         //renew board tiles
         _boardArray = [];
         _boardComponent.replaceChildren();
+        _replayButton.classList.remove('game-is-over');
     }
 
     const init = () => {
@@ -153,6 +168,8 @@ const gameBoard = (() => {
             _boardArray.push(boardRow);
         };
 
+        _replayButton.addEventListener('click', pressReplay);
+
         _contentText.textContent = `Welcome to Tic Tac Toe! ${getCurrentPlayer().name} shall start...`;
 
     };
@@ -166,13 +183,21 @@ const gameBoard = (() => {
         getCurrentPlayer,
         addPlayer,
         setMark,
+        checkGameIsOver,
     };
 
 })();
 
+function pressReplay(event) {
+    gameBoard.reset();
+    gameBoard.addPlayer(player1);
+    gameBoard.addPlayer(player2);
+    gameBoard.init();
+}
+
 function placeMark(event) {
     //use data attribute to determine if chosen
-    if (event.target.hasAttribute("player-choice")) return;
+    if (event.target.hasAttribute("player-choice") || gameBoard.checkGameIsOver()) return;
 
     const mark = gameBoard.getCurrentPlayer().sign;
     gameBoard.setMark(event.target, mark);
