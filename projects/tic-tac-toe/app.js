@@ -66,42 +66,56 @@ const gameBoard = (() => {
     }
 
     const _isEndgameRow = tile => {
-        let rowCorrect = 0;
-        _boardArray[tile.getAttribute('positionX')].forEach(rowTile => {
-            if (rowTile.getAttribute("player-choice") == tile.getAttribute("player-choice")) {
-                rowCorrect += 1;
-            }
-        });
-        console.log(`rowCorrect = ${rowCorrect}`);
-        if (rowCorrect >= 3) {
-            return true;
-        }
-        return false;
+        return _testSignAlongArray(_boardArray[tile.getAttribute('positionX')], tile, 'row');
     }
 
     const _isEndgameColumn = tile => {
-        let columnCorrect = 0;
         let column = _boardArray.map(row => {
             return row[tile.getAttribute('positionY')];
         })
-        column.forEach(columnTile => {
-            if (columnTile.getAttribute('player-choice') == tile.getAttribute('player-choice')) {
-                columnCorrect += 1;
-            }
-        });
-        console.log(`columnCorrect = ${columnCorrect}`);
-        if (columnCorrect >= 3) {
-            return true;
-        }
-        return false;
+        return _testSignAlongArray(column, tile, 'column');
     }
 
     const _isEndgameDiagonal = tile => {
         if (!_boardArray[1][1].getAttribute('player-choice')) return false;
-        
+        return _checkIsDownwardDiagonal(tile) ? true : _checkIsUpwardDiagonal(tile);
+    }
+
+    const _checkIsDownwardDiagonal = tile => {
         //slant down-rightward
-        
+        //create array of downward diagonal
+        let downArray = _boardArray.flat();
+        downArray = downArray.filter(element => {
+            return element.getAttribute('positionY') == element.getAttribute('positionX');
+        })
+
+        //test along this diagonal
+        return _testSignAlongArray(downArray, tile, 'downward diagonal');
+    }
+
+    const _checkIsUpwardDiagonal = tile => {
         //slant up-rightward
+        let upArray = _boardArray.flat();
+        upArray = upArray.filter(element => {
+            return element.getAttribute('positionY') == element.getAttribute('positionX');
+        })
+
+        //test along this diagonal
+        return _testSignAlongArray(upArray, tile, 'upward diagonal');
+    }
+        
+    const _testSignAlongArray = (array, tile, direction) => {
+        let slantSignCorrect = 0;
+        array.forEach(element => {
+            if (element.getAttribute('player-choice') == tile.getAttribute('player-choice')) {
+                slantSignCorrect += 1;
+            };
+        });
+        console.log(`${direction}: slantSignCorrect = ${slantSignCorrect}`);
+        if (slantSignCorrect >= 3) {
+            return true;
+        }
+        return false;
     }
 
     const _executeEndgame = () => {
