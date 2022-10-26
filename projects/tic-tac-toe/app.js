@@ -95,13 +95,21 @@ const gameBoard = (() => {
 
     const _checkIsUpwardDiagonal = tile => {
         //slant up-rightward
-        let upArray = _boardArray.flat();
-        upArray = upArray.filter(element => {
-            return element.getAttribute('positionY') == element.getAttribute('positionX');
-        })
+        //create array of upward diagonal
+        let finalArray = [];
+        let upArray = Array.from(_boardArray)
+                            .reverse();
+        upArray.forEach(row => {
+            row = row.filter(element => {
+                return (upArray.indexOf(row) == row.indexOf(element));
+            });
+            finalArray.push(row[0]);
+            console.log(finalArray);
+        });
+        console.log(upArray);
 
         //test along this diagonal
-        return _testSignAlongArray(upArray, tile, 'upward diagonal');
+        return _testSignAlongArray(finalArray, tile, 'upward diagonal');
     }
         
     const _testSignAlongArray = (array, tile, direction) => {
