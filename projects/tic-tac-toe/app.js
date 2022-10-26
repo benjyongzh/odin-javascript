@@ -3,6 +3,7 @@ const gameBoard = (() => {
     let _players = [];
     let _playerTurn = 0;
     let _gameIsOver = false;
+    let _turnCount = 0;
 
     const _boardComponent = document.querySelector(".gameboard");
     const _contentText = document.querySelector(".content-text");
@@ -36,7 +37,15 @@ const gameBoard = (() => {
             _playerTurn += 1;
         }
         _contentText.textContent = `${getCurrentPlayer().name}'s turn...`;
+        _turnCount += 1;
+        _checkOutOfTurns();
     }
+
+    const _checkOutOfTurns = () => {
+        if (_turnCount >= _boardArray.flat().length) {
+            _executeStalemate();
+        };
+    };
 
     const setMark = (tile, mark) => {
         //use _boardArray, textContent and setAttribute
@@ -49,19 +58,19 @@ const gameBoard = (() => {
     const _checkEndgame = (tile) => {
         //check that row
         if (_isEndgameRow(tile)) {
-            _executeEndgame();
+            _executeWinningEndgame();
             return;
         }
 
         //check that column
         if (_isEndgameColumn(tile)) {
-            _executeEndgame();
+            _executeWinningEndgame();
             return;
         }
 
         //check diagonals
         if (_isEndgameDiagonal(tile)) {
-            _executeEndgame();
+            _executeWinningEndgame();
             return;
         }
 
@@ -135,16 +144,20 @@ const gameBoard = (() => {
         })
     }
 
-    const _executeEndgame = () => {
-        let gameOverText = `game ended. ${getCurrentPlayer().name} has won!`;
+    const _executeWinningEndgame = () => {
+        let gameOverText = `Game over. ${getCurrentPlayer().name} has won!`;
         console.log(gameOverText);
         _contentText.textContent = gameOverText;
         _gameIsOver = true;
         _replayButton.classList.add('game-is-over');
+    }
 
-
-        //switch on play-again button
-
+    const _executeStalemate = () => {
+        let gameOverText = `Game over. Stalemate.`;
+        console.log(gameOverText);
+        _contentText.textContent = gameOverText;
+        _gameIsOver = true;
+        _replayButton.classList.add('game-is-over');
     }
 
     const checkGameIsOver = () => _gameIsOver;
@@ -153,6 +166,7 @@ const gameBoard = (() => {
         _players = [];
         _playerTurn = 0;
         _gameIsOver = false;
+        _turnCount = 0;
 
         //renew board tiles
         _boardArray = [];
