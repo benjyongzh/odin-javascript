@@ -135,3 +135,24 @@ function removeBook(event) {
     //delete book
     bookObject.remove();
 }
+
+class Library {
+    
+    collection = [];
+
+    get collection() {
+        return collection;
+    }
+
+    set collection(array) {
+        collection = array;
+    }
+
+    addBook = book => {
+        collection.push(book);
+    }
+
+    removeBook = book => {
+        
+    }
+}
