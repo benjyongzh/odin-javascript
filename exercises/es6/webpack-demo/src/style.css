@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'MyFont';
+    src: url('./Growland-Bold.otf') format('otf'),
+        url('./Growland-Black.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.hello {
+    color: red;
+    background: url('./my-image.jpg');
+    font-family: "MyFont";
+}
