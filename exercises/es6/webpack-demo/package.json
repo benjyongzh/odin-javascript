@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack serve --open"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "xml-loader": "^1.2.1"
   },
   "dependencies": {
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "webpack-dev-server": "^4.11.1"
   }
 }
