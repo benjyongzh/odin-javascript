@@ -1,1 +1,1 @@
-console.log("testing webpack");
+(()=>{"use strict";document.body.appendChild(function(){const e=document.createElement("div");return e.classList.add("header"),e.textContent="I am the header. Look at me.",e}())})();
