@@ -1,4 +1,5 @@
-import headerComponent from './header.js';
+import headerComponent from './components/header.js';
+import menuContentComponent from './components/menu-content';
 
 /* function component() {
     const element = document.createElement('.content');
@@ -8,5 +9,8 @@ import headerComponent from './header.js';
   
     return element;
   } */
-  
-document.body.appendChild(headerComponent());
+
+const tabNames = ['Home', 'Contact', 'About'];
+
+document.body.appendChild(headerComponent(tabNames));
+document.body.appendChild(menuContentComponent());
