@@ -1,3 +1,4 @@
+import './style.css';
 import headerComponent from './components/header.js';
 import menuContentComponent from './components/menu-content';
 
