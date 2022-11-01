@@ -17,6 +17,7 @@ export default function headerComponent(tabs) {
     tab.classList.add("tab");
     const tabButton = document.createElement('button');
     tabButton.classList.add("tabButton");
+    tabButton.setAttribute("id", tabs[i]);
     tabButton.textContent = tabs[i];
     tab.appendChild(tabButton);
     ul.appendChild(tab);

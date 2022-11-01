@@ -16,5 +16,21 @@ const menuItems = {
 };
 
 const main = document.querySelector(".content");
-main.appendChild(headerComponent(tabNames));
-main.appendChild(menuContentComponent(menuItems));
+
+//header with tabs
+const header = headerComponent(tabNames);
+main.appendChild(header);
+const menuTab = header.querySelector(`#${tabNames[0]}`);
+menuTab.addEventListener('click', tabClicked);
+const ContactTab = header.querySelector(`#${tabNames[1]}`);
+ContactTab.addEventListener('click', tabClicked);
+const AboutTab = header.querySelector(`#${tabNames[2]}`);
+AboutTab.addEventListener('click', tabClicked);
+
+//menu
+const menu = menuContentComponent(menuItems);
+main.appendChild(menu);
+
+function tabClicked(event) {
+  console.log(event);
+}
