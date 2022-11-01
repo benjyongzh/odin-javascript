@@ -5,7 +5,7 @@ export default function headerComponent(tabs) {
   //title
   const title = document.createElement('div');
   title.classList.add("header-title");
-  title.textContent = "I am the header. Look at me.";
+  title.textContent = "Eat food here";
   main.appendChild(title);
   //tab button area
   const ul = document.createElement('ul');
