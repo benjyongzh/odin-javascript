@@ -5,10 +5,10 @@ export default function contactContentComponent(contactItems) {
     // console.log(Object.keys(menuItems));
 
     //title
-      const title = document.createElement('div');
-      title.classList.add('contact-title');
-      title.textContent = "Reach out to us!";
-      main.appendChild(title);
+    const title = document.createElement('div');
+    title.classList.add('contact-title');
+    title.textContent = "Reach out to us!";
+    main.appendChild(title);
 
     
 

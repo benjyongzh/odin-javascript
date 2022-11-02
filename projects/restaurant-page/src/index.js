@@ -6,6 +6,7 @@ import aboutContentComponent from './components/about-content';
 
 const app = (() => {
 
+  const companyName = "Get Fat Here";
   const tabNames = ['Home', 'Contact', 'About'];
   const menuItems = {
     "Mains": {
@@ -20,14 +21,13 @@ const app = (() => {
   };
   
   const contactItems = {
-    "Who we are": "Get Fat Here",
+    "Who we are": companyName,
     "Where we are": "248 Henderson Road, #01-24, Singapore 589248",
     "Call us at": "+65 68120552",
   };
   
   const aboutItems = {
-    "title": "Who we are",
-    "text": "Have you ever wished you were fat? Tired of being on the side of society without fat privilege? Are you bullied for having a healthy and beautiful physique? Come on down to Get Fat Here, where you can... get fat here! No judgement on your looks and stature. We are all here to eat to our hearts content. We are open 24/7, because stomachs don't need a break.",
+    "What are we all about": "Have you ever wished you were fat? Tired of being on the side of society without fat privilege? Are you bullied for having a healthy and beautiful physique? Come on down to Get Fat Here, where you can... get fat here! No judgement on your looks and stature. We are all here to eat to our hearts content. We are open 24/7, because stomachs don't need a break.",
   };
   
   const main = document.querySelector(".content");
@@ -45,18 +45,18 @@ const app = (() => {
   //main.appendChild(about);
   
   //header with tabs
-  const header = headerComponent(tabNames);
+  const header = headerComponent(companyName, tabNames);
   main.appendChild(header);
   const menuTab = header.querySelector(`#${tabNames[0]}`);
   menuTab.addEventListener('click', () => {
     tabClicked(menu);
   });
-  const ContactTab = header.querySelector(`#${tabNames[1]}`);
-  ContactTab.addEventListener('click', () => {
+  const contactTab = header.querySelector(`#${tabNames[1]}`);
+  contactTab.addEventListener('click', () => {
     tabClicked(contact);
   });
-  const AboutTab = header.querySelector(`#${tabNames[2]}`);
-  AboutTab.addEventListener('click', () => {
+  const aboutTab = header.querySelector(`#${tabNames[2]}`);
+  aboutTab.addEventListener('click', () => {
     tabClicked(about);
   });
   

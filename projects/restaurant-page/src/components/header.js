@@ -1,11 +1,11 @@
-export default function headerComponent(tabs) {
+export default function headerComponent(companyName, tabs) {
   //body
   const main = document.createElement('div');
   main.classList.add("header");
   //title
   const title = document.createElement('div');
   title.classList.add("header-title");
-  title.textContent = "Eat food here";
+  title.textContent = companyName;
   main.appendChild(title);
   //tab button area
   const ul = document.createElement('ul');

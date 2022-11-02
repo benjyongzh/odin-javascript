@@ -105,7 +105,8 @@ body {
 }
 
 .menu-category,
-.contact-content {
+.contact-content,
+.about-content {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -177,5 +178,20 @@ body {
 }
 
 .contact-info-text {
+    font-size: 14px;
+}
+
+.about-title,
+.about-text {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.about-title {
+    font-size: 28px;
+}
+
+.about-text {
     font-size: 14px;
 }
