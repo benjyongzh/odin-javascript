@@ -1,42 +1,16 @@
-const Project = () => {
-    const tasks = [];
+import dashboardComponent from "./components/dashboard";
+import projectComponent from "./components/project";
+import taskComponent from "./components/task";
 
-    const addTask = task => {
-        tasks.push(task);
-    };
+(function () {
 
-    const removeTask = task => {
-        if (tasks.includes(task)) {
-            tasks.splice(tasks.indexOf(task), 1);
-        };
-    };
-}
+    const dashboard = dashboardComponent();
 
-const Task = (title="My Task", description=""/* , dueDate */, priority="low") => {
-    
-    const setTitle = inputTitle => title = inputTitle;
-    const setDescription = inputDescription => description = inputDescription;
-    //const setDueDate = inputDueDate => dueDate = inputDueDate;
-    const setPriority = inputPriority => priority = inputPriority;
+    //dashboard publish adding and removal of projects
 
+    const newProject = projectComponent("myprojectname", "somedesc");
+    const someTask = taskComponent("some task", "i gotta do this", "medium");
+    newProject.addTask(someTask);
+    console.log(newProject);
 
-    const getTitle = () => title;
-    const getDescription = () => description;
-    //const getDueDate = () => dueDate;
-    const getPriority = () => priority;
-
-    return {
-        setTitle,
-        setDescription,
-        //setDueDate,
-        setPriority,
-
-        getTitle,
-        getDescription,
-        //getDueDate,
-        getPriority,
-    };
-};
-
-const lolThisTask = Task();
-const lolThatTask = Task("loltask", "loldesc");
+})();
