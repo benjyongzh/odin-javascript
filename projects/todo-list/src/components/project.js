@@ -1,6 +1,6 @@
 //import { eventManager } from "../index";
 
-function projectItem(title="My Project", description="") {
+export default function projectItem(title="My Project", description="") {
 
     const setTitle = inputTitle => title = inputTitle;
     const setDescription = inputDescription => description = inputDescription;
@@ -33,8 +33,4 @@ function projectItem(title="My Project", description="") {
         getTasks
     }
 
-}
-
-export {
-    projectItem
 }

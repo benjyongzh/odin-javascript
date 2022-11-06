@@ -1,10 +1,7 @@
-import * as projectManagement from "./components/projectManager";
+import * as projectManager from "./components/projectManager";
 //import projectComponent from "./components/project";
 import taskComponent from "./components/task";
 import * as eventManager from "./components/eventManager";
-
-const projectManager = projectManagement.projectManagerComponent();
-projectManager.init();
 
 const addProjectButton = document.querySelector("button.dashboard-add-project-button");
 //const addTaskButton = document.querySelector("button.add-task-button");
