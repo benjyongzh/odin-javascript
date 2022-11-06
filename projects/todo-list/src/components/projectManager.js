@@ -1,15 +1,20 @@
-import projectComponent from "./project";
-import { eventManager } from "../index";
+import {projectItem} from "./project";
+import * as eventManager from "./eventManager";
 
-export default function ProjectManagerComponent() {
+function projectManagerComponent() {
     
     const _projects = [];
 
     const getProjects = () => _projects;
 
-    const addProject = project => {
+    const createProject = projectName => {
+        const project = projectItem(projectName);
+        eventManager.publish('addNewProject', project);
+    }
+
+    /* const addProject = project => {
         _projects.push(project);
-    };
+    }; */
 
     const removeProject = project => {
         if (_projects.includes(project)) {
@@ -18,18 +23,20 @@ export default function ProjectManagerComponent() {
     };
 
     const init = () => {
-        eventManager.subscribe('addNewProject', addProject);
+        eventManager.subscribe('addNewProject', eventArgs => {
+            _projects.push(eventArgs);
+        });
     }
 
     return {
         getProjects,
-        addProject,
+        createProject,
+        //addProject,
         removeProject,
         init
     };
 };
 
-export function createProject(name){
-    const project = projectComponent(name);
-    return project;
-};
+export {
+    projectManagerComponent,
+}

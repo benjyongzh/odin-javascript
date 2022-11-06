@@ -1,43 +1,16 @@
-function eventItem(name) {
-    const handlers = [];
-
-    const addHandler = handler => {
-        handlers.push(handler);
-    }
-
-    const removeHandler = handlerToRemove => {
-        for (let i = 0; i < handlers.length; i++){
-            if (handlers[i] == handlerToRemove){
-                handlers.splice(i,1);
-                break;
-            }
-        }
-    }
-
-    const fire = eventArgs => {
-        handlers.forEach(handle => {
-            handle(eventArgs);
-        });
-    }
-
-    return {
-        name,
-        handlers,
-        addHandler,
-        removeHandler,
-        fire
-    }
-}
-
-function eventManager() {
+/* export default function eventManager() {
     const events = [];
 
-    const showEvents = () => events;
+    const getEvents = () => {
+        return events;
+        //events.forEach(event => console.log(event.name));
+    }
 
-    const getEvent = (eventName) => {
-        return events.filter(event => {
+    const getEvent = eventName => {
+        const eventList = events.filter(event => {
             event.name === eventName}
-        )[0];
+        );
+        return eventList[0];
     };
 
     const publish = (eventName, eventArgs) => {
@@ -62,14 +35,51 @@ function eventManager() {
     }
 
     return {
-        showEvents,
+        getEvents,
         publish,
         subscribe
     }
 
+}; */
+
+import eventItem from "./eventItem";
+
+const events = [];
+
+function getEvents() {
+    return events;
+}
+
+function getEvent (eventName) {
+    const eventList = events.filter(event => {
+        event.name === eventName}
+    );
+    return eventList[0];
 };
 
-export {
-    eventItem,
-    eventManager
+function publish(eventName, eventArgs) {
+    let event = getEvent(eventName);
+
+    if (!event) {
+        event = eventItem(eventName);
+        events.push(event);
+    }
+    event.fire(eventArgs);
+};
+
+function subscribe(eventName, handler) {
+    let event = getEvent(eventName);
+    if (!event){
+        event = eventItem(eventName);
+        events.push(event);
+    }
+
+    event.addHandler(handler);
 }
+
+export {
+    getEvents,
+    getEvent,
+    publish,
+    subscribe
+};
