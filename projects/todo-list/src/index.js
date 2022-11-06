@@ -6,6 +6,7 @@ import{eventItem as event, eventManager as eventAggregator} from "./components/e
 
 const eventManager = eventAggregator();
 const projectManager = projectManagerComponent();
+projectManager.init();
 
 const addProjectButton = document.querySelector("button.dashboard-add-project-button");
 //const addTaskButton = document.querySelector("button.add-task-button");
@@ -13,7 +14,6 @@ const addProjectButton = document.querySelector("button.dashboard-add-project-bu
 addProjectButton.addEventListener('click', (event) => {
     event.preventDefault();
     const newProjectInput = event.target.parentElement.querySelector("#new-project-input");
-    //console.log(newProjectInput.value);
     addProject(newProjectInput.value);
 });
 
@@ -27,8 +27,9 @@ console.log(eventManager.showEvents());
 function addProject(name) {
     const newProject = createProject(name);
     //projectManager.addProject(newProject);
-    eventManager.publish('addNewProject', newProject)
-    console.log(eventManager)
+    eventManager.publish('addNewProject', newProject);
+    console.log(eventManager.showEvents());
+    console.log(projectManager.getProjects());
 }
 
 export {

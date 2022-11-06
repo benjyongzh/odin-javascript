@@ -1,13 +1,12 @@
 import projectComponent from "./project";
 import { eventManager } from "../index";
 
-const ProjectManager = () => {
+export default function ProjectManagerComponent() {
     
     const _projects = [];
 
     const getProjects = () => _projects;
 
-    eventManager.subscribe('addNewProject', addProject);
     const addProject = project => {
         _projects.push(project);
     };
@@ -18,15 +17,16 @@ const ProjectManager = () => {
         };
     };
 
+    const init = () => {
+        eventManager.subscribe('addNewProject', addProject);
+    }
+
     return {
         getProjects,
         addProject,
-        removeProject
+        removeProject,
+        init
     };
-};
-
-export default function projectManagerComponent(){
-    return ProjectManager;
 };
 
 export function createProject(name){

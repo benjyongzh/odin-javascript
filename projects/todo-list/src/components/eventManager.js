@@ -1,5 +1,5 @@
-const eventItem = (name) => {
-    handlers = [];
+function eventItem(name) {
+    const handlers = [];
 
     const addHandler = handler => {
         handlers.push(handler);
@@ -29,7 +29,7 @@ const eventItem = (name) => {
     }
 }
 
-const eventManager = () => {
+function eventManager() {
     const events = [];
 
     const showEvents = () => events;
@@ -41,7 +41,7 @@ const eventManager = () => {
     };
 
     const publish = (eventName, eventArgs) => {
-        const event = getEvent(eventName);
+        let event = getEvent(eventName);
 
         if (!event) {
             event = eventItem(eventName);
@@ -51,7 +51,7 @@ const eventManager = () => {
     };
 
     const subscribe = (eventName, handler) => {
-        const event = getEvent(eventName);
+        let event = getEvent(eventName);
         if (!event){
             event = eventItem(eventName);
             events.push(event);
