@@ -1,4 +1,4 @@
-import { eventManager } from "../index";
+//import { eventManager } from "../index";
 
 const Project = (title="My Project", description="") => {
 

@@ -32,6 +32,8 @@ const eventItem = (name) => {
 const eventManager = () => {
     const events = [];
 
+    const showEvents = () => events;
+
     const getEvent = (eventName) => {
         return events.filter(event => {
             event.name === eventName}
@@ -60,6 +62,7 @@ const eventManager = () => {
     }
 
     return {
+        showEvents,
         publish,
         subscribe
     }

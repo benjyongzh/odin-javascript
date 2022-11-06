@@ -8,10 +8,12 @@ const eventManager = eventAggregator();
 const projectManager = projectManagerComponent();
 
 const addProjectButton = document.querySelector("button.dashboard-add-project-button");
-const newProjectInput = document.querySelector("#new-project-input");
 //const addTaskButton = document.querySelector("button.add-task-button");
 
-addProjectButton.addEventListener('click', () => {
+addProjectButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const newProjectInput = event.target.parentElement.querySelector("#new-project-input");
+    //console.log(newProjectInput.value);
     addProject(newProjectInput.value);
 });
 
@@ -20,11 +22,13 @@ const someTask = taskComponent("some task", "i gotta do this", "medium");
 newProject.addTask(someTask);
 console.log(newProject); */
 
-
+console.log(eventManager.showEvents());
 
 function addProject(name) {
     const newProject = createProject(name);
-    projectManager.addProject(newProject);
+    //projectManager.addProject(newProject);
+    eventManager.publish('addNewProject', newProject)
+    console.log(eventManager)
 }
 
 export {

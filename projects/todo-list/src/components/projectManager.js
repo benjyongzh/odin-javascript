@@ -1,4 +1,5 @@
 import projectComponent from "./project";
+import { eventManager } from "../index";
 
 const ProjectManager = () => {
     
@@ -6,6 +7,7 @@ const ProjectManager = () => {
 
     const getProjects = () => _projects;
 
+    eventManager.subscribe('addNewProject', addProject);
     const addProject = project => {
         _projects.push(project);
     };
