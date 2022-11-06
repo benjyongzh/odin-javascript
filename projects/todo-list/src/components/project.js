@@ -1,3 +1,5 @@
+import { eventManager } from "../index";
+
 const Project = (title="My Project", description="") => {
 
     const setTitle = inputTitle => title = inputTitle;

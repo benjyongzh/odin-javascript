@@ -15,8 +15,17 @@
     <div class="content">
         <div class="dashboard">
             <div class="dashboard-title">Dashboard</div>
-            <button class="dashboard-add-project-button">Add New Project</button>
-            <ul class="projectlist"></ul>
+
+            <div class="projects-section">
+                <div class="projects-section-title"></div>
+                <ul class="projectlist"></ul>
+            </div>
+
+            <form action="post" class="add-new-project-section">
+                <label for="new-project-name" class="new-project-label">Add New Project</label>
+                <input type="text" name="new-project-name" id="new-project-input" placeholder="Project Name">
+                <button class="dashboard-add-project-button">Add</button>
+            </form>
         </div>
 
         <div class="tasks">
@@ -28,6 +37,7 @@
     <div class="footer">
         <div class="credits">The Odin Project - Benjamin Yong - Nov 2022</div>
     </div>
+    
     <script src="./main.js"></script>
 </body>
 </html>
