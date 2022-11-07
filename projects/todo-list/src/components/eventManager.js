@@ -44,13 +44,15 @@
 
 import eventItem from "./eventItem";
 
-const events = [];
+const _events = [];
+
+function getEvents() {return _events;};
 
 function getEvent(eventName) {
     //console.log(events);
     const tempList = [];
     //console.log(events.length);
-    events.forEach(event => {
+    _events.forEach(event => {
 
         //console.log(events.length);
         if (event.name == eventName){
@@ -63,12 +65,10 @@ function getEvent(eventName) {
 };
 
 function publish(eventName, eventArgs) {
-    //console.log("publish ran");
     let event = getEvent(eventName);
-    //console.log(event);
     if (!event) {
         event = eventItem(eventName);
-        events.push(event);
+        _events.push(event);
     }
     /* console.log(event);
     console.log(events.length); */
@@ -80,7 +80,7 @@ function subscribe(eventName, handler) {
     let event = getEvent(eventName);
     if (!event){
         event = eventItem(eventName);
-        events.push(event);
+        _events.push(event);
     }
 
     //console.log(events);
@@ -89,7 +89,8 @@ function subscribe(eventName, handler) {
 }
 
 export {
-    events,
+    //events,
+    getEvents,
     getEvent,
     publish,
     subscribe
