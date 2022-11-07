@@ -44,33 +44,34 @@
 
 import eventItem from "./eventItem";
 
-const _events = [];
-
-function getEvents() {
-    return _events;
-}
+const events = [];
 
 function getEvent(eventName) {
     //console.log(events);
     const tempList = [];
-    console.log(_events);
-    _events.forEach(event => {
-        console.log(event.name);
+    //console.log(events.length);
+    events.forEach(event => {
+
+        //console.log(events.length);
         if (event.name == eventName){
             tempList.push(event);
         }
     })
 
-    console.log(tempList);
+    //console.log(tempList);
     return tempList[0];
 };
 
 function publish(eventName, eventArgs) {
+    //console.log("publish ran");
     let event = getEvent(eventName);
+    //console.log(event);
     if (!event) {
         event = eventItem(eventName);
-        _events.push(event);
+        events.push(event);
     }
+    /* console.log(event);
+    console.log(events.length); */
 
     event.fire(eventArgs);
 };
@@ -79,14 +80,16 @@ function subscribe(eventName, handler) {
     let event = getEvent(eventName);
     if (!event){
         event = eventItem(eventName);
-        _events.push(event);
+        events.push(event);
     }
+
+    //console.log(events);
 
     event.addHandler(handler);
 }
 
 export {
-    getEvents,
+    events,
     getEvent,
     publish,
     subscribe

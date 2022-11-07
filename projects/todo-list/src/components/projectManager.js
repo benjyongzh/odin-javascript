@@ -58,6 +58,9 @@ function removeProject (project){
 
 eventManager.subscribe('addNewProject', eventArgs => {
     _projects.push(eventArgs);
+    /* _projects.forEach(project => {
+        console.log(project.getTitle());
+    }) */
 });
 
 export {

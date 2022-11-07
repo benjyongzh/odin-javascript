@@ -10,9 +10,13 @@ addProjectButton.addEventListener('click', (event) => {
     const newProjectInput = event.target.parentElement.querySelector("#new-project-input");
     projectManager.createProject(newProjectInput.value);
 
-    //console.log(eventManager.getEvents());
-    //console.log(projectManager.getProjects());
+    console.log(eventManager.events);
+    console.log(projectManager.getProjects());
 });
+
+/* export {
+    eventManager
+} */
 
 /* const newProject = projectComponent("myprojectname", "somedesc");
 const someTask = taskComponent("some task", "i gotta do this", "medium");
