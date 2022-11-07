@@ -64,6 +64,14 @@ eventManager.subscribe('addNewProject', eventArgs => {
     }) */
 });
 
+eventManager.subscribe('removeProject', eventArgs => {
+    _projects.splice(_projects.indexOf(eventArgs), 1);
+    /* _projects.forEach(project => {
+        console.log(project.getTitle());
+    }) */
+});
+
+
 console.log('projectManager.js is run');
 
 export {
