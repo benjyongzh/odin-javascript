@@ -37,16 +37,22 @@ function newProject(eventArgs){
 
 function getProjectDOMFromEvent(eventArgs){
     const allProjects = projects.querySelectorAll('.project-list-item');
+    let projectDOM = undefined;
     allProjects.forEach(project => {
         if (project.getAttribute('project-id') == eventArgs.projectID) {
-            return project;
+            projectDOM = project;
         };
     });
-    return undefined;
+    return projectDOM;
 }
 
 function selectProjectDOM(eventArgs) {
     const projectDOM = getProjectDOMFromEvent(eventArgs);
+    if (projectDOM == undefined) {
+        console.log("projectDOM is undefined.");
+        return;
+    };
+
     const allProjects = projects.querySelectorAll('.project-list-item');
     allProjects.forEach(project => {
         project.classList.remove('selected-project');
