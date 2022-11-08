@@ -5,26 +5,21 @@ const projects = document.querySelector('ul.project-list');
 function addNewProjectDOM(eventArgs){
     const newProj = newProject(eventArgs);
     projects.appendChild(newProj);
-    selectProjectDOM(newProj);
+    eventManager.publish('selectProject', eventArgs);
 }
 
 function removeProjectDOM(eventArgs){
-    const allProjects = projects.querySelectorAll('.project-list-item');
-    
-    allProjects.forEach(project => {
-        //use an ID and project title
-        const title = project.querySelector('.project-list-item-name');
-        if (title.textContent == eventArgs.getTitle() && project.getAttribute('project-id') == eventArgs.projectID) {
-            console.log("this is run")
-            projects.removeChild(project);
-        };
-    });
+    projects.removeChild(getProjectDOMFromEvent(eventArgs));
 };
 
 function newProject(eventArgs){
     const project = document.createElement('div');
     project.classList.add('project-list-item');
     project.setAttribute('project-id', eventArgs.projectID);
+    //for selection
+    project.addEventListener('click', () => {
+        eventManager.publish('selectProject', eventArgs);
+    })
 
     //project title
     const title = newDivText('project-list-item-name', eventArgs.getTitle());
@@ -38,9 +33,20 @@ function newProject(eventArgs){
     })
 
     return project;
+};
+
+function getProjectDOMFromEvent(eventArgs){
+    const allProjects = projects.querySelectorAll('.project-list-item');
+    allProjects.forEach(project => {
+        if (project.getAttribute('project-id') == eventArgs.projectID) {
+            return project;
+        };
+    });
+    return undefined;
 }
 
-function selectProjectDOM(projectDOM) {
+function selectProjectDOM(eventArgs) {
+    const projectDOM = getProjectDOMFromEvent(eventArgs);
     const allProjects = projects.querySelectorAll('.project-list-item');
     allProjects.forEach(project => {
         project.classList.remove('selected-project');
@@ -68,6 +74,10 @@ eventManager.subscribe('addNewProject', eventArgs => {
 
 eventManager.subscribe('removeProject', eventArgs => {
     removeProjectDOM(eventArgs);
+});
+
+eventManager.subscribe('selectProject', eventArgs => {
+    selectProjectDOM(eventArgs);
 });
 
 
