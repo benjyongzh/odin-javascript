@@ -3,7 +3,9 @@ import * as eventManager from "./eventManager";
 const projects = document.querySelector('ul.project-list');
 
 function addNewProjectDOM(eventArgs){
-    projects.appendChild(newProject(eventArgs));
+    const newProj = newProject(eventArgs);
+    projects.appendChild(newProj);
+    selectProjectDOM(newProj);
 }
 
 function removeProjectDOM(eventArgs){
@@ -36,6 +38,14 @@ function newProject(eventArgs){
     })
 
     return project;
+}
+
+function selectProjectDOM(projectDOM) {
+    const allProjects = projects.querySelectorAll('.project-list-item');
+    allProjects.forEach(project => {
+        project.classList.remove('selected-project');
+    });
+    projectDOM.classList.add('selected-project');
 }
 
 function newDivText(classname, text){
