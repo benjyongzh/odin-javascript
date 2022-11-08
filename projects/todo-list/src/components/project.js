@@ -2,11 +2,12 @@ import * as eventManager from "./eventManager";
 
 export default function projectItem(title="My Project", description="") {
 
+    let projectID;
+
     const setTitle = inputTitle => title = inputTitle;
     const setDescription = inputDescription => description = inputDescription;
     const getTitle = () => title;
     const getDescription = () => description;
-
     
 
     /* const _tasks = [];
@@ -24,6 +25,7 @@ export default function projectItem(title="My Project", description="") {
     const getTasks = () => _tasks; */
 
     return {
+        projectID,
         setTitle,
         setDescription,
 

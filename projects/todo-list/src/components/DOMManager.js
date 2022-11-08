@@ -8,10 +8,12 @@ function addNewProjectDOM(eventArgs){
 
 function removeProjectDOM(eventArgs){
     const allProjects = projects.querySelectorAll('.project-list-item');
-    console.log(allProjects);
+    
     allProjects.forEach(project => {
-        //use an ID
-        if (project.textContent == eventArgs.getTitle()) {
+        //use an ID and project title
+        const title = project.querySelector('.project-list-item-name');
+        if (title.textContent == eventArgs.getTitle() && project.getAttribute('project-id') == eventArgs.projectID) {
+            console.log("this is run")
             projects.removeChild(project);
         };
     });
@@ -20,15 +22,28 @@ function removeProjectDOM(eventArgs){
 function newProject(eventArgs){
     const project = document.createElement('div');
     project.classList.add('project-list-item');
-    project.textContent = eventArgs.getTitle();
+    project.setAttribute('project-id', eventArgs.projectID);
+
+    //project title
+    const title = newDivText('project-list-item-name', eventArgs.getTitle());
+    project.appendChild(title);
+
+    //project delete button
     const deleteButton = newButton('project-delete-buton', 'del');
     project.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
         eventManager.publish('removeProject', eventArgs);
     })
+
     return project;
 }
 
+function newDivText(classname, text){
+    const div = document.createElement('div');
+    div.classList.add(classname);
+    div.textContent = text;
+    return div;
+}
 
 function newButton(classname, text){
     const button = document.createElement('button');

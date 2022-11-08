@@ -43,10 +43,13 @@ import * as eventManager from "./eventManager";
 
 const _projects = [];
 
+let _projectIDNext = "00001";
+
 function getProjects() {return _projects};
 
 function createProject (projectName) {
     const project = projectItem(projectName);
+    project.projectID = _projectIDNext;
     eventManager.publish('addNewProject', project);
 }
 
@@ -56,9 +59,23 @@ function removeProject (project){
     };
 };
 
+function projectIDIncrement() {
+    let nextID = parseInt(_projectIDNext);
+    nextID += 1;
+    _projectIDNext = makeIntegerIntoID(nextID);
+}
+
+function makeIntegerIntoID(id){
+    let string = id.toString();
+    while (string.length < _projectIDNext.length){
+        string = "0" + string;
+    };
+    return string;
+};
 
 eventManager.subscribe('addNewProject', eventArgs => {
     _projects.push(eventArgs);
+    projectIDIncrement();
     /* _projects.forEach(project => {
         console.log(project.getTitle());
     }) */
