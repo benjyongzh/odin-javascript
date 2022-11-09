@@ -1,9 +1,21 @@
 import * as eventManager from "./eventManager";
 
 const projects = document.querySelector('ul.project-list');
+let currentProject = {};
+
+const addProjectButton = document.querySelector("button.dashboard-add-project-button");
+addProjectButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    const newProjectInput = event.target.parentElement.querySelector("#new-project-input");
+    eventManager.publish('createProject', newProjectInput.value);
+});
 
 const tasks = document.querySelector('ul.task-list');
 const addTaskButton = document.querySelector('button.add-task-button');
+addTaskButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    eventManager.publish('createTask', currentProject);
+});
 
 function addNewProjectDOM(eventArgs){
     const newProj = newProject(eventArgs);
@@ -13,6 +25,17 @@ function addNewProjectDOM(eventArgs){
 
 function removeProjectDOM(eventArgs){
     projects.removeChild(getProjectDOMFromEvent(eventArgs));
+    const remainingProjects = projects.querySelectorAll('.project-list-item');
+    let projectCount = 0;
+    remainingProjects.forEach(project => {
+        projectCount += 1;
+    });
+    if (projectCount <= 0) {
+        currentProject = {};
+        console.log('no projects remaining');
+    } else {
+        console.log('some projects remaining');
+    };
 };
 
 function newProject(eventArgs){
@@ -68,8 +91,12 @@ function updateTasklistDOM(eventArgs){
     if (eventArgs.getTasks().length >= 1){
         console.log("there are tasks to do");
     } else {
-        console.log("empty project. No tasks yet.")
-    }
+        console.log("empty project. No tasks yet.");
+    };
+};
+
+function addNewTask(){
+
 }
 
 function newDivText(classname, text){
@@ -96,6 +123,7 @@ eventManager.subscribe('removeProject', eventArgs => {
 
 eventManager.subscribe('selectProject', eventArgs => {
     selectProjectDOM(eventArgs);
+    currentProject = eventArgs;
     updateTasklistDOM(eventArgs);
 });
 

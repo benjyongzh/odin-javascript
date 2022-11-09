@@ -24,6 +24,10 @@ export default function projectItem(title="My Project", description="") {
 
     const getTasks = () => _tasks;
 
+    eventManager.subscribe('createTask', eventArgs => {
+        console.log('task shall be created in this project');
+    });
+
     return {
         projectID,
         setTitle,

@@ -3,12 +3,7 @@ import * as DOMManager from "./components/DOMManager";
 //import taskComponent from "./components/task";
 //import * as eventManager from "./components/eventManager";
 
-const addProjectButton = document.querySelector("button.dashboard-add-project-button");
-addProjectButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    const newProjectInput = event.target.parentElement.querySelector("#new-project-input");
-    projectManager.createProject(newProjectInput.value);
-});
+
 
 
 /* const newProject = projectComponent("myprojectname", "somedesc");
