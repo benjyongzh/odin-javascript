@@ -1,4 +1,5 @@
 import * as eventManager from "./eventManager";
+import taskItem from "./task";
 
 export default function projectItem(title="My Project", description="") {
 
@@ -14,6 +15,7 @@ export default function projectItem(title="My Project", description="") {
 
     const addTask = task => {
         _tasks.push(task);
+        eventManager.publish('requestTaskDOMUpdate', this);
     };
 
     const removeTask = task => {
@@ -24,8 +26,9 @@ export default function projectItem(title="My Project", description="") {
 
     const getTasks = () => _tasks;
 
-    eventManager.subscribe('createTask', eventArgs => {
-        console.log('task shall be created in this project');
+    eventManager.subscribe('createNewTask', eventArgs => {
+        const task = taskItem();
+        addTask(task);
     });
 
     return {

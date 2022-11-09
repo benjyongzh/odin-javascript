@@ -10,12 +10,31 @@ addProjectButton.addEventListener('click', (event) => {
     eventManager.publish('createProject', newProjectInput.value);
 });
 
-const tasks = document.querySelector('ul.task-list');
+const taskList = document.querySelector('ul.task-list');
 const addTaskButton = document.querySelector('button.add-task-button');
 addTaskButton.addEventListener('click', (event) => {
     event.preventDefault();
-    eventManager.publish('createTask', currentProject);
+    if (addTaskButton.classList.contains('disabled') || currentProject == {}) return;
+    eventManager.publish('createNewTask', currentProject);
 });
+
+function getProjectCount(){
+    const projectList = projects.querySelectorAll('.project-list-item');
+    let count = 0;
+    projectList.forEach(project => {
+        count += 1;
+    });
+    console.log(`there are ${count} projects now.`)
+    return count;
+}
+
+function refreshAddTaskButton(){
+    if (getProjectCount() <= 0){
+        addTaskButton.classList.add('disabled');
+    } else {
+        addTaskButton.classList.remove('disabled');
+    }
+}
 
 function addNewProjectDOM(eventArgs){
     const newProj = newProject(eventArgs);
@@ -25,16 +44,12 @@ function addNewProjectDOM(eventArgs){
 
 function removeProjectDOM(eventArgs){
     projects.removeChild(getProjectDOMFromEvent(eventArgs));
-    const remainingProjects = projects.querySelectorAll('.project-list-item');
-    let projectCount = 0;
-    remainingProjects.forEach(project => {
-        projectCount += 1;
-    });
-    if (projectCount <= 0) {
+    if (getProjectCount() <= 0) {
         currentProject = {};
         console.log('no projects remaining');
     } else {
         console.log('some projects remaining');
+        //selectProjectDOM()
     };
 };
 
@@ -88,15 +103,39 @@ function selectProjectDOM(eventArgs) {
 
 function updateTasklistDOM(eventArgs){
     console.log(eventArgs);
+    taskList.replaceChildren();
     if (eventArgs.getTasks().length >= 1){
         console.log("there are tasks to do");
+        for (let i = 0; i < eventArgs.getTasks().length; i++){
+            populateTaskList(eventArgs.getTasks()[i]);
+        };
     } else {
         console.log("empty project. No tasks yet.");
     };
 };
 
-function addNewTask(){
+function populateTaskList(task){
+    const taskDOM = newTask(task);
+    taskList.appendChild(taskDOM);
+}
 
+function newTask(task){
+    const taskDOM = document.createElement('div');
+    taskDOM.classList.add('project-list-item');
+    //taskDOM.setAttribute('task-id', eventArgs.projectID);
+
+    //project title
+    const title = newDivText('task-item-name', eventArgs.getTitle());
+    taskDOM.appendChild(title);
+
+    //project delete button
+    const deleteButton = newButton('task-delete-buton', 'del');
+    taskDOM.appendChild(deleteButton);
+    deleteButton.addEventListener('click', () => {
+        eventManager.publish('removeTask', task);
+    })
+
+    return taskDOM;
 }
 
 function newDivText(classname, text){
@@ -119,11 +158,17 @@ eventManager.subscribe('addNewProject', eventArgs => {
 
 eventManager.subscribe('removeProject', eventArgs => {
     removeProjectDOM(eventArgs);
+    refreshAddTaskButton();
 });
 
 eventManager.subscribe('selectProject', eventArgs => {
     selectProjectDOM(eventArgs);
     currentProject = eventArgs;
+    eventManager.publish('requestTaskDOMUpdate', eventArgs);
+    refreshAddTaskButton();
+});
+
+eventManager.subscribe('requestTaskDOMUpdate', eventArgs => {
     updateTasklistDOM(eventArgs);
 });
 

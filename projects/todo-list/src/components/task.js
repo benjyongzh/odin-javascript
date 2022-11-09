@@ -1,4 +1,6 @@
-const Task = (title="My Task", description=""/* , dueDate */, priority=1) => {
+import * as eventManager from "./eventManager";
+
+export default function taskItem(title="My New Task", description=""/* , dueDate */, priority=1) {
 
     let _isComplete = false;
     
@@ -27,7 +29,3 @@ const Task = (title="My Task", description=""/* , dueDate */, priority=1) => {
         getPriority,
     };
 };
-
-export default function taskComponent(){
-    return Task();
-}
