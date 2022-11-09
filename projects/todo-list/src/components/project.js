@@ -10,7 +10,7 @@ export default function projectItem(title="My Project", description="") {
     const getDescription = () => description;
     
 
-    /* const _tasks = [];
+    const _tasks = [];
 
     const addTask = task => {
         _tasks.push(task);
@@ -22,7 +22,7 @@ export default function projectItem(title="My Project", description="") {
         };
     };
 
-    const getTasks = () => _tasks; */
+    const getTasks = () => _tasks;
 
     return {
         projectID,
@@ -32,9 +32,9 @@ export default function projectItem(title="My Project", description="") {
         getTitle,
         getDescription,
         
-        /* addTask,
+        addTask,
         removeTask,
-        getTasks */
+        getTasks
     }
 
 }

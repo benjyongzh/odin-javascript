@@ -89,7 +89,7 @@ eventManager.subscribe('removeProject', eventArgs => {
 });
 
 
-console.log('projectManager.js is run');
+console.log('projectManager.js is running');
 
 export {
     getProjects,

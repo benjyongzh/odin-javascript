@@ -2,6 +2,9 @@ import * as eventManager from "./eventManager";
 
 const projects = document.querySelector('ul.project-list');
 
+const tasks = document.querySelector('ul.task-list');
+const addTaskButton = document.querySelector('button.add-task-button');
+
 function addNewProjectDOM(eventArgs){
     const newProj = newProject(eventArgs);
     projects.appendChild(newProj);
@@ -60,6 +63,15 @@ function selectProjectDOM(eventArgs) {
     projectDOM.classList.add('selected-project');
 }
 
+function updateTasklistDOM(eventArgs){
+    console.log(eventArgs);
+    if (eventArgs.getTasks().length >= 1){
+        console.log("there are tasks to do");
+    } else {
+        console.log("empty project. No tasks yet.")
+    }
+}
+
 function newDivText(classname, text){
     const div = document.createElement('div');
     div.classList.add(classname);
@@ -84,7 +96,8 @@ eventManager.subscribe('removeProject', eventArgs => {
 
 eventManager.subscribe('selectProject', eventArgs => {
     selectProjectDOM(eventArgs);
+    updateTasklistDOM(eventArgs);
 });
 
 
-console.log('DOMManager.js is run');
+console.log('DOMManager.js is running');
