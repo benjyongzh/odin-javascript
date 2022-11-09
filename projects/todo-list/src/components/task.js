@@ -9,23 +9,25 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
     //const setDueDate = inputDueDate => dueDate = inputDueDate;
     const setPriority = inputPriority => priority = inputPriority;
 
-    const setComplete = () => _isComplete = true;
+    const setCompletion = status => _isComplete = status;
 
     const getTitle = () => title;
     const getDescription = () => description;
     //const getDueDate = () => dueDate;
     const getPriority = () => priority;
+    const getCompletion = () => _isComplete;
 
     return {
         setTitle,
         setDescription,
         //setDueDate,
         setPriority,
-        setComplete,
+        setCompletion,
 
         getTitle,
         getDescription,
         //getDueDate,
         getPriority,
+        getCompletion
     };
 };

@@ -2,10 +2,15 @@ import projectItem from "./project";
 import * as eventManager from "./eventManager";
 
 const _projects = [];
+let _currentProject = {};
 
 let _projectIDNext = "00001";
 
 function getProjects() {return _projects};
+
+function getCurrentProject(){
+    return _createProject;
+}
 
 function createProject (projectName) {
     const project = projectItem(projectName);
@@ -49,10 +54,15 @@ eventManager.subscribe('removeProject', eventArgs => {
     _projects.splice(_projects.indexOf(eventArgs), 1);
 });
 
+eventManager.subscribe('selectProject', eventArgs => {
+    _currentProject = eventArgs;
+})
+
 
 console.log('projectManager.js is running');
 
 export {
+    getCurrentProject,
     getProjects,
     createProject,
     removeProject

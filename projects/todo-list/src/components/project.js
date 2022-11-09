@@ -15,12 +15,13 @@ export default function projectItem(title="My Project", description="") {
 
     const addTask = task => {
         _tasks.push(task);
-        eventManager.publish('requestTaskDOMUpdate', this);
+        eventManager.publish('requestTaskDOMUpdate', {});
     };
 
     const removeTask = task => {
         if (_tasks.includes(task)) {
             _tasks.splice(_tasks.indexOf(task), 1);
+            eventManager.publish('requestTaskDOMUpdate', {});
         };
     };
 
@@ -29,6 +30,10 @@ export default function projectItem(title="My Project", description="") {
     eventManager.subscribe('createNewTask', eventArgs => {
         const task = taskItem();
         addTask(task);
+    });
+
+    eventManager.subscribe('removeTask', eventArgs => {
+        removeTask(eventArgs);
     });
 
     return {

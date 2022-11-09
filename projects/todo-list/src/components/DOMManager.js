@@ -46,9 +46,9 @@ function removeProjectDOM(eventArgs){
     projects.removeChild(getProjectDOMFromEvent(eventArgs));
     if (getProjectCount() <= 0) {
         currentProject = {};
-        console.log('no projects remaining');
+        //console.log('no projects remaining');
     } else {
-        console.log('some projects remaining');
+        //console.log('some projects remaining');
         //selectProjectDOM()
     };
 };
@@ -101,16 +101,19 @@ function selectProjectDOM(eventArgs) {
     projectDOM.classList.add('selected-project');
 }
 
-function updateTasklistDOM(eventArgs){
-    console.log(eventArgs);
+function updateTasklistDOM(){
     taskList.replaceChildren();
-    if (eventArgs.getTasks().length >= 1){
-        console.log("there are tasks to do");
-        for (let i = 0; i < eventArgs.getTasks().length; i++){
-            populateTaskList(eventArgs.getTasks()[i]);
+    if (currentProject == {}) {
+        makeEmptyTaskListDOM();
+        return;
+    }
+    console.log(`there are ${currentProject.getTasks().length} tasks in this project.`)
+    if (currentProject.getTasks().length >= 1){
+        for (let i = 0; i < currentProject.getTasks().length; i++){
+            populateTaskList(currentProject.getTasks()[i]);
         };
     } else {
-        console.log("empty project. No tasks yet.");
+        makeEmptyTaskListDOM();
     };
 };
 
@@ -119,13 +122,17 @@ function populateTaskList(task){
     taskList.appendChild(taskDOM);
 }
 
+function makeEmptyTaskListDOM(){
+    //make some image on taskList as a resting state.
+}
+
 function newTask(task){
     const taskDOM = document.createElement('div');
-    taskDOM.classList.add('project-list-item');
+    taskDOM.classList.add('task-list-item');
     //taskDOM.setAttribute('task-id', eventArgs.projectID);
 
     //project title
-    const title = newDivText('task-item-name', eventArgs.getTitle());
+    const title = newDivText('task-item-name', task.getTitle());
     taskDOM.appendChild(title);
 
     //project delete button
@@ -169,8 +176,14 @@ eventManager.subscribe('selectProject', eventArgs => {
 });
 
 eventManager.subscribe('requestTaskDOMUpdate', eventArgs => {
-    updateTasklistDOM(eventArgs);
+    updateTasklistDOM();
 });
 
+/* eventManager.subscribe('removeTask', eventArgs => {
+    updateTasklistDOM(eventArgs);
+});
+ */
+
+refreshAddTaskButton();
 
 console.log('DOMManager.js is running');
