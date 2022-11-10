@@ -9,12 +9,13 @@ let _projectIDNext = "00001";
 function getProjects() {return _projects};
 
 function getCurrentProject(){
-    return _createProject;
+    return _currentProject;
 }
 
 function createProject (projectName) {
     const project = projectItem(projectName);
     project.projectID = _projectIDNext;
+    //project = project.bind(project);
     eventManager.publish('addNewProject', project);
 }
 
@@ -56,6 +57,10 @@ eventManager.subscribe('removeProject', eventArgs => {
 
 eventManager.subscribe('selectProject', eventArgs => {
     _currentProject = eventArgs;
+});
+
+eventManager.subscribe('createNewTask', eventArgs => {
+    if (getCurrentProject() == eventArgs) getCurrentProject().createNewTask();
 })
 
 

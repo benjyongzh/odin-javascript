@@ -15,8 +15,11 @@ const addTaskButton = document.querySelector('button.add-task-button');
 addTaskButton.addEventListener('click', (event) => {
     event.preventDefault();
     if (addTaskButton.classList.contains('disabled') || currentProject == {}) return;
-    eventManager.publish('createNewTask', currentProject);
+    eventManager.publish('createNewTask', getCurrentProject());
 });
+
+function getCurrentProject() {return currentProject};
+function setCurrentProject(arg){currentProject = arg};
 
 function getProjectCount(){
     const projectList = projects.querySelectorAll('.project-list-item');
@@ -45,7 +48,7 @@ function addNewProjectDOM(eventArgs){
 function removeProjectDOM(eventArgs){
     projects.removeChild(getProjectDOMFromEvent(eventArgs));
     if (getProjectCount() <= 0) {
-        currentProject = {};
+        setCurrentProject({});
         //console.log('no projects remaining');
     } else {
         //console.log('some projects remaining');
@@ -103,14 +106,15 @@ function selectProjectDOM(eventArgs) {
 
 function updateTasklistDOM(){
     taskList.replaceChildren();
-    if (currentProject == {}) {
+    if (!getCurrentProject()) {
+        console.log('no projects, so no task');
         makeEmptyTaskListDOM();
         return;
     }
-    console.log(`there are ${currentProject.getTasks().length} tasks in this project.`)
-    if (currentProject.getTasks().length >= 1){
-        for (let i = 0; i < currentProject.getTasks().length; i++){
-            populateTaskList(currentProject.getTasks()[i]);
+    console.log(`there are ${getCurrentProject().getTasks().length} tasks in this project.`)
+    if (getCurrentProject().getTasks().length >= 1){
+        for (let i = 0; i < getCurrentProject().getTasks().length; i++){
+            populateTaskList(getCurrentProject().getTasks()[i]);
         };
     } else {
         makeEmptyTaskListDOM();
@@ -120,22 +124,23 @@ function updateTasklistDOM(){
 function populateTaskList(task){
     const taskDOM = newTask(task);
     taskList.appendChild(taskDOM);
-}
+};
 
 function makeEmptyTaskListDOM(){
     //make some image on taskList as a resting state.
-}
+    console.log("makeEmptyTaskListDOM is run.");
+};
 
 function newTask(task){
     const taskDOM = document.createElement('div');
     taskDOM.classList.add('task-list-item');
     //taskDOM.setAttribute('task-id', eventArgs.projectID);
 
-    //project title
+    //task title
     const title = newDivText('task-item-name', task.getTitle());
     taskDOM.appendChild(title);
 
-    //project delete button
+    //task delete button
     const deleteButton = newButton('task-delete-buton', 'del');
     taskDOM.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
@@ -170,7 +175,8 @@ eventManager.subscribe('removeProject', eventArgs => {
 
 eventManager.subscribe('selectProject', eventArgs => {
     selectProjectDOM(eventArgs);
-    currentProject = eventArgs;
+    setCurrentProject(eventArgs);
+    console.log(`current project is ${getCurrentProject().getTitle()}`);
     eventManager.publish('requestTaskDOMUpdate', eventArgs);
     refreshAddTaskButton();
 });
