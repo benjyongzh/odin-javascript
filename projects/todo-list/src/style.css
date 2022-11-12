@@ -4,4 +4,55 @@
     padding: 0;
     text-decoration: none;
     list-style-type: none;
+    color: var(--color-text);
 }
+
+:root {
+    --color-bg: #232946;
+    --color-headertext: #fffffe;
+    --color-text: #b8c1ec;
+    --color-bg-button:#eebbc3;
+    --color-text-button: #232946;
+    --color-stroke:#121629;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    width: 100%;
+    background-color: var(--color-text);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr;
+    width: min(1200px, 100%);
+    background-color: var(--color-bg);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: flex-start;
+    padding: 30px 50px;
+    gap: 15px;
+}
+
+.header-title {
+    font-size: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-headertext);
+}
+
+.header-description {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+

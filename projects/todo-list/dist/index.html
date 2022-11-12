@@ -7,37 +7,39 @@
     <title>Todo List</title>
 </head>
 <body>
-    <div class="header">
-        <div class="header-title">To Do List</div>
-        <div class="header-description">Create your projects from the dashboard and organise the tasks within each project.</div>
-    </div>
+    <div class="container">
+        <div class="header">
+            <div class="header-title">To Do List</div>
+            <div class="header-description">Create your projects from the dashboard and organise the tasks within each project.</div>
+        </div>
 
-    <div class="content">
-        <div class="dashboard">
-            <div class="dashboard-title">Dashboard</div>
+        <div class="content">
+            <div class="dashboard">
+                <div class="dashboard-title">Dashboard</div>
 
-            <div class="projects-section">
-                <div class="projects-section-title">Projects</div>
-                <ul class="project-list"></ul>
+                <div class="projects-section">
+                    <div class="projects-section-title">Projects</div>
+                    <ul class="project-list"></ul>
+                </div>
+
+                <form action="post" class="add-new-project-section">
+                    <label for="new-project-name" class="new-project-label">Add New Project</label>
+                    <div class="new-project-interactive">
+                        <input type="text" name="new-project-name" id="new-project-input" placeholder="Project Name">
+                        <button class="dashboard-add-project-button">Add</button>
+                    </div>
+                </form>
             </div>
 
-            <form action="post" class="add-new-project-section">
-                <label for="new-project-name" class="new-project-label">Add New Project</label>
-                <div class="new-project-interactive">
-                    <input type="text" name="new-project-name" id="new-project-input" placeholder="Project Name">
-                    <button class="dashboard-add-project-button">Add</button>
-                </div>
-            </form>
+            <div class="tasks">
+                <button class="add-task-button">Add New Task</button>
+                <ul class="task-list"></ul>
+            </div>
         </div>
 
-        <div class="tasks">
-            <button class="add-task-button">Add New Task</button>
-            <ul class="task-list"></ul>
+        <div class="footer">
+            <div class="credits">The Odin Project - Benjamin Yong - Nov 2022</div>
         </div>
-    </div>
-
-    <div class="footer">
-        <div class="credits">The Odin Project - Benjamin Yong - Nov 2022</div>
     </div>
     
     <script src="./main.js"></script>
