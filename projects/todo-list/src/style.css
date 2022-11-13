@@ -124,7 +124,12 @@ button.project-delete-buton{
     background-color: var(--color-bg-button);
 }
 
-.project-list-item:hover .project-list-item-name {
+.project-list-item.selected-project {
+    background-color: var(--color-bg-button);
+}
+
+.project-list-item:hover .project-list-item-name,
+.project-list-item.selected-project .project-list-item-name{
     color: var(--color-text-button);
 }
 
