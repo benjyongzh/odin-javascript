@@ -70,7 +70,7 @@ function newProject(eventArgs){
     project.appendChild(title);
 
     //project delete button
-    const deleteButton = newButton('project-delete-buton', 'del');
+    const deleteButton = newButton('project-delete-button', 'del');
     project.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
         eventManager.publish('removeProject', eventArgs);
@@ -141,7 +141,7 @@ function newTask(task){
     taskDOM.appendChild(title);
 
     //task delete button
-    const deleteButton = newButton('task-delete-buton', 'del');
+    const deleteButton = newButton('task-delete-button', 'del');
     taskDOM.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
         eventManager.publish('removeTask', task);

@@ -85,7 +85,8 @@ body {
 }
 
 .projects-section,
-form.add-new-project-section {
+form.add-new-project-section,
+.task-list {
     border-radius: 16px;
     border: 2px solid var(--color-stroke);
     padding: 20px;
@@ -96,7 +97,8 @@ form.add-new-project-section {
     margin-bottom: auto;
 }
 
-.projects-section ul {
+.projects-section ul,
+.task-list {
     display: grid;
     grid-template-columns: 1fr;
     gap: 5px;
@@ -109,15 +111,19 @@ form.add-new-project-section {
     justify-content: space-between;
     width: auto;
     height: 36px;
-    border-radius: 18px;
+    border-radius: 8px;
 }
 
 .project-list-item-name,
-button.project-delete-buton{
+button.project-delete-button{
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 16px;
+}
+
+button.project-delete-button{
+    visibility: hidden;
 }
 
 .project-list-item:hover {
@@ -132,6 +138,11 @@ button.project-delete-buton{
 .project-list-item.selected-project .project-list-item-name{
     color: var(--color-text-button);
 }
+
+.project-list-item:hover button.project-delete-button {
+    visibility: visible;
+}
+
 
 form.add-new-project-section {
     display: flex;
@@ -160,7 +171,7 @@ label.new-project-label {
 .new-project-interactive input {
     padding: 10px;
     color: var(--color-stroke);
-    border-radius: 15px;
+    border-radius: 6px;
     font-size: 14px;
     width: 100%;
     border: 0px solid var(--color-bg-button);
@@ -177,6 +188,66 @@ label.new-project-label {
     color: var(--color-text-button);
     font-size: 20px;
 }
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 25px;
+}
+
+.task-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+button.add-task-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-button);
+    color: var(--color-text-button);
+    font-size: 14px;
+    height: 100%;
+    padding: 0.3rem 1.2rem;
+    border-radius: 6px;
+}
+
+.task-list {
+    height: 100%;
+    align-content: start;
+}
+
+.task-list-item {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 1fr auto;
+    background-color: var(--color-text);
+    height: 80px;
+    padding: 15px;
+}
+
+.task-item-name,
+.task-delete-button {
+    display: flex;
+    align-items: center;
+}
+
+.task-item-name {
+    justify-content: flex-start;
+    color: var(--color-stroke);
+}
+
+
+.task-delete-button {
+    justify-content: center;
+    background-color: var(--color-bg-button);
+    color: var(--color-text-button);
+    padding: 0.3rem 1.2rem;
+}
+
 
 .footer,
 .credits {
