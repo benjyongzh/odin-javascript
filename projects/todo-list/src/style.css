@@ -85,8 +85,7 @@ body {
 }
 
 .projects-section,
-form.add-new-project-section,
-.task-list {
+form.add-new-project-section {
     border-radius: 16px;
     border: 2px solid var(--color-stroke);
     padding: 20px;
@@ -97,8 +96,7 @@ form.add-new-project-section,
     margin-bottom: auto;
 }
 
-.projects-section ul,
-.task-list {
+.projects-section ul {
     display: grid;
     grid-template-columns: 1fr;
     gap: 5px;
@@ -216,6 +214,9 @@ button.add-task-button {
 }
 
 .task-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
     height: 100%;
     align-content: start;
 }
@@ -227,21 +228,42 @@ button.add-task-button {
     background-color: var(--color-text);
     height: 80px;
     padding: 15px;
+    gap: 15px;
+    border-radius: 8px;
+}
+
+.task-list-texts-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 15px;
 }
 
 .task-item-name,
-.task-delete-button {
+.task-delete-button,
+.task-edit-button,
+.task-item-desc {
     display: flex;
     align-items: center;
 }
 
-.task-item-name {
+.task-item-name,
+.task-item-desc {
     justify-content: flex-start;
     color: var(--color-stroke);
 }
 
+.task-item-name {
+    font-size: 20px;
+}
 
-.task-delete-button {
+.task-item-desc {
+    font-size: 16px;
+}
+
+.task-delete-button,
+.task-edit-button {
     justify-content: center;
     background-color: var(--color-bg-button);
     color: var(--color-text-button);

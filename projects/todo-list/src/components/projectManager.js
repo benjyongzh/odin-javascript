@@ -53,6 +53,11 @@ eventManager.subscribe('addNewProject', eventArgs => {
 
 eventManager.subscribe('removeProject', eventArgs => {
     _projects.splice(_projects.indexOf(eventArgs), 1);
+    let tempProj = {};
+    if (_projects.length>0){
+        tempProj = _projects[0];
+    };
+    eventManager.publish('selectProject', tempProj);
 });
 
 eventManager.subscribe('selectProject', eventArgs => {

@@ -3,6 +3,7 @@ import * as eventManager from "./eventManager";
 const projects = document.querySelector('ul.project-list');
 let currentProject = {};
 
+const addProjectInput = document.querySelector("input#new-project-input");
 const addProjectButton = document.querySelector("button.dashboard-add-project-button");
 addProjectButton.addEventListener('click', (event) => {
     event.preventDefault();
@@ -27,7 +28,7 @@ function getProjectCount(){
     projectList.forEach(project => {
         count += 1;
     });
-    console.log(`there are ${count} projects now.`)
+    //console.log(`there are ${count} projects now.`)
     return count;
 }
 
@@ -43,17 +44,11 @@ function addNewProjectDOM(eventArgs){
     const newProj = newProject(eventArgs);
     projects.appendChild(newProj);
     eventManager.publish('selectProject', eventArgs);
+    addProjectInput.value = "";
 }
 
 function removeProjectDOM(eventArgs){
     projects.removeChild(getProjectDOMFromEvent(eventArgs));
-    if (getProjectCount() <= 0) {
-        setCurrentProject({});
-        //console.log('no projects remaining');
-    } else {
-        //console.log('some projects remaining');
-        //selectProjectDOM()
-    };
 };
 
 function newProject(eventArgs){
@@ -73,6 +68,7 @@ function newProject(eventArgs){
     const deleteButton = newButton('project-delete-button', 'del');
     project.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
+        event.stopPropagation();
         eventManager.publish('removeProject', eventArgs);
     })
 
@@ -91,27 +87,28 @@ function getProjectDOMFromEvent(eventArgs){
 }
 
 function selectProjectDOM(eventArgs) {
-    const projectDOM = getProjectDOMFromEvent(eventArgs);
-    if (projectDOM == undefined) {
-        console.log("projectDOM is undefined.");
-        return;
-    };
-
     const allProjects = projects.querySelectorAll('.project-list-item');
     allProjects.forEach(project => {
         project.classList.remove('selected-project');
     });
+
+    const projectDOM = getProjectDOMFromEvent(eventArgs);
+    if (projectDOM == undefined) {
+        //console.log("projectDOM is undefined.");
+        return;
+    };
+
     projectDOM.classList.add('selected-project');
 }
 
 function updateTasklistDOM(){
     taskList.replaceChildren();
-    if (!getCurrentProject()) {
-        console.log('no projects, so no task');
+    if (Object.keys(getCurrentProject()).length === 0) {
+        //console.log('no projects, so no task');
         makeEmptyTaskListDOM();
         return;
     }
-    console.log(`there are ${getCurrentProject().getTasks().length} tasks in this project.`)
+    //console.log(`there are ${getCurrentProject().getTasks().length} tasks in this project.`)
     if (getCurrentProject().getTasks().length >= 1){
         for (let i = 0; i < getCurrentProject().getTasks().length; i++){
             populateTaskList(getCurrentProject().getTasks()[i]);
@@ -136,9 +133,24 @@ function newTask(task){
     taskDOM.classList.add('task-list-item');
     //taskDOM.setAttribute('task-id', eventArgs.projectID);
 
+    //task text div
+    const textsDiv = newDivText('task-item-texts-section', "");
+    taskDOM.appendChild(textsDiv);
+
     //task title
     const title = newDivText('task-item-name', task.getTitle());
-    taskDOM.appendChild(title);
+    textsDiv.appendChild(title);
+
+    //task desc
+    // const description = newDivText('task-item-desc', task.getDescription());
+    // textsDiv.appendChild(description);
+
+    //task edit button
+    const editButton = newButton('task-edit-button', 'edit');
+    taskDOM.appendChild(editButton);
+    editButton.addEventListener('click', () => {
+        eventManager.publish('editTask', task);
+    })
 
     //task delete button
     const deleteButton = newButton('task-delete-button', 'del');
@@ -176,7 +188,7 @@ eventManager.subscribe('removeProject', eventArgs => {
 eventManager.subscribe('selectProject', eventArgs => {
     selectProjectDOM(eventArgs);
     setCurrentProject(eventArgs);
-    console.log(`current project is ${getCurrentProject().getTitle()}`);
+    //console.log(`current project is ${getCurrentProject().getTitle()}`);
     eventManager.publish('requestTaskDOMUpdate', eventArgs);
     refreshAddTaskButton();
 });
