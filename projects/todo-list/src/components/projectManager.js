@@ -68,6 +68,10 @@ eventManager.subscribe('createNewTask', eventArgs => {
     if (getCurrentProject() == eventArgs) getCurrentProject().createNewTask();
 })
 
+eventManager.subscribe('setTaskValues', eventArgs => {
+    if (getCurrentProject() == eventArgs) getCurrentProject().setTaskValues(eventArgs);
+})
+
 
 console.log('projectManager.js is running');
 

@@ -29,6 +29,14 @@ export default function projectItem(title="My Project", description="") {
         };
     };
 
+    const setTaskValues = eventArgs => {
+        getTasks().forEach(task => {
+            if (task == eventArgs.task){
+                task.setTaskValues(eventArgs);
+            };
+        });
+    };
+
     const getTasks = () => _tasks;
 
     /* eventManager.subscribe('createNewTask', eventArgs => {
@@ -62,6 +70,7 @@ export default function projectItem(title="My Project", description="") {
         createNewTask,
         addTask,
         removeTask,
+        setTaskValues,
         getTasks,
 
     }

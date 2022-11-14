@@ -141,6 +141,12 @@ function newTask(task){
     const title = newDivText('task-item-name', task.getTitle());
     textsDiv.appendChild(title);
 
+    //task edit form
+    //const editForm = newForm('task-item-editform');
+    const titleEdit = newInputText('task-item-edit-title-input', "Task name");
+    textsDiv.appendChild(titleEdit);
+
+
     //task desc
     // const description = newDivText('task-item-desc', task.getDescription());
     // textsDiv.appendChild(description);
@@ -149,7 +155,21 @@ function newTask(task){
     const editButton = newButton('task-edit-button', 'edit');
     taskDOM.appendChild(editButton);
     editButton.addEventListener('click', () => {
-        eventManager.publish('editTask', task);
+        eventManager.publish('editTaskStart', {task, taskDOM});
+    })
+
+    //task edit confirm button
+    const editConfirmButton = newButton('task-edit-confirm-button', 'confirm');
+    taskDOM.appendChild(editConfirmButton);
+    editConfirmButton.addEventListener('click', () => {
+        eventManager.publish('editTaskEnd', {task, taskDOM, change: true});
+    })
+
+    //task cancel button
+    const editCancelButton = newButton('task-edit-cancel-button', 'cancel');
+    taskDOM.appendChild(editCancelButton);
+    editCancelButton.addEventListener('click', () => {
+        eventManager.publish('editTaskEnd', {task, taskDOM, change: false});
     })
 
     //task delete button
@@ -160,6 +180,29 @@ function newTask(task){
     })
 
     return taskDOM;
+}
+
+function editTaskStart(eventArgs){
+    const taskDOM = eventArgs.taskDOM;
+    taskDOM.classList.add('editing-task');
+    const input = taskDOM.querySelector('.task-item-edit-title-input');
+    input.placeholder = eventArgs.task.getTitle();
+}
+
+function editTaskEnd(eventArgs){
+    const taskDOM = eventArgs.taskDOM;
+    taskDOM.classList.remove('editing-task');
+    if (eventArgs.change == true){
+        const titleInput = taskDOM.querySelector('.task-item-edit-title-input');
+        eventManager.publish('setTaskValues', {task: eventArgs.task, title: titleInput.value});
+    }
+}
+
+function newInputText(classname, placeholder){
+    const input = document.createElement('input');
+    input.classList.add(classname);
+    input.placeholder = placeholder;
+    return input;
 }
 
 function newDivText(classname, text){
@@ -201,6 +244,18 @@ eventManager.subscribe('requestTaskDOMUpdate', eventArgs => {
     updateTasklistDOM(eventArgs);
 });
  */
+
+eventManager.subscribe('editTaskStart', eventArgs => {
+    editTaskStart(eventArgs);
+});
+
+eventManager.subscribe('editTaskEnd', eventArgs => {
+    editTaskEnd(eventArgs);
+});
+
+eventManager.subscribe('refreshTask', eventArgs => {
+    updateTasklistDOM();
+});
 
 refreshAddTaskButton();
 

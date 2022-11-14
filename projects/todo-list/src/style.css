@@ -243,6 +243,7 @@ button.add-task-button {
 .task-item-name,
 .task-delete-button,
 .task-edit-button,
+.task-edit-confirm-button,
 .task-item-desc {
     display: flex;
     align-items: center;
@@ -263,11 +264,24 @@ button.add-task-button {
 }
 
 .task-delete-button,
-.task-edit-button {
+.task-edit-button,
+.task-edit-confirm-button {
     justify-content: center;
     background-color: var(--color-bg-button);
     color: var(--color-text-button);
     padding: 0.3rem 1.2rem;
+}
+
+.task-list-item:not(.editing-task) .task-item-edit-title-input,
+.task-list-item:not(.editing-task) .task-edit-confirm-button,
+.task-list-item:not(.editing-task) .task-edit-cancel-button {
+    visibility: hidden;
+}
+
+.task-list-item.editing-task .task-item-name,
+.task-list-item.editing-task .task-edit-button,
+.task-list-item.editing-task .task-delete-button {
+    visibility: hidden;
 }
 
 
