@@ -241,21 +241,25 @@ button.add-task-button {
 }
 
 .task-item-name,
+.task-item-edit-title-input,
 .task-delete-button,
 .task-edit-button,
 .task-edit-confirm-button,
+.task-edit-cancel-button,
 .task-item-desc {
     display: flex;
     align-items: center;
 }
 
 .task-item-name,
+.task-item-edit-title-input,
 .task-item-desc {
     justify-content: flex-start;
     color: var(--color-stroke);
 }
 
-.task-item-name {
+.task-item-name,
+.task-item-edit-title-input {
     font-size: 20px;
 }
 
@@ -265,23 +269,39 @@ button.add-task-button {
 
 .task-delete-button,
 .task-edit-button,
-.task-edit-confirm-button {
+.task-edit-confirm-button,
+.task-edit-cancel-button {
     justify-content: center;
     background-color: var(--color-bg-button);
     color: var(--color-text-button);
     padding: 0.3rem 1.2rem;
+    visibility: hidden;
+}
+
+.task-list-item.editing-task .task-delete-button,
+.task-list-item.editing-task .task-edit-button,
+.task-list-item.editing-task .task-edit-confirm-button,
+.task-list-item.editing-task .task-edit-cancel-button {
+    visibility: visible;
+}
+
+.task-list-item:hover:not(.editing-task) .task-delete-button,
+.task-list-item:hover:not(.editing-task) .task-edit-button,
+.task-list-item:hover:not(.editing-task) .task-edit-confirm-button,
+.task-list-item:hover:not(.editing-task) .task-edit-cancel-button {
+    visibility: visible;
 }
 
 .task-list-item:not(.editing-task) .task-item-edit-title-input,
 .task-list-item:not(.editing-task) .task-edit-confirm-button,
 .task-list-item:not(.editing-task) .task-edit-cancel-button {
-    visibility: hidden;
+    display: none;
 }
 
 .task-list-item.editing-task .task-item-name,
 .task-list-item.editing-task .task-edit-button,
 .task-list-item.editing-task .task-delete-button {
-    visibility: hidden;
+    display: none;
 }
 
 
