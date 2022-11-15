@@ -11,7 +11,7 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
 
     const setCompletion = status => _isComplete = status;
 
-    const setValues = eventArgs => {
+    const setTaskValues = eventArgs => {
         setTitle(eventArgs.title);
         eventManager.publish('refreshTask', eventArgs.task);
     }
@@ -22,9 +22,9 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
     const getPriority = () => priority;
     const getCompletion = () => _isComplete;
 
-    eventManager.subscribe('setTaskValues', eventArgs => {
-        setValues(eventArgs);
-    })
+    // eventManager.subscribe('setTaskValues', eventArgs => {
+    //     setValues(eventArgs);
+    // })
 
     return {
         setTitle,
@@ -32,6 +32,7 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
         //setDueDate,
         setPriority,
         setCompletion,
+        setTaskValues,
 
         getTitle,
         //getDescription,
