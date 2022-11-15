@@ -69,7 +69,7 @@ eventManager.subscribe('createNewTask', eventArgs => {
 })
 
 eventManager.subscribe('setTaskValues', eventArgs => {
-    if (getCurrentProject() == eventArgs) getCurrentProject().setTaskValues(eventArgs);
+    getCurrentProject().setTaskValues(eventArgs);
 })
 
 

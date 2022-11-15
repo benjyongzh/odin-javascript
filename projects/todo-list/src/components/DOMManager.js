@@ -192,10 +192,12 @@ function editTaskStart(eventArgs){
 function editTaskEnd(eventArgs){
     const taskDOM = eventArgs.taskDOM;
     taskDOM.classList.remove('editing-task');
+    const titleInput = taskDOM.querySelector('.task-item-edit-title-input');
     if (eventArgs.change == true){
-        const titleInput = taskDOM.querySelector('.task-item-edit-title-input');
         eventManager.publish('setTaskValues', {task: eventArgs.task, title: titleInput.value});
-    }
+    };
+    titleInput.value = "";
+
 }
 
 function newInputText(classname, placeholder){
