@@ -159,6 +159,7 @@ function newTask(task){
     const editButton = newButton('task-edit-button', 'edit');
     taskDOM.appendChild(editButton);
     editButton.addEventListener('click', () => {
+        if (taskDOM.classList.contains('disabled')) return;
         eventManager.publish('editTaskStart', {task, taskDOM});
     })
 
@@ -166,6 +167,7 @@ function newTask(task){
     const editConfirmButton = newButton('task-edit-confirm-button', 'confirm');
     taskDOM.appendChild(editConfirmButton);
     editConfirmButton.addEventListener('click', () => {
+        if (taskDOM.classList.contains('disabled')) return;
         eventManager.publish('editTaskEnd', {task, taskDOM, change: true});
     })
 
@@ -173,6 +175,7 @@ function newTask(task){
     const editCancelButton = newButton('task-edit-cancel-button', 'cancel');
     taskDOM.appendChild(editCancelButton);
     editCancelButton.addEventListener('click', () => {
+        if (taskDOM.classList.contains('disabled')) return;
         eventManager.publish('editTaskEnd', {task, taskDOM, change: false});
     })
 
@@ -180,11 +183,24 @@ function newTask(task){
     const deleteButton = newButton('task-delete-button', 'del');
     taskDOM.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
+        if (taskDOM.classList.contains('disabled')) return;
         eventManager.publish('removeTask', task);
     })
 
     return taskDOM;
 }
+
+function enableAllTasks(bool){
+    const tasks = taskList.querySelectorAll('.task-list-item');
+    tasks.forEach(task => {
+        bool ? task.classList.remove('disabled') : task.classList.add('disabled');
+    });
+};
+
+function enableTask(eventArgs, bool){
+    const taskDOM = eventArgs.taskDOM;
+    bool ? taskDOM.classList.remove('disabled') : taskDOM.classList.add('disabled');
+};
 
 function editTaskStart(eventArgs){
     const taskDOM = eventArgs.taskDOM;
@@ -201,8 +217,7 @@ function editTaskEnd(eventArgs){
         eventManager.publish('setTaskValues', {task: eventArgs.task, title: titleInput.value});
     };
     titleInput.value = "";
-
-}
+};
 
 function newInputText(classname, placeholder){
     const input = document.createElement('input');
@@ -246,16 +261,15 @@ eventManager.subscribe('requestTaskDOMUpdate', eventArgs => {
     updateTasklistDOM();
 });
 
-/* eventManager.subscribe('removeTask', eventArgs => {
-    updateTasklistDOM(eventArgs);
-});
- */
-
 eventManager.subscribe('editTaskStart', eventArgs => {
+    //cancelAllTaskEditing();
+    enableAllTasks(false);
+    enableTask(eventArgs, true);
     editTaskStart(eventArgs);
 });
 
 eventManager.subscribe('editTaskEnd', eventArgs => {
+    enableAllTasks(true);
     editTaskEnd(eventArgs);
 });
 

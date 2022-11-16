@@ -1,5 +1,5 @@
 * {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -210,6 +210,7 @@ button.add-task-button {
     font-size: 14px;
     height: 100%;
     padding: 0.3rem 1.2rem;
+    border: 0px solid black;
     border-radius: 6px;
 }
 
@@ -230,6 +231,10 @@ button.add-task-button {
     padding: 15px;
     gap: 15px;
     border-radius: 8px;
+}
+
+.task-list-item.disabled {
+    opacity: 0.45;
 }
 
 .task-list-texts-section {
@@ -275,20 +280,23 @@ button.add-task-button {
     background-color: var(--color-bg-button);
     color: var(--color-text-button);
     padding: 0.3rem 1.2rem;
+    border: 2px solid var(--color-text-button);
+    border-radius: 5px;
+
     visibility: hidden;
 }
 
-.task-list-item.editing-task .task-delete-button,
-.task-list-item.editing-task .task-edit-button,
-.task-list-item.editing-task .task-edit-confirm-button,
-.task-list-item.editing-task .task-edit-cancel-button {
+.task-list-item.editing-task:not(.disabled) .task-delete-button,
+.task-list-item.editing-task:not(.disabled) .task-edit-button,
+.task-list-item.editing-task:not(.disabled) .task-edit-confirm-button,
+.task-list-item.editing-task:not(.disabled) .task-edit-cancel-button {
     visibility: visible;
 }
 
-.task-list-item:hover:not(.editing-task) .task-delete-button,
-.task-list-item:hover:not(.editing-task) .task-edit-button,
-.task-list-item:hover:not(.editing-task) .task-edit-confirm-button,
-.task-list-item:hover:not(.editing-task) .task-edit-cancel-button {
+.task-list-item:hover:not(.editing-task):not(.disabled) .task-delete-button,
+.task-list-item:hover:not(.editing-task):not(.disabled) .task-edit-button,
+.task-list-item:hover:not(.editing-task):not(.disabled) .task-edit-confirm-button,
+.task-list-item:hover:not(.editing-task):not(.disabled) .task-edit-cancel-button {
     visibility: visible;
 }
 
