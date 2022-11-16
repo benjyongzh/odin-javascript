@@ -1,15 +1,28 @@
 import * as eventManager from "./eventManager";
+import { add, format } from 'date-fns';
 
 export default function taskItem(title="My New Task", description=""/* , dueDate */, priority=1) {
 
-    let _isComplete = false;
+    //let _isComplete = false;
+    let dueDate = new Date();
+    dueDate = add(dueDate, {
+        years: 0,
+        months: 0,
+        weeks: 0,
+        days: 1,
+        hours: 0,
+        minutes: 0,
+        seconds: 0,
+      });
+    format(dueDate, 'MM/dd/yyyy');
+    
     
     const setTitle = inputTitle => title = inputTitle;
     //const setDescription = inputDescription => description = inputDescription;
     //const setDueDate = inputDueDate => dueDate = inputDueDate;
-    const setPriority = inputPriority => priority = inputPriority;
+    //const setPriority = inputPriority => priority = inputPriority;
 
-    const setCompletion = status => _isComplete = status;
+    //const setCompletion = status => _isComplete = status;
 
     const setTaskValues = eventArgs => {
         setTitle(eventArgs.title);
@@ -18,9 +31,9 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
 
     const getTitle = () => title;
     //const getDescription = () => description;
-    //const getDueDate = () => dueDate;
-    const getPriority = () => priority;
-    const getCompletion = () => _isComplete;
+    const getDueDate = () => dueDate;
+    //const getPriority = () => priority;
+    //const getCompletion = () => _isComplete;
 
     // eventManager.subscribe('setTaskValues', eventArgs => {
     //     setValues(eventArgs);
@@ -30,14 +43,14 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
         setTitle,
         //setDescription,
         //setDueDate,
-        setPriority,
-        setCompletion,
+        // setPriority,
+        // setCompletion,
         setTaskValues,
 
         getTitle,
         //getDescription,
-        //getDueDate,
-        getPriority,
-        getCompletion
+        getDueDate,
+        // getPriority,
+        // getCompletion
     };
 };

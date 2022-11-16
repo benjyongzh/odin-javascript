@@ -151,6 +151,10 @@ function newTask(task){
     // const description = newDivText('task-item-desc', task.getDescription());
     // textsDiv.appendChild(description);
 
+    // task dueDate
+    const duedate = newDivText('task-item-duedate', `Due: ${task.getDueDate()}`);
+    textsDiv.appendChild(duedate);
+
     //task edit button
     const editButton = newButton('task-edit-button', 'edit');
     taskDOM.appendChild(editButton);

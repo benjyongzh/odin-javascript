@@ -246,14 +246,14 @@ button.add-task-button {
 .task-edit-button,
 .task-edit-confirm-button,
 .task-edit-cancel-button,
-.task-item-desc {
+.task-item-duedate {
     display: flex;
     align-items: center;
 }
 
 .task-item-name,
 .task-item-edit-title-input,
-.task-item-desc {
+.task-item-duedate {
     justify-content: flex-start;
     color: var(--color-stroke);
 }
@@ -263,7 +263,7 @@ button.add-task-button {
     font-size: 20px;
 }
 
-.task-item-desc {
+.task-item-duedate {
     font-size: 16px;
 }
 
