@@ -1,4 +1,5 @@
 import * as eventManager from "./eventManager";
+import { add, format, formatDistance } from 'date-fns';
 
 const projects = document.querySelector('ul.project-list');
 let currentProject = {};
@@ -152,7 +153,7 @@ function newTask(task){
     // textsDiv.appendChild(description);
 
     // task dueDate
-    const duedate = newDivText('task-item-duedate', `Due: ${task.getDueDate()}`);
+    const duedate = newDivText('task-item-duedate', `Due: ${formatDate(task.getDueDate())}, (${stringEstimateTimeFromPresent(task.getDueDate())})`);
     textsDiv.appendChild(duedate);
 
     //task edit button
@@ -218,6 +219,14 @@ function editTaskEnd(eventArgs){
     };
     titleInput.value = "";
 };
+
+function formatDate(date){
+    return format(date, 'MM/dd/yyyy');
+}
+
+function stringEstimateTimeFromPresent(date){
+    return formatDistance(date, new Date());
+}
 
 function newInputText(classname, placeholder){
     const input = document.createElement('input');

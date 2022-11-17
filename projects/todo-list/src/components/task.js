@@ -1,5 +1,5 @@
 import * as eventManager from "./eventManager";
-import { add, format } from 'date-fns';
+import { add } from 'date-fns';
 
 export default function taskItem(title="My New Task", description=""/* , dueDate */, priority=1) {
 
@@ -14,7 +14,6 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
         minutes: 0,
         seconds: 0,
       });
-    format(dueDate, 'MM/dd/yyyy');
     
     
     const setTitle = inputTitle => title = inputTitle;
