@@ -1,5 +1,5 @@
 import * as eventManager from "./eventManager";
-import { add, format, formatDistance } from 'date-fns';
+import { add, format, formatDistanceToNow } from 'date-fns';
 
 const projects = document.querySelector('ul.project-list');
 let currentProject = {};
@@ -142,8 +142,7 @@ function newTask(task){
     const title = newDivText('task-item-name', task.getTitle());
     textsDiv.appendChild(title);
 
-    //task edit form
-    //const editForm = newForm('task-item-editform');
+    //title edit form
     const titleEdit = newInputText('task-item-edit-title-input', "Task name");
     textsDiv.appendChild(titleEdit);
 
@@ -153,8 +152,14 @@ function newTask(task){
     // textsDiv.appendChild(description);
 
     // task dueDate
-    const duedate = newDivText('task-item-duedate', `Due: ${formatDate(task.getDueDate())}, (${stringEstimateTimeFromPresent(task.getDueDate())})`);
+    const duedate = newDivText('task-item-duedate', `Due: ${formatDateForHuman(task.getDueDate())}, (${stringEstimateTimeFromPresent(task.getDueDate())})`);
     textsDiv.appendChild(duedate);
+
+    //duedate edit input
+    //const editForm = newForm('task-item-editform');
+    const dueDateEdit = newInputText('task-item-edit-duedate-input', formatDateToInput(task.getDueDate()));
+    dueDateEdit.setAttribute('type', 'date');
+    textsDiv.appendChild(dueDateEdit);
 
     //task edit button
     const editButton = newButton('task-edit-button', 'edit');
@@ -206,26 +211,47 @@ function enableTask(eventArgs, bool){
 function editTaskStart(eventArgs){
     const taskDOM = eventArgs.taskDOM;
     taskDOM.classList.add('editing-task');
-    const input = taskDOM.querySelector('.task-item-edit-title-input');
-    input.placeholder = eventArgs.task.getTitle();
+    const inputTitle = taskDOM.querySelector('.task-item-edit-title-input');
+    inputTitle.placeholder = eventArgs.task.getTitle();
+    const inputDate = taskDOM.querySelector('.task-item-edit-duedate-input');
+    inputDate.value = formatDateToInput(eventArgs.task.getDueDate());
 }
 
 function editTaskEnd(eventArgs){
     const taskDOM = eventArgs.taskDOM;
     taskDOM.classList.remove('editing-task');
     const titleInput = taskDOM.querySelector('.task-item-edit-title-input');
+    const dateInput = taskDOM.querySelector('.task-item-edit-duedate-input');
+    if (titleInput.value == "") titleInput.value = eventArgs.task.getTitle();
+    if (!dateInput.checkValidity()) dateInput.value = formatDateToInput(eventArgs.task.getDueDate());
     if (eventArgs.change == true){
-        eventManager.publish('setTaskValues', {task: eventArgs.task, title: titleInput.value});
+        eventManager.publish('setTaskValues', {task: eventArgs.task, title: titleInput.value, duedate: new Date(dateInput.value)});
     };
     titleInput.value = "";
+    dateInput.value = formatDateToInput(eventArgs.task.getDueDate());
 };
 
-function formatDate(date){
-    return format(date, 'MM/dd/yyyy');
+function formatDateForHuman(date){
+    return format(date, 'dd/MM/yyyy');
 }
 
 function stringEstimateTimeFromPresent(date){
-    return formatDistance(date, new Date());
+    return formatDistanceToNow(date, {addSuffix: true});
+}
+
+function formatDateToInput(date){
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+}
+
+function formatInputDateToDate(value){
+    // const array = value.split("-");
+    // const year = parseInt(array[0]);
+    // const month = parseInt(array[1]) - 1;
+    // const day = parseInt(array[2]);
+    return new Date(value);
 }
 
 function newInputText(classname, placeholder){

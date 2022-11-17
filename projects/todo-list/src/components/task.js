@@ -16,18 +16,20 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
       });
     
     
-    const setTitle = inputTitle => title = inputTitle;
-    //const setDescription = inputDescription => description = inputDescription;
-    //const setDueDate = inputDueDate => dueDate = inputDueDate;
-    //const setPriority = inputPriority => priority = inputPriority;
-
-    //const setCompletion = status => _isComplete = status;
-
-    const setTaskValues = eventArgs => {
-        setTitle(eventArgs.title);
-        eventManager.publish('refreshTask', eventArgs.task);
-    }
-
+      const setTitle = inputTitle => title = inputTitle;
+      const setDueDate = inputDate => dueDate = inputDate;
+      //const setDueDate = inputDueDate => dueDate = inputDueDate;
+      //const setDescription = inputDescription => description = inputDescription;
+      //const setPriority = inputPriority => priority = inputPriority;
+      
+      //const setCompletion = status => _isComplete = status;
+      
+      const setTaskValues = eventArgs => {
+          setTitle(eventArgs.title);
+          setDueDate(eventArgs.duedate);
+          eventManager.publish('refreshTask', eventArgs.task);
+        };
+    
     const getTitle = () => title;
     //const getDescription = () => description;
     const getDueDate = () => dueDate;
@@ -40,6 +42,7 @@ export default function taskItem(title="My New Task", description=""/* , dueDate
 
     return {
         setTitle,
+        setDueDate,
         //setDescription,
         //setDueDate,
         // setPriority,

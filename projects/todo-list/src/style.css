@@ -6,13 +6,18 @@
     list-style-type: none;
     color: var(--color-text);
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 :root {
     --color-bg: #232946;
     --color-headertext: #fffffe;
     --color-text: #b8c1ec;
+    --color-text-hover: #96a2da;
+    --color-text-active: #6d7dc9;
     --color-bg-button:#eebbc3;
+    --color-bg-button-hover:#da97a3;
+    --color-bg-button-active:#ce7281;
     --color-text-button: #232946;
     --color-stroke:#121629;
 }
@@ -129,7 +134,7 @@ button.project-delete-button{
 }
 
 .project-list-item.selected-project {
-    background-color: var(--color-bg-button);
+    background-color: var(--color-bg-button-hover);
 }
 
 .project-list-item:hover .project-list-item-name,
@@ -187,6 +192,14 @@ label.new-project-label {
     font-size: 20px;
 }
 
+.new-project-interactive button:hover {
+    background-color: var(--color-bg-button-hover);
+}
+
+.new-project-interactive button:active {
+    background-color: var(--color-bg-button-active);
+}
+
 .tasks {
     display: flex;
     flex-direction: column;
@@ -214,12 +227,22 @@ button.add-task-button {
     border-radius: 6px;
 }
 
+button.add-task-button:hover {
+    background-color: var(--color-bg-button-hover);
+}
+
+button.add-task-button:active {
+    background-color: var(--color-bg-button-active);
+}
+
 .task-list {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 15px;
     height: 100%;
     align-content: start;
+    border-top: 2px solid var(--color-stroke);
+    padding-top: 20px;
 }
 
 .task-list-item {
@@ -233,20 +256,25 @@ button.add-task-button {
     border-radius: 8px;
 }
 
+.task-list-item:not(.disabled):hover {
+    background-color: var(--color-text-hover);
+}
+
 .task-list-item.disabled {
     opacity: 0.45;
 }
 
-.task-list-texts-section {
+.task-item-texts-section {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    gap: 15px;
+    gap: 5px;
 }
 
 .task-item-name,
 .task-item-edit-title-input,
+.task-item-edit-duedate-input,
 .task-delete-button,
 .task-edit-button,
 .task-edit-confirm-button,
@@ -257,7 +285,6 @@ button.add-task-button {
 }
 
 .task-item-name,
-.task-item-edit-title-input,
 .task-item-duedate {
     justify-content: flex-start;
     color: var(--color-stroke);
@@ -268,8 +295,22 @@ button.add-task-button {
     font-size: 20px;
 }
 
-.task-item-duedate {
+.task-item-duedate,
+.task-item-edit-duedate-input {
     font-size: 16px;
+}
+
+.task-item-edit-title-input,
+.task-item-edit-duedate-input {
+    background-color: rgba(255, 255, 255, 0);
+    color: var(--color-stroke);
+    border: 0px solid var(--color-stroke);
+    border-bottom: 1px solid var(--color-stroke);
+}
+
+.task-item-edit-title-input::placeholder {
+    color: var(--color-text-button);
+    opacity: 0.7;
 }
 
 .task-delete-button,
@@ -282,8 +323,21 @@ button.add-task-button {
     padding: 0.3rem 1.2rem;
     border: 2px solid var(--color-text-button);
     border-radius: 5px;
-
     visibility: hidden;
+}
+
+.task-delete-button:hover,
+.task-edit-button:hover,
+.task-edit-confirm-button:hover,
+.task-edit-cancel-button:hover {
+    background-color: var(--color-bg-button-hover);
+}
+
+.task-delete-button:active,
+.task-edit-button:active,
+.task-edit-confirm-button:active,
+.task-edit-cancel-button:active {
+    background-color: var(--color-bg-button-active);
 }
 
 .task-list-item.editing-task:not(.disabled) .task-delete-button,
@@ -301,12 +355,14 @@ button.add-task-button {
 }
 
 .task-list-item:not(.editing-task) .task-item-edit-title-input,
+.task-list-item:not(.editing-task) .task-item-edit-duedate-input,
 .task-list-item:not(.editing-task) .task-edit-confirm-button,
 .task-list-item:not(.editing-task) .task-edit-cancel-button {
     display: none;
 }
 
 .task-list-item.editing-task .task-item-name,
+.task-list-item.editing-task .task-item-duedate,
 .task-list-item.editing-task .task-edit-button,
 .task-list-item.editing-task .task-delete-button {
     display: none;
