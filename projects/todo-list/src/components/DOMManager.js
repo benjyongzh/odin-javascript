@@ -9,7 +9,9 @@ const addProjectButton = document.querySelector("button.dashboard-add-project-bu
 addProjectButton.addEventListener('click', (event) => {
     event.preventDefault();
     const newProjectInput = event.target.parentElement.querySelector("#new-project-input");
-    eventManager.publish('createProject', newProjectInput.value);
+    if (isValidName(newProjectInput.value)){
+        eventManager.publish('createProject', newProjectInput.value);
+    };
 });
 
 const taskList = document.querySelector('ul.task-list');
@@ -19,6 +21,12 @@ addTaskButton.addEventListener('click', (event) => {
     if (addTaskButton.classList.contains('disabled') || currentProject == {}) return;
     eventManager.publish('createNewTask', getCurrentProject());
 });
+
+function isValidName(input){
+    const startEnd = /[a-zA-Z0-9\-\_]/;
+    const alphaNumeric = /[a-zA-Z0-9]+/;
+    return (startEnd.test(input.toString()[0]) || startEnd.test(input.toString()[input.length-1])) && alphaNumeric.test(input);
+}
 
 function getCurrentProject() {return currentProject};
 function setCurrentProject(arg){currentProject = arg};
@@ -222,7 +230,7 @@ function editTaskEnd(eventArgs){
     taskDOM.classList.remove('editing-task');
     const titleInput = taskDOM.querySelector('.task-item-edit-title-input');
     const dateInput = taskDOM.querySelector('.task-item-edit-duedate-input');
-    if (titleInput.value == "") titleInput.value = eventArgs.task.getTitle();
+    if (!isValidName(titleInput.value)) titleInput.value = eventArgs.task.getTitle();
     if (!dateInput.checkValidity()) dateInput.value = formatDateToInput(eventArgs.task.getDueDate());
     if (eventArgs.change == true){
         eventManager.publish('setTaskValues', {task: eventArgs.task, title: titleInput.value, duedate: new Date(dateInput.value)});
