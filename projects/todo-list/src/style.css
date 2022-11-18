@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+
 * {
     /* border: 1px solid black; */
     margin: 0;
@@ -6,7 +8,19 @@
     list-style-type: none;
     color: var(--color-text);
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+}
+
+input {
+    outline: none;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
 }
 
 :root {
@@ -55,14 +69,16 @@ body {
     justify-content: center;
     color: var(--color-headertext);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
+    font-weight: 500;
 }
 
 .header-description {
-    font-size: 22px;
+    font-size: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 300;
 }
 
 .content {
@@ -87,6 +103,8 @@ body {
 .tasks-section-title {
     font-size: 24px;
     color: var(--color-headertext);
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
 .projects-section,
@@ -123,6 +141,15 @@ button.project-delete-button{
     align-items: center;
     justify-content: center;
     font-size: 16px;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 50%;
+    border: 0px solid black;
+    color: var(--color-stroke);
+}
+
+
+button.project-delete-button{
+    font-size: 20px;
 }
 
 button.project-delete-button{
@@ -140,6 +167,7 @@ button.project-delete-button{
 .project-list-item:hover .project-list-item-name,
 .project-list-item.selected-project .project-list-item-name{
     color: var(--color-text-button);
+    font-weight: 700;
 }
 
 .project-list-item:hover button.project-delete-button {
@@ -160,22 +188,24 @@ label.new-project-label {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    font-weight: 500;
 }
 
 .new-project-interactive {
     display: flex;
     height: 30px;
     width: 100%;
-    gap: 15px;
+    gap: 20px;
     justify-content: space-between;
-    align-items: stretch;
+    align-items: center;
 }
 
 .new-project-interactive input {
-    padding: 10px;
+    padding: 0px 10px;
     color: var(--color-stroke);
     border-radius: 6px;
     font-size: 14px;
+    height: 100%;
     width: 100%;
     border: 0px solid var(--color-bg-button);
 }
@@ -185,11 +215,12 @@ label.new-project-label {
     align-items: center;
     justify-content: center;
     border-radius: 15px;
-    padding: 0.3rem 0.6rem;
+    border: 0px solid black;
+    height: 100%;
+    width: 35px;
     background-color: var(--color-bg-button);
     border: 0px solid var(--color-bg-button);
     color: var(--color-text-button);
-    font-size: 20px;
 }
 
 .new-project-interactive button:hover {
@@ -225,6 +256,7 @@ button.add-task-button {
     padding: 0.3rem 1.2rem;
     border: 0px solid black;
     border-radius: 6px;
+    font-weight: 500;
 }
 
 button.add-task-button:hover {
@@ -251,9 +283,10 @@ button.add-task-button:active {
     grid-template-columns: 1fr auto;
     background-color: var(--color-text);
     height: 80px;
-    padding: 15px;
-    gap: 15px;
+    padding: 10px 15px;
+    gap: 10px;
     border-radius: 8px;
+    align-items: stretch;
 }
 
 .task-list-item:not(.disabled):hover {
@@ -290,14 +323,22 @@ button.add-task-button:active {
     color: var(--color-stroke);
 }
 
-.task-item-name,
-.task-item-edit-title-input {
+.task-item-name {
     font-size: 20px;
+    font-weight: 700;
 }
 
-.task-item-duedate,
-.task-item-edit-duedate-input {
+.task-item-edit-title-input {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.task-item-duedate {
     font-size: 16px;
+}
+
+.task-item-edit-duedate-input {
+    font-size: 14px;
 }
 
 .task-item-edit-title-input,
@@ -306,6 +347,7 @@ button.add-task-button:active {
     color: var(--color-stroke);
     border: 0px solid var(--color-stroke);
     border-bottom: 1px solid var(--color-stroke);
+    padding: 0px 5px;
 }
 
 .task-item-edit-title-input::placeholder {
@@ -320,7 +362,7 @@ button.add-task-button:active {
     justify-content: center;
     background-color: var(--color-bg-button);
     color: var(--color-text-button);
-    padding: 0.3rem 1.2rem;
+    padding: 0.3rem 0.9rem;
     border: 2px solid var(--color-text-button);
     border-radius: 5px;
     visibility: hidden;

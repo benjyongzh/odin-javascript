@@ -74,7 +74,8 @@ function newProject(eventArgs){
     project.appendChild(title);
 
     //project delete button
-    const deleteButton = newButton('project-delete-button', 'del');
+    const deleteButton = newButton('project-delete-button', 'delete');
+    deleteButton.classList.add('material-symbols-outlined');
     project.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
         event.stopPropagation();
@@ -171,6 +172,7 @@ function newTask(task){
 
     //task edit button
     const editButton = newButton('task-edit-button', 'edit');
+    editButton.classList.add('material-symbols-outlined');
     taskDOM.appendChild(editButton);
     editButton.addEventListener('click', () => {
         if (taskDOM.classList.contains('disabled')) return;
@@ -178,7 +180,8 @@ function newTask(task){
     })
 
     //task edit confirm button
-    const editConfirmButton = newButton('task-edit-confirm-button', 'confirm');
+    const editConfirmButton = newButton('task-edit-confirm-button', 'check');
+    editConfirmButton.classList.add('material-symbols-outlined');
     taskDOM.appendChild(editConfirmButton);
     editConfirmButton.addEventListener('click', () => {
         if (taskDOM.classList.contains('disabled')) return;
@@ -186,7 +189,8 @@ function newTask(task){
     })
 
     //task cancel button
-    const editCancelButton = newButton('task-edit-cancel-button', 'cancel');
+    const editCancelButton = newButton('task-edit-cancel-button', 'close');
+    editCancelButton.classList.add('material-symbols-outlined');
     taskDOM.appendChild(editCancelButton);
     editCancelButton.addEventListener('click', () => {
         if (taskDOM.classList.contains('disabled')) return;
@@ -194,7 +198,8 @@ function newTask(task){
     })
 
     //task delete button
-    const deleteButton = newButton('task-delete-button', 'del');
+    const deleteButton = newButton('task-delete-button', 'delete');
+    deleteButton.classList.add('material-symbols-outlined');
     taskDOM.appendChild(deleteButton);
     deleteButton.addEventListener('click', () => {
         if (taskDOM.classList.contains('disabled')) return;
