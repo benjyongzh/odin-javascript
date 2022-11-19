@@ -4,7 +4,10 @@ import './style.css';
 const body = document.querySelector('body');
 
 //const menu = dropdownMenu("hello", {appearOnHover: false});
-const dropdownMenu = dropdownMenu("hello");
-dropdownMenu.addLink("test 1");
+const menu = dropdownMenu("hello");
+menu.addLink("test 1");
+menu.addLink("test 2");
+menu.addLink("google", "https://www.google.com/");
+menu.addLink("leetcode", "https://leetcode.com/");
 
-body.appendChild(dropdownMenu.mainDOM);
+body.appendChild(menu.mainDOM);

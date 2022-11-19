@@ -1,8 +1,8 @@
 export const dropdownMenu = (title, options={}) => {
-    const main = document.createElement('div');
-    main.classList.add('dropdown-main');
+    const mainDOM = document.createElement('div');
+    mainDOM.classList.add('dropdown-main');
 
-    main.textContent = title;
+    mainDOM.textContent = title;
 
     // const link = createLink(options.mainLink="#", title);
     // main.appendChild(link);
@@ -21,7 +21,7 @@ export const dropdownMenu = (title, options={}) => {
     };
 
     const addLink = (title, link="#") => {
-        const newLink = createLink(link, title);
+        const newLink = createLink(title, link);
         menu.appendChild(newLink);
     }
 
@@ -47,8 +47,6 @@ export const dropdownMenu = (title, options={}) => {
 
     return {mainDOM, addLink};
 }
-
-
 
 const createLink = (text, link) => {
     const anchor = document.createElement('a');
