@@ -2,7 +2,10 @@ export const dropdownMenu = (title, options={}) => {
     const mainDOM = document.createElement('div');
     mainDOM.classList.add('dropdown-main');
 
-    mainDOM.textContent = title;
+    const mainTitle = document.createElement('div');
+    mainTitle.classList.add('dropdown-main-title');
+    mainTitle.textContent = title;
+    mainDOM.appendChild(mainTitle);
 
     // const link = createLink(options.mainLink="#", title);
     // main.appendChild(link);
