@@ -1,5 +1,5 @@
 * {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     box-sizing: border-box;
     list-style: none;
     margin: 0;
@@ -7,41 +7,85 @@
     text-decoration: none;
 }
 
-.dropdown-main {
-    position: relative;
-    
+:root {
+    --color-main-bg: #fff7fa;
+    --color-main-bg-hover: #fedada;
+    --color-main-bg-active: #ff5975;
+    --color-stroke: #2e1a35;
 }
 
+.dropdown-main {
+    position: relative;
+}
 
 .dropdown-main-title {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     padding: 10px;
-    border-radius: 8px;
-    border: 1px solid black;
     cursor: pointer;
     font-size: 20px;
+    color: var(--color-stroke);
+    background-color: var(--color-main-bg);
+    transition: 0.1s ease-in-out;
+}
+
+/* .dropdown-main-icon {
+    position: absolute;
+    color: var(--color-stroke);
+    justify-self: right;
+} */
+
+.dropdown-main-title::after {
+    content: "e5cf";
+    position: absolute;
+    right: 10px;
+    color: var(--color-stroke);
+    transition: 0.2s ease-in-out;
+}
+
+.dropdown-main-title:not(.droppedDown):hover {
+    background-color: var(--color-main-bg-hover);
+}
+
+.dropdown-main-title.droppedDown {
+    background-color: var(--color-main-bg-active);
+}
+
+.dropdown-main-title.droppedDown::after {
+    content: "dropped";
+    position: absolute;
+    right: 10px;
+    color: var(--color-stroke);
 }
 
 .dropdown-menu {
     position: absolute;
     display: none;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: stretch;
     align-items: stretch;
-    
+    width: 100%;
 }
 
 .dropdown-menu-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 6px 16px;
+    padding: 6px;
+    width: 100%;
     background-color: grey;
     cursor: pointer;
     font-size: 16px;
+    color: var(--color-stroke);
+    background-color: var(--color-main-bg);
+    transition: 0.1s ease-in-out;
 }
+
+.dropdown-menu-link:hover {
+    background-color: var(--color-main-bg-hover);
+}
+
 
 .visible {
     display: flex;

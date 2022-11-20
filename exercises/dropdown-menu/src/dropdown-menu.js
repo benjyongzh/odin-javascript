@@ -7,6 +7,11 @@ export const dropdownMenu = (title, options={}) => {
     mainTitle.textContent = title;
     mainDOM.appendChild(mainTitle);
 
+    /* const mainIcon = document.createElement('div');
+    mainIcon.classList.add('dropdown-main-icon');
+    mainIcon.textContent = 'icon';
+    mainDOM.appendChild(mainIcon); */
+
     const menu = document.createElement('div');
     menu.classList.add('dropdown-menu');
 
@@ -14,10 +19,12 @@ export const dropdownMenu = (title, options={}) => {
 
     const toggleShowMenu = () => {
         menu.classList.toggle('visible');
+        mainTitle.classList.toggle('droppedDown');
     };
 
     const showMenu = bool => {
         bool ? menu.classList.add('visible') : menu.classList.remove('visible');
+        bool ? mainTitle.classList.add('droppedDown') : mainTitle.classList.remove('droppedDown');
     };
 
     const addLink = (title, link="#") => {
