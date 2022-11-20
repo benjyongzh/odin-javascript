@@ -7,9 +7,6 @@ export const dropdownMenu = (title, options={}) => {
     mainTitle.textContent = title;
     mainDOM.appendChild(mainTitle);
 
-    // const link = createLink(options.mainLink="#", title);
-    // main.appendChild(link);
-
     const menu = document.createElement('div');
     menu.classList.add('dropdown-menu');
 
@@ -30,8 +27,12 @@ export const dropdownMenu = (title, options={}) => {
 
     let appearOnHover = options.appearOnHover!=undefined ? options.appearOnHover : true;
 
-    mainDOM.addEventListener('click', () => {
-        if (!appearOnHover) {
+    let mainLink = options.mainLink!=undefined ? options.mainLink : "#";
+
+    mainTitle.addEventListener('click', () => {
+        if (appearOnHover) {
+            window.location.href = mainLink;
+        } else {
             toggleShowMenu();
         };
     });
