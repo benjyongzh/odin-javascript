@@ -37,11 +37,20 @@
 } */
 
 .dropdown-main-title::after {
-    content: "e5cf";
+    content: "\f0d7";
     position: absolute;
-    right: 10px;
+    display: inline-block;
+    right: 15px;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
     color: var(--color-stroke);
     transition: 0.2s ease-in-out;
+    padding-bottom: 2px;
 }
 
 .dropdown-main-title:not(.droppedDown):hover {
@@ -53,10 +62,7 @@
 }
 
 .dropdown-main-title.droppedDown::after {
-    content: "dropped";
-    position: absolute;
-    right: 10px;
-    color: var(--color-stroke);
+    transform: rotate(180deg);
 }
 
 .dropdown-menu {
