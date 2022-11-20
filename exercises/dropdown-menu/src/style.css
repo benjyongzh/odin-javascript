@@ -4,6 +4,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    text-decoration: none;
 }
 
 .dropdown-main {
@@ -28,6 +29,15 @@
     justify-content: flex-start;
     align-items: stretch;
     
+}
+
+.dropdown-menu-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem 1.2rem;
+    background-color: grey;
+    cursor: pointer;
 }
 
 .visible {

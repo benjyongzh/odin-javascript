@@ -53,6 +53,7 @@ export const dropdownMenu = (title, options={}) => {
 
 const createLink = (text, link) => {
     const anchor = document.createElement('a');
+    anchor.classList.add('dropdown-menu-link');
     anchor.href = link;
     anchor.textContent = text;
     return anchor;

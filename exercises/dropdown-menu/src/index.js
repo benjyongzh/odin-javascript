@@ -11,3 +11,11 @@ menu.addLink("google", "https://www.google.com/");
 menu.addLink("leetcode", "https://leetcode.com/");
 
 body.appendChild(menu.mainDOM);
+
+const menu2 = dropdownMenu("hello2");
+menu2.addLink("test 3");
+menu2.addLink("test 4");
+menu2.addLink("google2", "https://www.google.com/");
+menu2.addLink("leetcode2", "https://leetcode.com/");
+
+body.appendChild(menu2.mainDOM);
