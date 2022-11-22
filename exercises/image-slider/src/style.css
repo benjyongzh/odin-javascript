@@ -1,0 +1,32 @@
+* {
+    border: 1px solid black;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.image-slider-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+
+}
+
+.image-slider-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    padding: 50px;
+}
+
+button.scroll-left,
+button.scroll-right {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 20px;
+    justify-content: center;
+}
