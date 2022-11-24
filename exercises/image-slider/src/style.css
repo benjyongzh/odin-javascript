@@ -57,3 +57,7 @@ button.scroll-right {
     width: 60%;
     transform: translateX(0px);
 }
+
+.imageContainer.focus {
+    background-color: rgb(100, 0, 0);
+}

@@ -38,6 +38,35 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
 
     //private array of images
     //const imageArray = [];
+
+    const getFocusInt = () => {
+        //get all elements into an array
+        const elements = content.querySelectorAll('.imageContainer');
+        elements = [...elements];
+
+        //guard clause if there are no elements
+        if (elements.length <1) return null;
+
+        //get value of N of the focused element
+        for (let j = 0; j < elements.length; j++){
+            if (elements[j].classList.contains('focus')){
+                return j;
+            };
+        };
+    };
+
+    const removeAllFocus = () => {
+        const elements = content.querySelectorAll('.imageContainer');
+        elements.forEach(element => {
+            element.classList.remove('focus');
+        });
+    }
+
+    const makeFocusFromInt = int => {
+        removeAllFocus();
+        const imageDiv = content.querySelector(`:nth-child(${int})`);
+        imageDiv.classList.add('focus');
+    }
     
     const addImage = (text="", src="//:0") => {
         const imageDiv = createComponent('div', 'imageContainer');
@@ -48,6 +77,9 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         imageDiv.appendChild(image);
         imageDiv.appendChild(imageText);
         content.appendChild(imageDiv);
+        if (content.firstChild == imageDiv){
+            imageDiv.classList.add('focus');
+        };
     };
 
 
@@ -69,5 +101,8 @@ function scrollDirection(directionInt){
     if (directionInt != -1 && directionInt != 1) return;
 
     console.log(`scrolling towards ${directionInt} now.`);
+
+    makeFocusFromInt(getFocusInt() + directionInt);
+
     //animation for moving DOM elements in certain direction
 };
