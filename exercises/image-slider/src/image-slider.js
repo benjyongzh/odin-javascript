@@ -71,6 +71,7 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         const imageDiv = elements.item(int);
         console.log(imageDiv);
         imageDiv.classList.add('focus');
+        imageDiv.scrollIntoView();
     }
     
     const addImage = (text="", src="//:0") => {
@@ -100,6 +101,7 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         makeFocusFromInt(getFocusInt() + Number(directionInt));
 
         //animation for moving DOM elements in certain direction
+
     };
 
 
