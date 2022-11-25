@@ -55,6 +55,8 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         };
     };
 
+    const getChildrenCount = () => content.children.length;
+
     const removeAllFocus = () => {
         const elements = content.querySelectorAll('.imageContainer');
         elements.forEach(element => {
@@ -91,6 +93,10 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         if (directionInt != -1 && directionInt != 1) return;
 
         console.log(`scrolling to ${getFocusInt() + Number(directionInt)} now.`);
+
+        //guard clause for index out of range
+        if (getFocusInt() == 0 && directionInt != 1) return;
+        if (getFocusInt() >= getChildrenCount()-1 && directionInt!=-1) return;
         makeFocusFromInt(getFocusInt() + Number(directionInt));
 
         //animation for moving DOM elements in certain direction
