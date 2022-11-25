@@ -41,7 +41,7 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
 
     const getFocusInt = () => {
         //get all elements into an array
-        const elements = content.querySelectorAll('.imageContainer');
+        let elements = content.querySelectorAll('.imageContainer');
         elements = [...elements];
 
         //guard clause if there are no elements
@@ -64,7 +64,10 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
 
     const makeFocusFromInt = int => {
         removeAllFocus();
-        const imageDiv = content.querySelector(`:nth-child(${int})`);
+        console.log(int);
+        const elements = content.querySelectorAll('.imageContainer');
+        const imageDiv = elements.item(int);
+        console.log(imageDiv);
         imageDiv.classList.add('focus');
     }
     
@@ -83,7 +86,15 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
     };
 
 
-    const scroll = directionInt => scrollDirection(directionInt);
+    const scroll = directionInt => {
+        //guard clause
+        if (directionInt != -1 && directionInt != 1) return;
+
+        console.log(`scrolling to ${getFocusInt() + Number(directionInt)} now.`);
+        makeFocusFromInt(getFocusInt() + Number(directionInt));
+
+        //animation for moving DOM elements in certain direction
+    };
 
 
     return {mainDOM, addImage, scroll};
@@ -94,15 +105,4 @@ function createComponent(elementType="div", className="", text=""){
     element.classList.add(className);
     element.textContent = text;
     return element;
-};
-
-function scrollDirection(directionInt){
-    //guard clause
-    if (directionInt != -1 && directionInt != 1) return;
-
-    console.log(`scrolling towards ${directionInt} now.`);
-
-    makeFocusFromInt(getFocusInt() + directionInt);
-
-    //animation for moving DOM elements in certain direction
 };
