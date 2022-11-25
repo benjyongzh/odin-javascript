@@ -16,13 +16,12 @@
 
 .image-slider-content {
     width: 100%;
-    position: relative;
     gap: 50px;
-    /* display: grid;
-    grid-auto-flow: column;
-    overflow: visible; */
-    white-space: nowrap;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    padding: 20px 0px;
+    scroll-snap-type: x mandatory;
 }
 
 button.scroll-left,
@@ -46,18 +45,31 @@ button.scroll-right {
 }
 
 .imageContainer {
-    /* position: absolute; */
-    display: inline-flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center; 
-    gap: 10px;
-    margin-top: 20px;
+    /*margin-top: 20px;
     margin-bottom: 20px;
     width: 60%;
-    transform: translateX(0px);
+    transform: translateX(0px); */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    scroll-snap-align: center;
+    align-items: center; 
+    gap: 10px;
+    flex-shrink: 0;
+    width: 70%;
+    height: 100%;
+
+}
+
+.imageContainer:first-of-type {
+    margin-left: 30%;
+}
+
+.imageContainer:last-of-type {
+    margin-right: 30%;
 }
 
 .imageContainer.focus {
     background-color: rgb(100, 0, 0);
 }
+
