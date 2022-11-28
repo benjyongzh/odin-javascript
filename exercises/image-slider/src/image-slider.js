@@ -1,21 +1,25 @@
 export default function imageSliderComponent(options={scrollMode: "click"}){
 
     const mainDOM = createComponent('div', 'image-slider-container');
+    const mainContainer = createComponent('div', 'content-container');
     const scrollButtonLeft = createComponent('button', 'scroll-left');
     scrollButtonLeft.setAttribute("scrollDirection", -1);
     const content = createComponent('div', 'image-slider-content');
     const scrollButtonRight = createComponent('button', 'scroll-right');
     scrollButtonRight.setAttribute("scrollDirection", 1);
+    const navContainer = createComponent('div', 'nav-container');
 
-    mainDOM.appendChild(scrollButtonLeft);
-    mainDOM.appendChild(content);
-    mainDOM.appendChild(scrollButtonRight);
+    mainDOM.appendChild(mainContainer);
+    mainContainer.appendChild(scrollButtonLeft);
+    mainContainer.appendChild(content);
+    mainContainer.appendChild(scrollButtonRight);
+    mainDOM.appendChild(navContainer);
 
     //scrollMode: "hover" or "click". by default its click
     let scrollMode = options.scrollMode;
 
     //adding button events
-    const buttons = mainDOM.querySelectorAll('button');
+    const buttons = mainContainer.querySelectorAll('button');
     buttons.forEach(button => {
         //for clicking
         button.addEventListener('click', () => {

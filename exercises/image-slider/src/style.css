@@ -9,6 +9,11 @@
 
 .image-slider-container {
     display: grid;
+    grid-template-columns: 1fr auto;
+}
+
+.content-container {
+    display: grid;
     grid-auto-flow: column;
     grid-template-columns: 1fr;
     position: relative;
@@ -66,7 +71,7 @@ button.scroll-right {
     width: 70%;
     height: 100%;
     opacity: 0.6;
-    transition: 0.3s ease-in-out;
+    transition: 0.35s ease-in-out;
 
 }
 
