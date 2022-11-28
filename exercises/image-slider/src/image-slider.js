@@ -51,7 +51,7 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         //guard clause if there are no elements
         if (elements.length <1) return null;
 
-        //get value of N of the focused element
+        //get value of N of the focused element. starts from 0
         for (let j = 0; j < elements.length; j++){
             if (elements[j].classList.contains('focus')){
                 return j;
@@ -70,12 +70,13 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
 
     const makeFocusFromInt = int => {
         removeAllFocus();
-        console.log(int);
+        //console.log(int);
         const elements = content.querySelectorAll('.imageContainer');
         const imageDiv = elements.item(int);
-        console.log(imageDiv);
+        //console.log(imageDiv);
         imageDiv.classList.add('focus');
         imageDiv.scrollIntoView();
+        refreshNavButtons();
     }
     
     const addImage = (text="", src="//:0") => {
@@ -90,7 +91,44 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         if (content.firstChild == imageDiv){
             imageDiv.classList.add('focus');
         };
+        addNavButton();
+        refreshNavButtons();
     };
+
+    const addNavButton = () => {
+        const navButton = createComponent('button', 'nav-button');
+        navButton.addEventListener('click', () => {
+            const int = getNavButtonInt(navButton);
+            makeFocusFromInt(int);
+        });
+        navContainer.appendChild(navButton);
+    };
+
+    const getNavButtonInt = button => {
+        //get all buttons
+        let buttons = navContainer.querySelectorAll("button");
+        buttons = [...buttons];
+        for (let i = 0; i < buttons.length; i++) {
+            if (buttons[i] == button) {
+                return i;
+            };
+        };
+        console.log('there are no such buttons.');
+        return -1;
+    };
+
+    const refreshNavButtons = () => {
+        offAllNavButtons();
+        const button = navContainer.querySelector(`:nth-child(${getFocusInt() + 1})`);
+        button.classList.add('nav-button-active');
+    };
+
+    const offAllNavButtons = () => {
+        const buttons = navContainer.querySelectorAll('.nav-button');
+        buttons.forEach(button => {
+            button.classList.remove('nav-button-active');
+        });
+    }
 
 
     const scroll = directionInt => {
@@ -103,9 +141,6 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         if (getFocusInt() == 0 && directionInt != 1) return;
         if (getFocusInt() >= getChildrenCount()-1 && directionInt!=-1) return;
         makeFocusFromInt(getFocusInt() + Number(directionInt));
-
-        //animation for moving DOM elements in certain direction
-
     };
 
 

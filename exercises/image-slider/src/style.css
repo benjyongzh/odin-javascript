@@ -9,7 +9,7 @@
 
 .image-slider-container {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
 }
 
 .content-container {
@@ -88,3 +88,27 @@ button.scroll-right {
     opacity: 1;
 }
 
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+    transition: 0.35s ease-in-out;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    border-width: 0;
+}
+
+.nav-button.nav-button-active {
+
+    background-color: blue;
+}
