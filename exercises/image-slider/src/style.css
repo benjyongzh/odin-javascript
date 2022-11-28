@@ -7,6 +7,14 @@
     padding: 0;
 }
 
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 300,
+  'GRAD' 0,
+  'opsz' 48
+}
+
 .image-slider-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -36,16 +44,20 @@ button.scroll-right {
     display: flex;
     align-items: center;
     height: 100%;
-    padding: 20px;
+    width: 55px;
+    padding: 20px 5px;
     justify-content: center;
     z-index: 1;
     opacity: 0.6;
     transition: 0.15s ease-in-out;
+    color: grey;
+    font-size: 55px;
 }
 
 button.scroll-left:hover,
 button.scroll-right:hover {
     opacity: 1;
+    color: blue;
 }
 
 button.scroll-left {
@@ -92,7 +104,7 @@ button.scroll-right {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
 
 }
 
@@ -103,9 +115,10 @@ button.scroll-right {
     background-color: grey;
     transition: 0.35s ease-in-out;
     border-radius: 50%;
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
     border-width: 0;
+    cursor: pointer;
 }
 
 .nav-button.nav-button-active {

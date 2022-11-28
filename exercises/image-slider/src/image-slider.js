@@ -3,10 +3,17 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
     const mainDOM = createComponent('div', 'image-slider-container');
     const mainContainer = createComponent('div', 'content-container');
     const scrollButtonLeft = createComponent('button', 'scroll-left');
+
     scrollButtonLeft.setAttribute("scrollDirection", -1);
+    scrollButtonLeft.classList.add('material-symbols-outlined');
+    scrollButtonLeft.textContent = "navigate_before";
     const content = createComponent('div', 'image-slider-content');
+
     const scrollButtonRight = createComponent('button', 'scroll-right');
     scrollButtonRight.setAttribute("scrollDirection", 1);
+    scrollButtonRight.classList.add('material-symbols-outlined');
+    scrollButtonRight.textContent = "navigate_next";
+
     const navContainer = createComponent('div', 'nav-container');
 
     mainDOM.appendChild(mainContainer);
@@ -22,7 +29,8 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
     const buttons = mainContainer.querySelectorAll('button');
     buttons.forEach(button => {
         //for clicking
-        button.addEventListener('click', () => {
+        button.addEventListener('click', event => {
+            event.stopPropagation();
             if (scrollMode == "click") {
                 scroll(button.getAttribute('scrollDirection'));
             };
