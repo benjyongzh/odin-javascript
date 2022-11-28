@@ -48,9 +48,6 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         //for hovering, how to set speed and intervals etc?
     });
 
-    //private array of images
-    //const imageArray = [];
-
     const getFocusInt = () => {
         //get all elements into an array
         let elements = content.querySelectorAll('.imageContainer');
