@@ -12,7 +12,7 @@
     --color-bg-Dgrey: rgb(92, 94, 97);
     --color-bg-hover: rgb(126, 170, 240);
     --color-bg-focus: rgb(72, 121, 201);
-    --container-width: 40%;
+    --container-width: 70%;
 }
 
 .material-symbols-outlined {
@@ -55,12 +55,13 @@ button.scroll-right {
     width: 55px;
     padding: 20px 5px;
     justify-content: center;
-    z-index: 1;
+    z-index: 2;
     opacity: 0.6;
     transition: 0.15s ease-in-out;
     color: var(--color-bg-Dgrey);
     font-size: 55px;
     background-color: var(--color-bg-Lgrey);
+    border: 0px solid var(--color-bg-Dgrey);
 }
 
 button.scroll-left:hover,
@@ -88,7 +89,7 @@ button.scroll-right {
     justify-content: space-between;
     scroll-snap-align: center;
     align-items: center; 
-    gap: 15px;
+    gap: 25px;
     flex-shrink: 0;
     width: var(--container-width);
     height: 100%;
@@ -111,8 +112,9 @@ button.scroll-right {
 .image {
     background-repeat: no-repeat;
     background-size: cover;
-    width: auto;
-    height: 300px;
+    width: 500px;
+    height: 400px;
+    object-fit: cover;
     box-shadow: 2px 2px 4px 1px var(--color-bg-Lgrey),
                 3px 6px 8px 1px var(--color-bg-Lgrey);
     scale: 0.85;
@@ -139,7 +141,7 @@ button.scroll-right {
     align-items: center;
     justify-content: center;
     gap: 12px;
-
+    padding: 10px 0px;
 }
 
 .nav-button {
