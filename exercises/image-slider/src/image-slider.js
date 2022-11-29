@@ -77,7 +77,7 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         const imageDiv = elements.item(int);
         //console.log(imageDiv);
         imageDiv.classList.add('focus');
-        imageDiv.scrollIntoView();
+        imageDiv.scrollIntoView();//needs to be changed to accommodate for smaller image sliders where next image is already within view.
         refreshNavButtons();
     }
     
@@ -135,24 +135,20 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
     const scrollButtonClick = event => {
         event.stopPropagation();
         if (scrollMode == "click") {
-            scroll(event.target.getAttribute('scrollDirection'));
+            const direction = Number(event.target.getAttribute('scrollDirection'));
+
+            //guard clause
+            if (direction != -1 && direction != 1) return;
+
+            //guard clause for index out of range
+            if (getFocusInt() == 0 && direction != 1) return;
+            if (getFocusInt() >= getChildrenCount()-1 && direction!=-1) return;
+
+            makeFocusFromInt(getFocusInt() + Number(direction));
         };
     }
 
-    const scroll = directionInt => {
-        //guard clause
-        if (directionInt != -1 && directionInt != 1) return;
-
-        console.log(`scrolling to ${getFocusInt() + Number(directionInt)} now.`);
-
-        //guard clause for index out of range
-        if (getFocusInt() == 0 && directionInt != 1) return;
-        if (getFocusInt() >= getChildrenCount()-1 && directionInt!=-1) return;
-        makeFocusFromInt(getFocusInt() + Number(directionInt));
-    };
-
-
-    return {mainDOM, addImage, scroll};
+    return {mainDOM, addImage};
 };
 
 function createComponent(elementType="div", className="", text=""){
