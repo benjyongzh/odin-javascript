@@ -29,12 +29,7 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
     const buttons = mainContainer.querySelectorAll('button');
     buttons.forEach(button => {
         //for clicking
-        button.addEventListener('click', event => {
-            event.stopPropagation();
-            if (scrollMode == "click") {
-                scroll(button.getAttribute('scrollDirection'));
-            };
-        });
+        button.addEventListener('click', event => scrollButtonClick(event));
 
         //for mouseover (hovering)
         /* button.addEventListener('mouseover', () => {
@@ -47,6 +42,8 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
 
         //for hovering, how to set speed and intervals etc?
     });
+
+    
 
     const getFocusInt = () => {
         //get all elements into an array
@@ -135,6 +132,12 @@ export default function imageSliderComponent(options={scrollMode: "click"}){
         });
     }
 
+    const scrollButtonClick = event => {
+        event.stopPropagation();
+        if (scrollMode == "click") {
+            scroll(event.target.getAttribute('scrollDirection'));
+        };
+    }
 
     const scroll = directionInt => {
         //guard clause
