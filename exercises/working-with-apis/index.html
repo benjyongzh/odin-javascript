@@ -7,15 +7,18 @@
     <title>Working With APIs</title>
 </head>
 <body>
-    <button class="refreshButton">refresh</button>
+    <input type="text" name="search" id="search">
+    <button class="searchButton">Search</button>
     <img src="#" alt="some img">
     <script>
         const img = document.querySelector('img');
-        const refreshButton = document.querySelector(".refreshButton");
+        const textInput = document.querySelector('#search');
+        const searchButton = document.querySelector(".searchButton");
 
-        function refreshFetch(){
+        function searchFetch(){
             img.src = "#";
-            const myurl = "https://api.giphy.com/v1/gifs/translate?api_key=97TKZc6HndbNw5X3DcBmf6YP7tDrbzou&s=dogs";
+            const text = textInput.value;
+            const myurl = `https://api.giphy.com/v1/gifs/translate?api_key=97TKZc6HndbNw5X3DcBmf6YP7tDrbzou&s=${text}`;
 
             fetch(myurl, {mode: 'cors'})
             .then(response => {
@@ -23,10 +26,13 @@
             })
             .then(responseJSON => {
                 img.src = responseJSON.data.images.original.url;
-            });
+            })
+            .catch(error => console.log(error));
         };
 
-        refreshButton.addEventListener('click', refreshFetch);
+        searchButton.addEventListener('click', searchFetch);
+
+        searchFetch();
         
     </script>
 </body>
