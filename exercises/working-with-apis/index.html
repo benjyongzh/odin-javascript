@@ -9,7 +9,15 @@
 <body>
     <img src="#" alt="some img">
     <script>
-        
+        const img = document.querySelector('img');
+        const myurl = "https://api.giphy.com/v1/gifs/translate?api_key=97TKZc6HndbNw5X3DcBmf6YP7tDrbzou&s=dogs";
+        fetch(myurl, {mode: 'cors'})
+            .then(response => {
+                return response.json();
+            })
+            .then(responseJSON => {
+                img.src = responseJSON.data.images.original.url;
+            });
     </script>
 </body>
 </html>
