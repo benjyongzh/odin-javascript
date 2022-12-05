@@ -15,9 +15,8 @@
         const textInput = document.querySelector('#search');
         const searchButton = document.querySelector(".searchButton");
 
-        function searchFetch(){
+        function searchFetch(text="cat"){
             img.src = "#";
-            const text = textInput.value;
             const myurl = `https://api.giphy.com/v1/gifs/translate?api_key=97TKZc6HndbNw5X3DcBmf6YP7tDrbzou&s=${text}`;
 
             fetch(myurl, {mode: 'cors'})
@@ -27,10 +26,16 @@
             .then(responseJSON => {
                 img.src = responseJSON.data.images.original.url;
             })
-            .catch(error => console.log(error));
+            .catch(error => {
+                console.log(error);
+
+            });
         };
 
-        searchButton.addEventListener('click', searchFetch);
+        searchButton.addEventListener('click', () => {
+            const text = textInput.value ? textInput.value : "cat";
+            searchFetch(text);
+        });
 
         searchFetch();
         
