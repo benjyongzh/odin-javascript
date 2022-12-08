@@ -14,34 +14,24 @@ async function getWeatherDataOfLocation(location){
         // console.log(text);
         const response = await fetch(text, {mode: 'cors'});
         const info = await response.json();
-        //console.log(info);
-        return info;
+        const filteredData = extractRelevantData(info);
+        return filteredData;
     } catch (error) {
         console.log(error);
     };
 };
 
-async function extractData(arg){
-    try {
-/*         const name = data.name;
-        const weather = {
-            'type': data.weather,
-            'description': data.weather,
-            'temperature': data.main.temp,
-            'humidity': data.main.humidity,
-            'wind': data.wind,
-        };
-        return await Promise.all([name, weather]); */
-        //const name = await arg;
-        console.log(await arg);
-        console.log(await arg.name);
-
-    } catch (error) {
-        console.log(error);
-    }
-
-}
+function extractRelevantData(data){
+    const name = data.name;
+    const weather = {
+        'type': data.weather[0].main,
+        'description': data.weather[0].description,
+        'temperature': data.main.temp,
+        'humidity': data.main.humidity,
+        'wind': data.wind,
+    };
+    return {name, weather};
+};
 
 const data = getWeatherDataOfLocation("london");
-const extracted = extractData(data);
-console.log(extracted);
+console.log(data);
