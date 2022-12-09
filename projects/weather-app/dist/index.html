@@ -11,20 +11,20 @@
         <header>Weather App</header>
 
         <div class="weather-info">
-
+            <div class="main-weather-info">
+                <div class="weather-type"></div>
+                <div class="temperature"></div>
+            </div>
+            <div class="secondary-weather-info">
+                <div class="humidity"></div>
+                <div class="wind-info"></div>
+            </div>
         </div>
 
-        <div class="user-interface">
-            <form action="#">
-                <div class="search">
-                    <label for="search-location">
-                        Search a city
-                        <input type="text" id="search-location" placeholder="city name">
-                    </label>
-                </div>
-                <button id="search-button" type="submit">Enter</button>
-            </form>
-        </div>
+        <form class="user-interface" action="#">
+            <input type="text" id="search-location" name="search-location" placeholder="Search a city">
+            <button id="search-button" type="submit">Search</button>
+        </form>
 
         <footer>
             <span>Benjamin Yong</span>

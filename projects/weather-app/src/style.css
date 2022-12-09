@@ -7,13 +7,62 @@
     list-style: none;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
 .container {
-    width: 100vw;
+    width: min(100vw, 1000px);
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     gap: 50px;
+    padding: 30px;
 }
 
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+form.user-interface {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    gap: 10px;
+}
+
+input#search-location {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border-radius: 8px;
+    font-size: 20px;
+}
+
+form.user-interface button#search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem 3rem;
+    width: min(400px, 100%);
+    font-size: 20px;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+}
