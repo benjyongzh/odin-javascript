@@ -31,6 +31,46 @@ header {
     font-size: 30px;
 }
 
+div.content {
+    display: grid;
+    grid-template: repeat(5, 1fr) / repeat(2, 1fr);
+    gap: 0px 50px;
+    width: min(80%, 800px);
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.content div.location {
+    grid-area: 1/1/2/3;
+}
+
+div.content div.weather-current {
+    grid-area: 2/1/6/2;
+    display: grid;
+    grid-template: repeat(3, 1fr) / repeat(4, 1fr);
+    gap: 10px;
+}
+
+div.content div.weather-forecast {
+    grid-area: 2/2/6/3;
+}
+
+div.temperature {
+    grid-area: 1/1/4/4;
+}
+
+div.weather-type {
+    grid-area: 1/4/2/5;
+}
+
+div.humidity {
+    grid-area: 2/4/3/5;
+}
+
+div.wind-info {
+    grid-area: 3/4/4/5;
+}
+
 form.user-interface {
     display: flex;
     flex-direction: column;
