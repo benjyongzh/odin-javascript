@@ -15,6 +15,8 @@ async function getWeatherDataOfLocation(location){
         const response = await fetch(text, {mode: 'cors'});
         const info = await response.json();
         const filteredData = extractRelevantData(info);
+        displayData(filteredData);
+        console.log(filteredData);
         return filteredData;
     } catch (error) {
         console.log(error);
@@ -33,5 +35,8 @@ function extractRelevantData(data){
     return {name, weather};
 };
 
-const data = getWeatherDataOfLocation("london");
-console.log(data);
+function displayData(data){
+    
+}
+
+getWeatherDataOfLocation("london");
