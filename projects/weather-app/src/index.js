@@ -4,6 +4,16 @@ const apiURL = "https://api.openweathermap.org/data/2.5/weather?q=";
 
 const apiKey = "25ab02671e4a2079d81ab8a2c5b2c733";
 
+const searchbar = document.querySelector('#search-bar');
+const searchbutton = document.querySelector('#search-button');
+searchbutton.addEventListener('click', event => {
+    event.preventDefault();
+    const location = searchbar.value;
+    getWeatherDataOfLocation(location);
+});
+
+const contentLocation = document.querySelector('.location');
+
 function constructFetchURL(url, location, key){
     return url+location+"&appid="+key+"&units=metric";
 }
@@ -36,7 +46,10 @@ function extractRelevantData(data){
 };
 
 function displayData(data){
-    
+    contentLocation.textContent = data.name;
 }
 
-getWeatherDataOfLocation("london");
+
+
+
+

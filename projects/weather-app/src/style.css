@@ -21,7 +21,6 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 50px;
-    padding: 30px;
 }
 
 header {
@@ -29,6 +28,7 @@ header {
     align-items: center;
     justify-content: center;
     font-size: 30px;
+    margin-top: 30px;
 }
 
 div.content {
@@ -38,10 +38,15 @@ div.content {
     width: min(80%, 800px);
     align-items: center;
     justify-content: space-between;
+    margin: auto;
+    height: 100%;
 }
 
 div.content div.location {
     grid-area: 1/1/2/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 div.content div.weather-current {
@@ -49,10 +54,6 @@ div.content div.weather-current {
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(4, 1fr);
     gap: 10px;
-}
-
-div.content div.weather-forecast {
-    grid-area: 2/2/6/3;
 }
 
 div.temperature {
@@ -71,6 +72,10 @@ div.wind-info {
     grid-area: 3/4/4/5;
 }
 
+div.content div.weather-forecast {
+    grid-area: 2/2/6/3;
+}
+
 form.user-interface {
     display: flex;
     flex-direction: column;
@@ -80,7 +85,7 @@ form.user-interface {
     gap: 10px;
 }
 
-input#search-location {
+input#search-bar {
     display: flex;
     align-items: center;
     width: 100%;
@@ -94,9 +99,11 @@ form.user-interface button#search-button {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.4rem 3rem;
-    width: min(400px, 100%);
+    padding: 0.6rem 3rem;
+    width: min(250px, 100%);
     font-size: 20px;
+    border-radius: 8px;
+    border: 2px solid grey;
 }
 
 footer {
@@ -104,5 +111,8 @@ footer {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+    background-color: lightblue;
+    width: 100%;
+    padding: 15px;
 }
