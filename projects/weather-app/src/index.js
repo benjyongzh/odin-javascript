@@ -56,13 +56,18 @@ function extractRelevantData(data){
 // DOM manipulation function
 function displayData(data){
     contentCurrentLocation.textContent = data.name;
-    contentCurrentTemperature.textContent = data.weather.temperature;
+    contentCurrentTemperature.textContent = data.weather.temperature.toFixed(1).toString() + "oC";
     contentCurrentWeatherType.textContent = data.weather.type;
-    contentCurrentHumidity.textContent = data.weather.humidity;
-    //contentCurrentWind.textContent = data.wind;
+    contentCurrentHumidity.textContent = data.weather.humidity + "%";
+    contentCurrentWind.textContent = `${data.weather.wind.speed}m/s ${degToCompass(data.weather.wind.deg)}`;
 }
 
-
+// function for changing wind direction degree into compass
+function degToCompass(num) {
+    const val = Math.floor((num / 45) + 0.5);
+    const arr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+    return arr[(val % 8)];
+}
 
 
 
