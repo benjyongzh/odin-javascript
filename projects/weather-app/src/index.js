@@ -19,6 +19,7 @@ searchbutton.addEventListener('click', event => {
     event.preventDefault();
     const location = searchbar.value;
     getWeatherDataOfLocation(location);
+    searchbar.value = "";
 });
 
 
@@ -32,9 +33,10 @@ async function getWeatherDataOfLocation(location){
         // console.log(text);
         const response = await fetch(text, {mode: 'cors'});
         const info = await response.json();
+        console.log(info);
         const filteredData = extractRelevantData(info);
         displayData(filteredData);
-        console.log(filteredData);
+        //console.log(filteredData);
         return filteredData;
     } catch (error) {
         console.log(error);
@@ -60,14 +62,14 @@ function displayData(data){
     contentCurrentWeatherType.textContent = data.weather.type;
     contentCurrentHumidity.textContent = data.weather.humidity + "%";
     contentCurrentWind.textContent = `${data.weather.wind.speed}m/s ${degToCompass(data.weather.wind.deg)}`;
-}
+};
 
 // function for changing wind direction degree into compass
 function degToCompass(num) {
     const val = Math.floor((num / 45) + 0.5);
     const arr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
     return arr[(val % 8)];
-}
+};
 
 
 
