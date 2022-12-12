@@ -86,8 +86,19 @@ function extractForecastWeatherData(data){
         let timezone = data.city.timezone/3600;
         let timeHour = parseInt(time.split(":")[0]);
         timeHour += timezone;
-        if (timeHour > 23) timeHour -= 24;
-        // console.log(timeHour);
+
+        // went into previous day
+        if (timeHour < 0) {
+            timeHour += 24;
+            date = addDay(date, -1);
+        };
+
+        //went into next day
+        if (timeHour > 23) {
+            timeHour -= 24;
+            date = addDay(date, 1);
+        };
+
         let AMorPM = timeHour<13 ? "AM" : "PM";
         if (timeHour > 12) timeHour -= 12;
         const set = {
@@ -163,4 +174,10 @@ function formatTemperature(num) {
 
 function formatHumidity(num) {
     return num + "%";
-}
+};
+
+function addDay(date, dayAmount){
+    let newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + dayAmount);
+    return `${newDate.getFullYear()}-${newDate.getMonth()}-${newDate.getDate()}`;
+};
