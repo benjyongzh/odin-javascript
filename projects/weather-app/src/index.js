@@ -1,7 +1,8 @@
 import './style.css';
 
 // constants
-const apiURL = "https://api.openweathermap.org/data/2.5/weather?q=";
+const apiURLCurrent = "https://api.openweathermap.org/data/2.5/weather?q=";
+const apiURLForecast = "https://api.openweathermap.org/data/2.5/forecast?q=";
 const apiKey = "25ab02671e4a2079d81ab8a2c5b2c733";
 
 // DOM item references
@@ -18,26 +19,38 @@ const searchbutton = document.querySelector('#search-button');
 searchbutton.addEventListener('click', event => {
     event.preventDefault();
     const location = searchbar.value;
-    getWeatherDataOfLocation(location);
+    getCurrentWeatherOfLocation(location)
+    .then(data => {
+        const filteredData = extractRelevantData(data);
+        displayData(filteredData);
+    });
+    getForecastWeatherOfLocation(location);
     searchbar.value = "";
 });
-
 
 function constructFetchURL(url, location, key){
     return url+location+"&appid="+key+"&units=metric";
 }
 
-async function getWeatherDataOfLocation(location){
+async function getCurrentWeatherOfLocation(location){
     try {
-        const text = constructFetchURL(apiURL, location, apiKey);
-        // console.log(text);
+        const text = constructFetchURL(apiURLCurrent, location, apiKey);
         const response = await fetch(text, {mode: 'cors'});
         const info = await response.json();
         console.log(info);
-        const filteredData = extractRelevantData(info);
-        displayData(filteredData);
-        //console.log(filteredData);
-        return filteredData;
+        return info;
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+async function getForecastWeatherOfLocation(location){
+    try {
+        const text = constructFetchURL(apiURLForecast, location, apiKey);
+        const response = await fetch(text, {mode: 'cors'});
+        const info = await response.json();
+        console.log(info);
+        return info;
     } catch (error) {
         console.log(error);
     };
