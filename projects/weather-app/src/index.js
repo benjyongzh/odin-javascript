@@ -21,10 +21,14 @@ searchbutton.addEventListener('click', event => {
     const location = searchbar.value;
     getCurrentWeatherOfLocation(location)
     .then(data => {
-        const filteredData = extractRelevantData(data);
+        const filteredData = extractCurrentWeatherData(data);
         displayData(filteredData);
     });
-    getForecastWeatherOfLocation(location);
+    getForecastWeatherOfLocation(location)
+    .then(data => {
+        const filteredData = extractForecastWeatherData(data);
+        console.log(filteredData);
+    });;
     searchbar.value = "";
 });
 
@@ -56,7 +60,7 @@ async function getForecastWeatherOfLocation(location){
     };
 };
 
-function extractRelevantData(data){
+function extractCurrentWeatherData(data){
     const name = data.name;
     const weather = {
         'type': data.weather[0].main,
@@ -66,6 +70,32 @@ function extractRelevantData(data){
         'wind': data.wind,
     };
     return {name, weather};
+};
+
+function extractForecastWeatherData(data){
+    let weather = [];
+    for (let i = 0; i < 6; i++){
+        let [date, time] = data.list[i].dt_txt.split(" ");
+        let timezone = data.city.timezone/3600;
+        let timeHour = parseInt(time.split(":")[0]);
+        timeHour += timezone;
+        if (timeHour > 23) timeHour -= 24;
+        // console.log(timeHour);
+        let AMorPM = timeHour<13 ? "AM" : "PM";
+        if (timeHour > 12) timeHour -= 12;
+        const set = {
+            'date': date,
+            'time': timeHour.toString() + AMorPM,
+            'type': data.list[i].weather[0].main,
+            'description': data.list[i].weather[0].description,
+            'temperature': data.list[i].main.temp,
+            // 'humidity': data.list[i].main.humidity,
+            // 'wind': data.list[i].wind,
+        };
+        weather.push(set);
+    }
+    
+    return weather;
 };
 
 // DOM manipulation function
