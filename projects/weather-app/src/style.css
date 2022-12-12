@@ -65,7 +65,7 @@ header {
 
 .weather-info {
     display: grid;
-    grid-template: 1fr 7fr / 1fr;
+    grid-template: 1fr 9fr / 1fr;
     height: 100%;
     row-gap: 20px;
 }
@@ -94,58 +94,86 @@ header {
     height: 100%;
 }
 
-.temperature {
+.current.temperature {
     grid-area: 1/1/-1/2;
     font-size: 60px;
     text-align: center;
     border-right: 1px solid var(--color-dark); 
 }
 
-.temperature::before {
+.current.temperature::before {
     content: "Temperature:";
     margin-bottom: 85px;
 }
 
-.weather-type,
-.humidity,
-.wind-info {
-    font-size: 24px;
+.current.type,
+.current.humidity,
+.current.wind-info {
+    font-size: 22px;
     margin-left: 10px;
 }
 
-.temperature::before,
-.weather-type::before,
-.humidity::before,
-.wind-info::before {
+.current.temperature::before,
+.current.type::before,
+.current.humidity::before,
+.current.wind-info::before {
     display: block;
     font-size: 16px;
     text-align: left;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-.weather-type {
+.current.type {
     grid-area: 1/2/2/3;
 }
-.weather-type::before {
+.current.type::before {
     content: "Condition:";
 }
 
-.humidity {
+.current.humidity {
     grid-area: 2/2/3/3;
 }
 
-.humidity::before {
+.current.humidity::before {
     content: "Humidity:";
 }
 
-.wind-info {
+.current.wind-info {
     grid-area: 3/2/4/3;
 }
 
-.wind-info::before {
+.current.wind-info::before {
     content: "Wind:";
 }
 
+.weather-forecast {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    height: 100%;
+}
+
+.forecast-info {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: 3fr 2fr 5fr 1fr;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid var(--color-dark);
+}
+
+.forecast-info:last-of-type {
+    border-width: 0px;
+}
+
+.forecast-info>div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    height: 100%;
+}
 
 form.user-interface {
     display: flex;

@@ -8,7 +8,7 @@ const apiKey = "25ab02671e4a2079d81ab8a2c5b2c733";
 // DOM item references
 const contentCurrentLocation = document.querySelector('.location');
 const contentCurrentTemperature = document.querySelector('.weather-current>.temperature');
-const contentCurrentWeatherType = document.querySelector('.weather-current>.weather-type');
+const contentCurrentWeatherType = document.querySelector('.weather-current>.type');
 const contentCurrentHumidity = document.querySelector('.weather-current>.humidity');
 const contentCurrentWind = document.querySelector('.weather-current>.wind-info');
 
@@ -16,6 +16,9 @@ const contentForecastTable = document.querySelector('.weather-forecast');
 
 const searchbar = document.querySelector('#search-bar');
 const searchbutton = document.querySelector('#search-button');
+
+//global variables
+const forecastCount = 8;
 
 // DOM manipulation events
 searchbutton.addEventListener('click', event => {
@@ -78,7 +81,7 @@ function extractCurrentWeatherData(data){
 
 function extractForecastWeatherData(data){
     let weather = [];
-    for (let i = 0; i < 6; i++){
+    for (let i = 0; i < forecastCount; i++){
         let [date, time] = data.list[i].dt_txt.split(" ");
         let timezone = data.city.timezone/3600;
         let timeHour = parseInt(time.split(":")[0]);
@@ -105,9 +108,10 @@ function extractForecastWeatherData(data){
 // DOM manipulation functions
 function displayCurrentData(data){
     contentCurrentLocation.textContent = data.name;
-    contentCurrentTemperature.textContent = data.weather.temperature.toFixed(1).toString() + "oC";
-    contentCurrentWeatherType.textContent = data.weather.type;
-    contentCurrentHumidity.textContent = data.weather.humidity + "%";
+    contentCurrentTemperature.textContent = formatTemperature(data.weather.temperature);
+    contentCurrentWeatherType.textContent = data.weather.description;
+    // contentCurrentWeatherType.textContent = data.weather.type;
+    contentCurrentHumidity.textContent = formatHumidity(data.weather.humidity);
     contentCurrentWind.textContent = `${data.weather.wind.speed}m/s ${degToCompass(data.weather.wind.deg)}`;
 };
 
@@ -116,7 +120,6 @@ function displayForecastData(data){
         const row = createForecastRow(forecast);
         contentForecastTable.appendChild(row);
     });
-    
 };
 
 function clearForecastDOM() {
@@ -126,20 +129,38 @@ function clearForecastDOM() {
 function createForecastRow(data){
     const row = document.createElement('div');
     row.classList.add('forecast-info');
-    row.textContent = data.date;
-    row.textContent = data.time;
-    // row.textContent = data.type;
-    // row.textContent = data.description;
-    // row.textContent = data.temperature;
+
+    const dateColumn = createComponent('date', data.date);
+    row.appendChild(dateColumn);
+    const timeColumn = createComponent('time', data.time);
+    row.appendChild(timeColumn);
+    // const typeColumn = createComponent('forecast type', data.type);
+    const typeColumn = createComponent('type', data.description);
+    row.appendChild(typeColumn);
+    const temperatureColumn = createComponent('temperature', formatTemperature(data.temperature));
+    row.appendChild(temperatureColumn);
+
     return row;
 };
 
-// function for changing wind direction degree into compass
+function createComponent(className, content){
+    const component = document.createElement('div');
+    component.classList.add(className);
+    component.textContent = content;
+    return component;
+}
+
+// util
 function degToCompass(num) {
     const val = Math.floor((num / 45) + 0.5);
     const arr = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
     return arr[(val % 8)];
 };
 
+function formatTemperature(num) {
+    return num.toFixed(1).toString() + "°C";
+};
 
-
+function formatHumidity(num) {
+    return num + "%";
+}
