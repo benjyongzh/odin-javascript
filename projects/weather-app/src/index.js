@@ -12,6 +12,8 @@ const contentCurrentWeatherType = document.querySelector('.weather-current>.weat
 const contentCurrentHumidity = document.querySelector('.weather-current>.humidity');
 const contentCurrentWind = document.querySelector('.weather-current>.wind-info');
 
+const contentForecastTable = document.querySelector('.weather-forecast');
+
 const searchbar = document.querySelector('#search-bar');
 const searchbutton = document.querySelector('#search-button');
 
@@ -22,13 +24,15 @@ searchbutton.addEventListener('click', event => {
     getCurrentWeatherOfLocation(location)
     .then(data => {
         const filteredData = extractCurrentWeatherData(data);
-        displayData(filteredData);
+        displayCurrentData(filteredData);
     });
     getForecastWeatherOfLocation(location)
     .then(data => {
         const filteredData = extractForecastWeatherData(data);
         console.log(filteredData);
-    });;
+        clearForecastDOM();
+        displayForecastData(filteredData);
+    });
     searchbar.value = "";
 });
 
@@ -98,13 +102,36 @@ function extractForecastWeatherData(data){
     return weather;
 };
 
-// DOM manipulation function
-function displayData(data){
+// DOM manipulation functions
+function displayCurrentData(data){
     contentCurrentLocation.textContent = data.name;
     contentCurrentTemperature.textContent = data.weather.temperature.toFixed(1).toString() + "oC";
     contentCurrentWeatherType.textContent = data.weather.type;
     contentCurrentHumidity.textContent = data.weather.humidity + "%";
     contentCurrentWind.textContent = `${data.weather.wind.speed}m/s ${degToCompass(data.weather.wind.deg)}`;
+};
+
+function displayForecastData(data){
+    data.forEach(forecast => {
+        const row = createForecastRow(forecast);
+        contentForecastTable.appendChild(row);
+    });
+    
+};
+
+function clearForecastDOM() {
+    contentForecastTable.replaceChildren();
+};
+
+function createForecastRow(data){
+    const row = document.createElement('div');
+    row.classList.add('forecast-info');
+    row.textContent = data.date;
+    row.textContent = data.time;
+    // row.textContent = data.type;
+    // row.textContent = data.description;
+    // row.textContent = data.temperature;
+    return row;
 };
 
 // function for changing wind direction degree into compass
