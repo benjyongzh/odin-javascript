@@ -30,10 +30,21 @@ function all(array, cb){
     if (array.length <= 1) return cb(array[0]);
     array.shift();
     return all(array, cb);
-}
+};
 
-var allAreLessThanSeven = all([1,2,7], function(num){
-	return num < 7;
-});
+// var allAreLessThanSeven = all([1,2,7], function(num){
+// 	return num < 7;
+// });
 
-console.log(allAreLessThanSeven);
+// console.log(allAreLessThanSeven);
+
+function productOfArray(array){
+    //end condition
+    if (array.length <= 1) return array[0];
+    let firstNum = array.shift();
+    return firstNum*productOfArray(array);
+};
+
+// console.log(productOfArray([1,2,3]) )// 6
+// console.log(productOfArray([1,2,3,10])) //60
+
