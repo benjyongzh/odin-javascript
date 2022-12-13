@@ -5,13 +5,23 @@ function sumRange(num){
     return num+sumRange(num-1);
 };
 
-console.log(sumRange(10));
+// console.log(sumRange(10));
 
 function power(base, exponent){
     //end condition
     if (exponent === 0) return 1;
 
     return base*power(base, exponent-1);
-}
+};
 
-console.log(power(5,3));
+// console.log(power(5,3));
+
+function factorial(num){
+    //end condiiton
+    if (num <= 1) return 1;
+
+    return factorial(num-1)*num;
+};
+
+
+console.log(factorial(5));
