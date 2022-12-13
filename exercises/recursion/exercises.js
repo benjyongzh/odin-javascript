@@ -23,5 +23,17 @@ function factorial(num){
     return factorial(num-1)*num;
 };
 
+// console.log(factorial(5));
 
-console.log(factorial(5));
+function all(array, cb){
+    //end condition
+    if (array.length <= 1) return cb(array[0]);
+    array.shift();
+    return all(array, cb);
+}
+
+var allAreLessThanSeven = all([1,2,7], function(num){
+	return num < 7;
+});
+
+console.log(allAreLessThanSeven);
