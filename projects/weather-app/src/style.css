@@ -15,7 +15,11 @@
     --color-mid: #74a2b4;
     --color-dark: #374b5a;
     --color-accent:#fcd037;
-    --color-grey:#e5e5e5;
+    --color-accenthover:#fadb6c;
+    --color-accentactive:#d3af2e;
+    --color-grey:#dadada;
+    --color-lightgrey:#f7f7f7;
+    --color-midgrey:#bebebe;
 
 }
 
@@ -197,14 +201,14 @@ input#search-bar {
     border-radius: 8px;
     font-size: 20px;
     border: 2px solid var(--color-dark);
-    background-color: var(--color-grey);
+    background-color: var(--color-lightgrey);
 }
 
 input#search-bar:focus {
     background-color: var(--color-light);
 }
 
-form.user-interface button#search-button {
+button#search-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -215,6 +219,15 @@ form.user-interface button#search-button {
     border: 2px solid var(--color-dark);
     background-color: var(--color-accent);
 }
+
+button#search-button:hover {
+    background-color: var(--color-accenthover);
+}
+
+button#search-button:active {
+    background-color: var(--color-accentactive);
+}
+
 
 footer {
     display: flex;
