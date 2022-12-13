@@ -6,3 +6,12 @@ function sumRange(num){
 };
 
 console.log(sumRange(10));
+
+function power(base, exponent){
+    //end condition
+    if (exponent === 0) return 1;
+
+    return base*power(base, exponent-1);
+}
+
+console.log(power(5,3));
