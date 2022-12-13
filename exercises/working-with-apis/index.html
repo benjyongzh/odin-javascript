@@ -22,6 +22,7 @@
 
                 const response = await fetch(myurl, {mode: 'cors'});
                 const imgData = await response.json();
+                console.log(imgData);
                 img.src = imgData.data.images.original.url;
             } catch (error) {
                 console.log(error);
