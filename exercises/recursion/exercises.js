@@ -48,3 +48,38 @@ function productOfArray(array){
 // console.log(productOfArray([1,2,3]) )// 6
 // console.log(productOfArray([1,2,3,10])) //60
 
+function contains(obj, value) {
+    for (const key in obj) {
+        //console.log(obj[key]);
+        //end condition
+        if (obj[key] == value){
+            //console.log("found it");
+            return true;
+        };
+
+        if (typeof obj[key] === 'object' && obj[key] != null) {
+            //console.log(`going into ${obj[key]}`);
+            return contains(obj[key], value);
+        };
+    };
+    return false;
+    
+};
+
+var nestedObject = {
+    data: {
+        info: {
+            stuff: {
+                thing: {
+                    moreStuff: {
+                        magicNumber: 44,
+                        something: 'foo2'
+                    }
+                }
+            }
+        }
+    }
+}
+
+console.log(contains(nestedObject, 44)); // true
+console.log(contains(nestedObject, "foo")); // false
