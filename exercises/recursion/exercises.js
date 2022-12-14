@@ -51,6 +51,7 @@ function productOfArray(array){
 function contains(obj, value) {
     for (const key in obj) {
         //console.log(obj[key]);
+
         //end condition
         if (obj[key] == value){
             //console.log("found it");
@@ -66,7 +67,7 @@ function contains(obj, value) {
     
 };
 
-var nestedObject = {
+/* var nestedObject = {
     data: {
         info: {
             stuff: {
@@ -82,4 +83,20 @@ var nestedObject = {
 }
 
 console.log(contains(nestedObject, 44)); // true
-console.log(contains(nestedObject, "foo")); // false
+console.log(contains(nestedObject, "foo")); // false */
+
+function totalIntegers(array){
+    let count = 0;
+    array.forEach(element => {
+        //console.log(element);
+        if (Array.isArray(element)){
+            console.log('should go into here')
+            count += totalIntegers(element);
+        };
+
+        if (Number.isInteger(element)) count += 1;
+    });
+    return count;
+};
+
+console.log(totalIntegers([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]));
