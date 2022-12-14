@@ -99,4 +99,5 @@ function totalIntegers(array){
     return count;
 };
 
-console.log(totalIntegers([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]));
+// console.log(totalIntegers([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]));
+
