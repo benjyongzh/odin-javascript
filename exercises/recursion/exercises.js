@@ -90,7 +90,6 @@ function totalIntegers(array){
     array.forEach(element => {
         //console.log(element);
         if (Array.isArray(element)){
-            console.log('should go into here')
             count += totalIntegers(element);
         };
 
@@ -101,3 +100,32 @@ function totalIntegers(array){
 
 // console.log(totalIntegers([[[5], 3], 0, 2, ['foo'], [], [4, [5, 6]]]));
 
+function sumSquares(array){
+    let count = 0;
+    array.forEach(element => {
+        if (Array.isArray(element)){
+            count += sumSquares(element);
+        }
+
+        else if (!Number.isNaN(element)){ 
+            
+            //  console.log(`element is now ${element}`);
+            // console.log(`square is now ${element**2}`);
+            count += element**2;
+            // console.log(`count is now ${count}`);
+        };
+    });
+    return count;
+};
+
+/* var l = [1,2,3]; 
+console.log(sumSquares(l)); // 1 + 4 + 9 = 14
+
+l = [[1,2],3]; 
+console.log(sumSquares(l)); // 1 + 4 + 9 = 14
+
+l = [[[[[[[[[1]]]]]]]]] 
+console.log(sumSquares(l)); // 1 = 1
+
+l = [10,[[10],10],[10]] 
+console.log(sumSquares(l)); // 100 + 100 + 100 + 100 = 400 */
