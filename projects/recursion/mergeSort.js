@@ -1,3 +1,5 @@
+import mergeSortedArrays from "./mergeSortedArrays.js";
+
 function mergeSort(array){
     //end condition
     if (array.length <= 1) return array;
@@ -6,8 +8,8 @@ function mergeSort(array){
     const midPoint = array.length %2 == 0 ? (array.length / 2) : (array.length - 1) / 2;
     let firstHalf = array.slice(0, midPoint);
     let secondHalf = array.slice(midPoint);
-    console.log(firstHalf);
-    console.log(secondHalf);
+    // console.log(firstHalf);
+    // console.log(secondHalf);
 
     //sort 1st half
     firstHalf = mergeSort(firstHalf);
@@ -15,26 +17,36 @@ function mergeSort(array){
     //sort 2nd half
     secondHalf = mergeSort(secondHalf);
 
-    /*
+    
     //merge halves
-    const mergedArray = [];
-    for (let i = 0; i < firstHalf.length + secondHalf.length - 2; i ++){
-        if (firstHalf == []){
-            mergedArray.concat(secondHalf);
-        } else if (secondHalf == []){
-            mergedArray.concat(firstHalf);
-        } else if (firstHalf[0] < secondHalf[0]){
-            mergedArray.push(firstHalf[0]);
-            firstHalf.shift();
+    /*  let mergedArray = [];
+    let firstIndex = 0;
+    let secondIndex = 0;
+    while (firstIndex < firstHalf.length && secondIndex < secondHalf.length){
+        if (firstHalf[firstIndex] <= secondHalf[secondIndex]){
+            mergedArray.push(firstHalf[firstIndex]);
+            firstIndex++;
         } else {
-            mergedArray.push(secondHalf[0]);
-            secondHalf.shift();
+            mergedArray.push(secondHalf[secondIndex]);
+            secondIndex++;
+        };
+        if (firstIndex == firstHalf.length){
+            mergedArray.push(...secondHalf.slice(secondIndex));
+            break;
+        };
+
+        //secondArray is finished
+        if (secondIndex == secondHalf.length){
+            mergedArray.push(...firstHalf.slice(firstIndex));
+            break;
         };
     };
-    return mergedArray; */
-    return firstHalf.concat(secondHalf);
+    
+    return mergedArray;
+    */
+    return mergeSortedArrays(firstHalf, secondHalf);
 };
 
 
-let testArray = [6,1,78];
+let testArray = [1,6,2,7,3];
 console.log(mergeSort(testArray));
