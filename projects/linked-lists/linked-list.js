@@ -52,8 +52,6 @@ const linkedList = () => {
             listTail.next = null;
         };
     };
-    
-    // contains(value)
 
     let contains = value => {
         let pointer = listHead;
@@ -66,6 +64,16 @@ const linkedList = () => {
     }
 
     // find(value)
+    let find = value => {
+        let counter = 0;
+        let pointer = listHead;
+        while (pointer != null){
+            if (pointer.value == value) return counter;
+            pointer = pointer.next;
+            counter += 1;
+        };
+        return null;
+    };
 
     let toString = () => {
         let string = "";
@@ -90,7 +98,7 @@ const linkedList = () => {
         at,
         pop,
         contains,
-        //find,
+        find,
         toString
     };
 };
@@ -123,10 +131,14 @@ console.log(list1.head());
 console.log(list1.tail());
 console.log(list1.toString());
 console.log(list1.size());
-console.log(list1.at(4));
+console.log(JSON.stringify(list1.at(4)));
 list1.pop();
 console.log(list1.head());
 console.log(list1.toString());
+console.log(list1.contains("harry"));
+console.log(list1.contains("john"));
+console.log(list1.find("harry"));
+console.log(list1.find("john"));
 
 /* 
 let node1 = node("nodevalue1");
