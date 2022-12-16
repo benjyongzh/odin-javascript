@@ -63,7 +63,6 @@ const linkedList = () => {
         return false;
     }
 
-    // find(value)
     let find = value => {
         let counter = 0;
         let pointer = listHead;
@@ -85,7 +84,16 @@ const linkedList = () => {
         string += `null`;
         return string;
     }
+
     // insertAt(value,index)
+    let insertAt = (value,index) => {
+        let newNode = node(value);
+        let nodeBefore = at(index-1);
+        let nodeAfter = at(index);
+        nodeBefore.next = newNode;
+        newNode.next = nodeAfter;
+    }
+
     // removeAt(index)
 
 
@@ -99,7 +107,8 @@ const linkedList = () => {
         pop,
         contains,
         find,
-        toString
+        toString,
+        insertAt
     };
 };
 
@@ -139,6 +148,8 @@ console.log(list1.contains("harry"));
 console.log(list1.contains("john"));
 console.log(list1.find("harry"));
 console.log(list1.find("john"));
+list1.insertAt("tim", 2);
+console.log(list1.toString());
 
 /* 
 let node1 = node("nodevalue1");
