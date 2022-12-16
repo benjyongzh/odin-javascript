@@ -27,6 +27,7 @@ const linkedList = () => {
         } while (pointer != null);
         return counter;
     };
+
     let head = () => JSON.stringify(listHead);
     let tail = () => JSON.stringify(listTail);
 
@@ -47,12 +48,13 @@ const linkedList = () => {
             listTail = null;
         } else {
             //use at()
-            let secondLastNode = at(size()-1);
-            secondLastNode.next = null;
-            listTail = secondLastNode;
+            listTail = at(size()-2);
+            listTail.next = null;
         };
     };
+    
     // contains(value)
+
     let contains = value => {
         let pointer = listHead;
         if (listHead == listTail && pointer.value == value) return true;
@@ -112,7 +114,24 @@ const node = (value = null, next = null) => {
 
 let list1 = linkedList();
 list1.append("dick");
-// list1.append("james");
+list1.append("james");
+list1.append("harry");
+list1.prepend("jerry");
+list1.append("john");
+list1.prepend("ronathan");
 console.log(list1.head());
 console.log(list1.tail());
 console.log(list1.toString());
+console.log(list1.size());
+console.log(list1.at(4));
+list1.pop();
+console.log(list1.head());
+console.log(list1.toString());
+
+/* 
+let node1 = node("nodevalue1");
+let node2 = node("nodevalue2");
+node1.next = node2;
+console.log(JSON.stringify(node1.next));
+node1.next = null;
+console.log(JSON.stringify(node1.next)); */
