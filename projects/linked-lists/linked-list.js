@@ -85,7 +85,6 @@ const linkedList = () => {
         return string;
     }
 
-    // insertAt(value,index)
     let insertAt = (value,index) => {
         let newNode = node(value);
         let nodeBefore = at(index-1);
@@ -95,6 +94,28 @@ const linkedList = () => {
     }
 
     // removeAt(index)
+    let removeAt = index => {
+        //index out of range
+        if (index >= size()){
+            throw console.error("index out of range, bruh");
+        };
+
+        let nodeBefore = at(index-1);
+
+        //check if its the last index
+        if (index == size() - 1){
+            pop();
+            return;
+        } else if (index == 0){
+            //pop the head
+            listHead = at(1);
+            return;
+        };
+
+        //index is somewhere in the middle
+        let nodeAfter = at(index+1);
+        nodeBefore.next = nodeAfter;
+    }
 
 
     return {
@@ -108,7 +129,8 @@ const linkedList = () => {
         contains,
         find,
         toString,
-        insertAt
+        insertAt,
+        removeAt
     };
 };
 
@@ -149,6 +171,8 @@ console.log(list1.contains("john"));
 console.log(list1.find("harry"));
 console.log(list1.find("john"));
 list1.insertAt("tim", 2);
+console.log(list1.toString());
+list1.removeAt(3);
 console.log(list1.toString());
 
 /* 
