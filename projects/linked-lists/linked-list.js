@@ -3,18 +3,19 @@ const linkedList = () => {
     let listTail = null;
 
     let append = value => {
+        let newNode = node(value);
         if (!listHead){
-            listHead = value;
-            listTail = value;
+            listHead = newNode;
+            listTail = newNode;
         } else {
-            listTail.next = value;
-            listTail = value;
+            listTail.next = newNode;
+            listTail = newNode;
         };
     };
 
     let prepend = value => {
-        value.next = listHead;
-        listHead = value;
+        let newNode = node(value, listHead);
+        listHead = newNode;
     };
 
     let size = () => {
@@ -26,8 +27,8 @@ const linkedList = () => {
         } while (pointer != null);
         return counter;
     };
-    let head = () => listHead;
-    let tail = () => listTail;
+    let head = () => JSON.stringify(listHead);
+    let tail = () => JSON.stringify(listTail);
 
     let at = index => {
         let counter = 0;
@@ -110,12 +111,8 @@ const node = (value = null, next = null) => {
 };
 
 let list1 = linkedList();
-let node1 = node("dick");
-let node2 = node("node2value");
-let node3 = node("node3value");
-let node4 = node("node4value");
-list1.append(node1);
-list1.append(node2);
-node2.next = node3;
+list1.append("dick");
+// list1.append("james");
+console.log(list1.head());
+console.log(list1.tail());
 console.log(list1.toString());
-console.log(list1.tail);
