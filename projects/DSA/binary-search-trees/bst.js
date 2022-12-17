@@ -64,11 +64,9 @@ let Tree = array => {
     let _root = buildTree(array);
 
     return {
-        get root() {return _root},
-        // set root(newRoot) {_root = newRoot},
-        // buildTree,
-        displayPreorder,
-        prettyPrint,
+      get root() {return _root},
+      displayPreorder,
+      prettyPrint,
     }
 };
 
@@ -82,8 +80,11 @@ let sortAndCull = array => {
   return sortedArray;
 };
 
-let myArray = [6,9,3,7,2,9,5];
+let myArray = [6,9,3,7,2,9,11,8,15,12,21,24,15,13,5];
 let myTree = Tree(myArray);
+
 // console.log(JSON.stringify(myTree.root));
-myTree.displayPreorder(myTree.root);
+// myTree.displayPreorder(myTree.root);
+
 // console.log(myTree.prettyPrint());
+myTree.prettyPrint(myTree.root);
