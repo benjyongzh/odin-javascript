@@ -151,7 +151,7 @@ const node = (value = null, next = null) => {
     };
 };
 
-let list1 = linkedList();
+/* let list1 = linkedList();
 list1.append("dick");
 list1.append("james");
 list1.append("harry");
@@ -173,7 +173,7 @@ console.log(list1.find("john"));
 list1.insertAt("tim", 2);
 console.log(list1.toString());
 list1.removeAt(3);
-console.log(list1.toString());
+console.log(list1.toString()); */
 
 /* 
 let node1 = node("nodevalue1");
