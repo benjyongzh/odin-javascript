@@ -29,16 +29,16 @@ let Tree = array => {
       let midIndex = parseInt((indexEnd+indexStart) / 2);
       let root = Node(array[midIndex]);
 
-      console.log("indexStart is " + indexStart, ", midIndex is " +  midIndex, ", indexEnd is " + indexEnd);
-      console.log("root is " + root.data);
+      // console.log("indexStart is " + indexStart, ", midIndex is " +  midIndex, ", indexEnd is " + indexEnd);
+      // console.log("root is " + root.data);
 
       //recursive for left side
       root.left = sortedArrayIntoBST(array, indexStart, midIndex - 1);
-      console.log(root.data + "'s left is " + (root.left ? root.left.data : "null"));
+      // console.log(root.data + "'s left is " + (root.left ? root.left.data : "null"));
 
       //recursive for right side
       root.right = sortedArrayIntoBST(array, midIndex + 1, indexEnd);
-      console.log(root.data + "'s right is " + (root.right ? root.right.data : "null"));
+      // console.log(root.data + "'s right is " + (root.right ? root.right.data : "null"));
 
       return root;
     };
@@ -46,11 +46,9 @@ let Tree = array => {
     let displayPreorder = node => {
       if (node == null) return;
 
-      let string = "";
-      string += node.data + ", ";
-      string += node.left + ", ";
-      string += node.right + ", ";
-      return string;
+      console.log(node.data);
+      displayPreorder(node.left);
+      displayPreorder(node.right);
     };
 
     const prettyPrint = (node = _root, prefix = '', isLeft = true) => {
@@ -86,6 +84,6 @@ let sortAndCull = array => {
 
 let myArray = [6,9,3,7,2,9,5];
 let myTree = Tree(myArray);
-// console.log(myTree.root);
-// console.log(myTree.displayPreorder());
+// console.log(JSON.stringify(myTree.root));
+myTree.displayPreorder(myTree.root);
 // console.log(myTree.prettyPrint());
