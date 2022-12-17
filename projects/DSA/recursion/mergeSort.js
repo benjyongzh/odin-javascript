@@ -1,6 +1,6 @@
 import mergeSortedArrays from "./mergeSortedArrays.js";
 
-function mergeSort(array){
+export default function mergeSort(array){
     //end condition
     if (array.length <= 1) return array;
 
@@ -48,5 +48,5 @@ function mergeSort(array){
 };
 
 
-let testArray = [1,6,2,7,3];
-console.log(mergeSort(testArray));
+// let testArray = [1,6,2,7,3];
+// console.log(mergeSort(testArray));

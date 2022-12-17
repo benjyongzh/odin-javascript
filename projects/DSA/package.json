@@ -1,13 +1,13 @@
 {
-  "name": "recursion",
+  "name": "data-structs-algo",
   "version": "1.0.0",
-  "description": "",
-  "main": "fibonacci.js",
+  "description": "Practices for DSA.",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Benjamin Yong",
   "license": "ISC",
   "type": "module"
 }

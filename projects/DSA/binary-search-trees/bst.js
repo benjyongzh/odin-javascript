@@ -1,4 +1,6 @@
-let Node = (data) => {
+import mergeSort from "../recursion/mergeSort.js";
+
+let Node = data => {
     let _data = data;
     let _left;
     let _right;
@@ -13,34 +15,77 @@ let Node = (data) => {
 };
 
 let Tree = array => {
-    let _root = buildTree(array);
-
     let buildTree = array => {
-        //sort array using mergeSort();
-        let sortedArray = 
-        //remove duplicates using Set();
-
-        // let root = Node(array[0]);
-
-
-
-        return root;
+      let newArray = sortAndCull(array);
+      // console.log(`newArray is ${newArray}`);
+      let root = sortedArrayIntoBST(newArray, 0, newArray.length - 1);
+      return root;
     };
 
-    const prettyPrint = (node, prefix = '', isLeft = true) => {
-        if (node.right !== null) {
-          prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
-        }
-        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
-        if (node.left !== null) {
-          prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
-        }
-      }
+    let sortedArrayIntoBST = (array, indexStart, indexEnd) => {
+      if (indexStart > indexEnd) return null;
+      
+      //set middle element of array as root
+      let midIndex = parseInt((indexEnd+indexStart) / 2);
+      let root = Node(array[midIndex]);
+
+      console.log("indexStart is " + indexStart, ", midIndex is " +  midIndex, ", indexEnd is " + indexEnd);
+      console.log("root is " + root.data);
+
+      //recursive for left side
+      root.left = sortedArrayIntoBST(array, indexStart, midIndex - 1);
+      console.log(root.data + "'s left is " + (root.left ? root.left.data : "null"));
+
+      //recursive for right side
+      root.right = sortedArrayIntoBST(array, midIndex + 1, indexEnd);
+      console.log(root.data + "'s right is " + (root.right ? root.right.data : "null"));
+
+      return root;
+    };
+
+    let displayPreorder = node => {
+      if (node == null) return;
+
+      let string = "";
+      string += node.data + ", ";
+      string += node.left + ", ";
+      string += node.right + ", ";
+      return string;
+    };
+
+    const prettyPrint = (node = _root, prefix = '', isLeft = true) => {
+      if (node.right !== null) {
+        prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+      };
+      console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+      if (node.left !== null) {
+        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+      };
+    };
+
+    let _root = buildTree(array);
 
     return {
         get root() {return _root},
-        set root(newRoot) {_root = newRoot},
-        buildTree,
+        // set root(newRoot) {_root = newRoot},
+        // buildTree,
+        displayPreorder,
         prettyPrint,
     }
 };
+
+let sortAndCull = array => {
+  //sort array using mergeSort();
+  let sortedArray = mergeSort(array);
+
+  //remove duplicates using Set();
+  sortedArray = [...new Set(sortedArray)];
+
+  return sortedArray;
+};
+
+let myArray = [6,9,3,7,2,9,5];
+let myTree = Tree(myArray);
+// console.log(myTree.root);
+// console.log(myTree.displayPreorder());
+// console.log(myTree.prettyPrint());
