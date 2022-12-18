@@ -30,10 +30,7 @@ const Board = (horizontal,vertical) => {
     let forAllVertices = callback => {
         _array.forEach(row => {
             row.forEach(vertex => {
-                // callback.bind(vertex);
-                // console.log("do smth here");
-                // callback.call(vertex, _array);
-                // callback(vertex.position);
+                // add array and current vertex into argument of callback
                 callback({
                     array: _array,
                     vertex: vertex,
@@ -50,9 +47,7 @@ const Board = (horizontal,vertical) => {
     };
 };
 
-
-
-// create a list of other spaces are valid from that vertex, for a knight to traverse to. (adjacenccy list)
+// create a list of other spaces are valid from that vertex(adjacenccy list) must be used with bind() to indentify what validity pattern is to be followed
 function createAdjacencyList(args){
     let list = [];
     // console.log(this);
@@ -76,18 +71,18 @@ function checkValidKnightMove(pointA, pointB){
     
     let distanceX = Math.abs(x2 - x1);
     let distanceY = Math.abs(y2 - y1);
+    // console.log(`distanceX is ${distanceX}.`, `distanceY is ${distanceY}.`);
 
     //check x direction within range (value 1 or 2 only)
-    if (distanceX != 2 || distanceX != 1 ) return false;
+    if (distanceX != 2 && distanceX != 1 ) return false;
     //check y direction within range (value 1 or 2 only)
-    if (distanceY != 2 || distanceY != 1 ) return false;
-
-    console.log("not rejected yet");
+    if (distanceY != 2 && distanceY != 1 ) return false;
 
     // check for L-shape movements. (1,2) or (2,1) movements only
     if ((distanceX == 2 && distanceY == 1) || 
         (distanceX == 1 && distanceY == 2))
         {
+        // console.log("jackpot");
         return true;
     };
     return false;
