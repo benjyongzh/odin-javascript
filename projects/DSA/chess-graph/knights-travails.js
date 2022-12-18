@@ -15,11 +15,11 @@ const Board = (horizontal,vertical) => {
 
     let createBoard = (x, y) => {
         let newBoard = [];
-        for ( let i = 0; i < horizontal; i++){
+        for ( let i = 0; i < y; i++){
             let row = [];
-            for (let j = 0; j < vertical; j++){
+            for (let j = 0; j < x; j++){
                 //push a chess space instead of a simple array
-                row.push(Vertex([i,j]));
+                row.push(Vertex([j,i]));
             };
             newBoard.push(row);
         };
@@ -28,15 +28,21 @@ const Board = (horizontal,vertical) => {
 
     // for each board space, do something
     let forAllVertices = callback => {
+        // let array = [];
         _array.forEach(row => {
+            // let rowArray = [];
             row.forEach(vertex => {
                 // add array and current vertex into argument of callback
                 callback({
                     array: _array,
                     vertex: vertex,
                 });
+                // rowArray.push(vertex.adjacencyList);
             });
+            // array.push(JSON.stringify(rowArray));
+
         });
+        // console.log(array);
     };
 
     let _array = createBoard(horizontal,vertical);
@@ -59,7 +65,7 @@ function createAdjacencyList(args){
         });
     });
     args.vertex.adjacencyList = list;
-    console.log(args.vertex.adjacencyList);
+    // console.log(args.vertex.adjacencyList.length);
 };
 
 // function to check for valid move from 1 space to another
@@ -90,5 +96,5 @@ function checkValidKnightMove(pointA, pointB){
 
 
 const chessBoard = Board(3,3);
-// console.log(chessBoard.array);
+console.log(JSON.stringify(chessBoard.array));
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
