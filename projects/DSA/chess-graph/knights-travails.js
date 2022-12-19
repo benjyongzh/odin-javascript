@@ -52,9 +52,6 @@ const Board = (horizontal,vertical) => {
 
     let _array = createBoard(horizontal,vertical);
 
-    // let _flatArray = [];
-    // forAllVertices(_flatArray.push(args.vertex));
-
     function breadthFirstSearch(vertexStart, vertexTarget){
         let queue = [vertexStart];
         let visited = [vertexStart];
@@ -82,7 +79,6 @@ const Board = (horizontal,vertical) => {
         get array() {return _array},
         getVertex,
         forAllVertices,
-        // searchVertex,
         breadthFirstSearch,
     };
 };
