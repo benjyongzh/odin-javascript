@@ -45,11 +45,45 @@ const Board = (horizontal,vertical) => {
         // console.log(array);
     };
 
+    let getVertex = (x,y) => {
+        // console.log(_array[y][x].position);
+        return _array[y][x];
+    };
+
     let _array = createBoard(horizontal,vertical);
+
+    // let _flatArray = [];
+    // forAllVertices(_flatArray.push(args.vertex));
+
+    function breadthFirstSearch(vertexStart, vertexTarget){
+        let queue = [vertexStart];
+        let visited = [vertexStart];
+
+        while (queue.length > 0){
+            let vertex = queue.pop();
+            if (vertex == vertexTarget){
+                visited.push(vertexTarget);
+                return visited;
+            };
+
+            console.log(vertex.position);
+
+            vertex.adjacencyList.forEach(element => {
+                if (!visited.includes(element)){
+                    visited.push(element);
+                    queue.push(element);
+                };
+            });
+        };
+
+    };
 
     return {
         get array() {return _array},
+        getVertex,
         forAllVertices,
+        // searchVertex,
+        breadthFirstSearch,
     };
 };
 
@@ -60,7 +94,7 @@ function createAdjacencyList(args){
     args.array.forEach(row => {
         row.forEach(space => {
             if (this(args.vertex, space)) {
-                list.push([ space.position[0], space.position[1] ]);
+                list.push(space);
             };
         });
     });
@@ -95,6 +129,12 @@ function checkValidKnightMove(pointA, pointB){
 };
 
 
+
 const chessBoard = Board(3,3);
-console.log(JSON.stringify(chessBoard.array));
+// console.log(JSON.stringify(chessBoard.array));
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
+console.log(chessBoard.breadthFirstSearch(
+    chessBoard.getVertex(0,0),
+    chessBoard.getVertex(2,0)
+    )
+);
