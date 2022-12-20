@@ -16,38 +16,32 @@ const Board = (horizontal,vertical) => {
     let createBoard = (x, y) => {
         let newBoard = [];
         for ( let i = 0; i < y; i++){
-            let row = [];
             for (let j = 0; j < x; j++){
                 //push a chess space instead of a simple array
-                row.push(Vertex([j,i]));
+                newBoard.push(Vertex([j,i]));
             };
-            newBoard.push(row);
         };
         return newBoard;
     };
 
     // for each board space, do something
     let forAllVertices = callback => {
-        // let array = [];
-        _array.forEach(row => {
-            // let rowArray = [];
-            row.forEach(vertex => {
-                // add array and current vertex into argument of callback
-                callback({
-                    array: _array,
-                    vertex: vertex,
-                });
-                // rowArray.push(vertex.adjacencyList);
+        for (let i = 0; i < _array.length; i++){
+            callback({
+                array: _array,
+                vertex: _array[i],
             });
-            // array.push(JSON.stringify(rowArray));
-
-        });
-        // console.log(array);
+        };
     };
 
     let getVertex = (x,y) => {
-        // console.log(_array[y][x].position);
-        return _array[y][x];
+        for (let i = 0; i < _array.length; i++){
+            if (_array[i].position[0] == x && _array[i].position[1] == y){
+                // console.log(_array[i].position);
+                return _array[i];
+            };
+        };
+        return null;
     };
 
     let _array = createBoard(horizontal,vertical);
@@ -55,28 +49,47 @@ const Board = (horizontal,vertical) => {
     function breadthFirstSearch(vertexStart, vertexTarget){
         let queue = [vertexStart];
         let visited = [vertexStart];
+        let pathStack = [vertexStart];
 
         while (queue.length > 0){
             let vertex = queue.pop();
+            console.log("now looking at " + vertex.position);
+
             if (vertex == vertexTarget){
-                visited.push(vertexTarget);
-                return visited;
+            // console.log(vertex.position);
+                /* visited.push(vertexTarget);
+                let positions = visited.map(element => {JSON.stringify(element.position)});
+                return positions; */
+                pathStack.push(vertexTarget);
+                // let positions = pathStack.map(element => {JSON.stringify(element.position)});
+                // return positions;
+                console.log("visited: " + visited);
+                console.log("queue: " + queue);
+                return pathStack;
             };
 
-            console.log(vertex.position);
-
-            vertex.adjacencyList.forEach(element => {
-                if (!visited.includes(element)){
-                    visited.push(element);
-                    queue.push(element);
+            for (let i = 0; i < vertex.adjacencyList.length; i++){
+                if (vertex.adjacencyList[i] == vertexTarget){
+                    pathStack.push(vertexTarget);
+                    return pathStack;
                 };
-            });
+                
+                if (!visited.includes(vertex.adjacencyList[i])){
+                    visited.push(vertex.adjacencyList[i]);
+                    queue.unshift(vertex.adjacencyList[i]);
+                };
+            }
         };
 
     };
 
     return {
         get array() {return _array},
+        get arrayPositions() {
+            return _array.map(vertex => {
+                return vertex.position
+            });
+        },
         getVertex,
         forAllVertices,
         breadthFirstSearch,
@@ -87,12 +100,10 @@ const Board = (horizontal,vertical) => {
 function createAdjacencyList(args){
     let list = [];
     // console.log(this);
-    args.array.forEach(row => {
-        row.forEach(space => {
-            if (this(args.vertex, space)) {
-                list.push(space);
-            };
-        });
+    args.array.forEach(space => {
+        if (this(args.vertex, space)) {
+            list.push(space);
+        };
     });
     args.vertex.adjacencyList = list;
     // console.log(args.vertex.adjacencyList.length);
@@ -129,8 +140,11 @@ function checkValidKnightMove(pointA, pointB){
 const chessBoard = Board(3,3);
 // console.log(JSON.stringify(chessBoard.array));
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
-console.log(chessBoard.breadthFirstSearch(
+// console.log(chessBoard.getVertex(1,0));
+/* console.log(chessBoard.breadthFirstSearch(
     chessBoard.getVertex(0,0),
-    chessBoard.getVertex(2,0)
+    chessBoard.getVertex(1,0)
     )
-);
+); */
+
+console.log(chessBoard.arrayPositions);
