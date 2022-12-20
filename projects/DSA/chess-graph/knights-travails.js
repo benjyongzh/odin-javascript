@@ -49,37 +49,26 @@ const Board = (horizontal,vertical) => {
     function breadthFirstSearch(vertexStart, vertexTarget){
         let queue = [vertexStart];
         let visited = [vertexStart];
-        let pathStack = [vertexStart];
+        let prev = _array.map(element => { return null});
 
         while (queue.length > 0){
             let vertex = queue.pop();
-            console.log("now looking at " + vertex.position);
-
-            if (vertex == vertexTarget){
-            // console.log(vertex.position);
-                /* visited.push(vertexTarget);
-                let positions = visited.map(element => {JSON.stringify(element.position)});
-                return positions; */
-                pathStack.push(vertexTarget);
-                // let positions = pathStack.map(element => {JSON.stringify(element.position)});
-                // return positions;
-                console.log("visited: " + visited);
-                console.log("queue: " + queue);
-                return pathStack;
-            };
+            // console.log("now looking at " + vertex.position);
 
             for (let i = 0; i < vertex.adjacencyList.length; i++){
-                if (vertex.adjacencyList[i] == vertexTarget){
-                    pathStack.push(vertexTarget);
-                    return pathStack;
-                };
+                // if (vertex.adjacencyList[i] == vertexTarget){
+                //     pathStack.push(vertexTarget);
+                //     return pathStack;
+                // };
                 
                 if (!visited.includes(vertex.adjacencyList[i])){
                     visited.push(vertex.adjacencyList[i]);
                     queue.unshift(vertex.adjacencyList[i]);
+                    prev[_array.indexOf(vertex.adjacencyList[i])] = vertex.adjacencyList[i];
                 };
             }
         };
+        return prev;
 
     };
 
@@ -139,11 +128,11 @@ function checkValidKnightMove(pointA, pointB){
 
 const chessBoard = Board(3,3);
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
-/* console.log(chessBoard.breadthFirstSearch(
+console.log(chessBoard.breadthFirstSearch(
     chessBoard.getVertex(0,0),
     chessBoard.getVertex(1,0)
     )
-); */
+);
 /* let set = chessBoard.array[3].adjacencyList;
 let set2 = set.map(element => {
     return element.position;
