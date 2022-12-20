@@ -138,13 +138,15 @@ function checkValidKnightMove(pointA, pointB){
 
 
 const chessBoard = Board(3,3);
-// console.log(JSON.stringify(chessBoard.array));
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
-// console.log(chessBoard.getVertex(1,0));
 /* console.log(chessBoard.breadthFirstSearch(
     chessBoard.getVertex(0,0),
     chessBoard.getVertex(1,0)
     )
 ); */
-
-console.log(chessBoard.arrayPositions);
+/* let set = chessBoard.array[3].adjacencyList;
+let set2 = set.map(element => {
+    return element.position;
+});
+console.log(set2); */
+// console.log(chessBoard.arrayPositions);
