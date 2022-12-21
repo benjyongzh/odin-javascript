@@ -51,16 +51,11 @@ const Board = (horizontal,vertical) => {
         let visited = [vertexStart];
         let prev = _array.map(element => { return null});
 
+        // setting up prev array
         while (queue.length > 0){
             let vertex = queue.pop();
-            // console.log("now looking at " + vertex.position);
 
-            for (let i = 0; i < vertex.adjacencyList.length; i++){
-                // if (vertex.adjacencyList[i] == vertexTarget){
-                //     pathStack.push(vertexTarget);
-                //     return pathStack;
-                // };
-                
+            for (let i = 0; i < vertex.adjacencyList.length; i++){                
                 if (!visited.includes(vertex.adjacencyList[i])){
                     visited.push(vertex.adjacencyList[i]);
                     queue.unshift(vertex.adjacencyList[i]);
@@ -68,11 +63,29 @@ const Board = (horizontal,vertical) => {
                 };
             }
         };
-        // return prev;
-        return prev.map(element => {
+        let prevPositions = prev.map(element => {
             if (element != null) {return element.position}
             else return null;
         });
+        console.log(prevPositions);
+        
+        //reconstruct path in reverse using prev array. start from vertexTarget
+        let arrayActualVertex = vertexTarget;
+        let currentIndex = _array.indexOf(arrayActualVertex);
+        console.log(currentIndex);
+        let path = [arrayActualVertex];
+        while (currentIndex != -1 && arrayActualVertex != vertexStart){
+            arrayActualVertex = prev[currentIndex];
+            console.log(arrayActualVertex.position);
+            path.push(arrayActualVertex);
+            // currentIndex = prev.indexOf(arrayActualVertex);
+            currentIndex = _array.indexOf(arrayActualVertex);
+            console.log(currentIndex);
+        };
+
+        let pathPositions = path.reverse().map(element => element.position);
+
+        return pathPositions;
 
     };
 
