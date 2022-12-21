@@ -64,11 +64,15 @@ const Board = (horizontal,vertical) => {
                 if (!visited.includes(vertex.adjacencyList[i])){
                     visited.push(vertex.adjacencyList[i]);
                     queue.unshift(vertex.adjacencyList[i]);
-                    prev[_array.indexOf(vertex.adjacencyList[i])] = vertex.adjacencyList[i];
+                    prev[_array.indexOf(vertex.adjacencyList[i])] = vertex;
                 };
             }
         };
-        return prev;
+        // return prev;
+        return prev.map(element => {
+            if (element != null) {return element.position}
+            else return null;
+        });
 
     };
 
