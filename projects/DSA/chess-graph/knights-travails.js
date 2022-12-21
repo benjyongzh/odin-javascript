@@ -10,18 +10,40 @@ const Vertex = data => {
     };
 };
 
+let boardContainer = document.querySelector('.boardContainer');
+
 // factory fn to create board using X and Y cartesian coordinates
 const Board = (horizontal,vertical) => {
 
     let createBoard = (x, y) => {
         let newBoard = [];
+        createBoardDOM(x,y)
         for ( let i = 0; i < y; i++){
+            booleanColor = (i%2 != 0);
             for (let j = 0; j < x; j++){
                 //push a chess space instead of a simple array
                 newBoard.push(Vertex([j,i]));
             };
         };
         return newBoard;
+    };
+
+    let createBoardDOM = (x, y) => {
+        boardContainer.replaceChildren();
+        boardContainer.style.gridTemplateColumns = `repeat(${x},1fr)`;
+        boardContainer.style.gridTemplateRows = `repeat(${y},1fr)`;
+        let booleanColor = true;//true = black, false = white
+        let styleColorDark = 'rgb(' + 50 + ',' + 50 + ',' + 50 + ')';
+        let styleColorLight = 'rgb(' + 200 + ',' + 200 + ',' + 200 + ')';
+        for ( let i = 0; i < y; i++){
+            booleanColor = (i%2 != 0);
+            for (let j = 0; j < x; j++){
+                let color = booleanColor ? styleColorDark : styleColorLight;
+                let newTile = createBoardTile('board-tile', j, i, color);
+                boardContainer.appendChild(newTile);
+                booleanColor = !booleanColor;
+            };
+        };
     };
 
     // for each board space, do something
@@ -63,24 +85,24 @@ const Board = (horizontal,vertical) => {
                 };
             }
         };
-        let prevPositions = prev.map(element => {
+        /* let prevPositions = prev.map(element => {
             if (element != null) {return element.position}
             else return null;
         });
-        console.log(prevPositions);
+        console.log(prevPositions); */
         
         //reconstruct path in reverse using prev array. start from vertexTarget
         let arrayActualVertex = vertexTarget;
         let currentIndex = _array.indexOf(arrayActualVertex);
-        console.log(currentIndex);
+        // console.log(currentIndex);
         let path = [arrayActualVertex];
         while (currentIndex != -1 && arrayActualVertex != vertexStart){
             arrayActualVertex = prev[currentIndex];
-            console.log(arrayActualVertex.position);
+            // console.log(arrayActualVertex.position);
             path.push(arrayActualVertex);
             // currentIndex = prev.indexOf(arrayActualVertex);
             currentIndex = _array.indexOf(arrayActualVertex);
-            console.log(currentIndex);
+            // console.log(currentIndex);
         };
 
         let pathPositions = path.reverse().map(element => element.position);
@@ -141,18 +163,25 @@ function checkValidKnightMove(pointA, pointB){
     return false;
 };
 
+//DOM elements
+function createDiv(className){
+    const element = document.createElement('div');
+    element.classList.add(className);
+    return element;
+};
 
+function createBoardTile(className, positionHorizontal, positionVertical, color){
+    let element = createDiv(className);
+    element.setAttribute('horizontal', positionHorizontal);
+    element.setAttribute('vertical', positionVertical);
+    element.style.backgroundColor = color;
+    return element;
+}
 
-const chessBoard = Board(3,3);
+const chessBoard = Board(8,8);
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
 console.log(chessBoard.breadthFirstSearch(
     chessBoard.getVertex(0,0),
-    chessBoard.getVertex(1,0)
+    chessBoard.getVertex(2,0)
     )
 );
-/* let set = chessBoard.array[3].adjacencyList;
-let set2 = set.map(element => {
-    return element.position;
-});
-console.log(set2); */
-// console.log(chessBoard.arrayPositions);
