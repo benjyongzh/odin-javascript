@@ -40,7 +40,6 @@ const Board = (horizontal,vertical) => {
     let getVertex = (x,y) => {
         for (let i = 0; i < _array.length; i++){
             if (_array[i].position[0] == x && _array[i].position[1] == y){
-                // console.log(_array[i].position);
                 return _array[i];
             };
         };
@@ -66,24 +65,15 @@ const Board = (horizontal,vertical) => {
                 };
             }
         };
-        /* let prevPositions = prev.map(element => {
-            if (element != null) {return element.position}
-            else return null;
-        });
-        console.log(prevPositions); */
         
         //reconstruct path in reverse using prev array. start from vertexTarget
         let arrayActualVertex = vertexTarget;
         let currentIndex = _array.indexOf(arrayActualVertex);
-        // console.log(currentIndex);
         let path = [arrayActualVertex];
         while (currentIndex != -1 && arrayActualVertex != vertexStart){
             arrayActualVertex = prev[currentIndex];
-            // console.log(arrayActualVertex.position);
             path.push(arrayActualVertex);
-            // currentIndex = prev.indexOf(arrayActualVertex);
             currentIndex = _array.indexOf(arrayActualVertex);
-            // console.log(currentIndex);
         };
 
         let pathPositions = path.reverse().map(element => element.position);
@@ -109,14 +99,12 @@ const Board = (horizontal,vertical) => {
 // create a list of other spaces are valid from that vertex(adjacenccy list) must be used with bind() to indentify what validity pattern is to be followed
 function createAdjacencyList(args){
     let list = [];
-    // console.log(this);
     args.array.forEach(space => {
         if (this(args.vertex, space)) {
             list.push(space);
         };
     });
     args.vertex.adjacencyList = list;
-    // console.log(args.vertex.adjacencyList.length);
 };
 
 // function to check for valid move from 1 space to another
@@ -128,7 +116,6 @@ function checkValidKnightMove(pointA, pointB){
     
     let distanceX = Math.abs(x2 - x1);
     let distanceY = Math.abs(y2 - y1);
-    // console.log(`distanceX is ${distanceX}.`, `distanceY is ${distanceY}.`);
 
     //check x direction within range (value 1 or 2 only)
     if (distanceX != 2 && distanceX != 1 ) return false;
@@ -139,7 +126,6 @@ function checkValidKnightMove(pointA, pointB){
     if ((distanceX == 2 && distanceY == 1) || 
         (distanceX == 1 && distanceY == 2))
         {
-        // console.log("jackpot");
         return true;
     };
     return false;
@@ -147,10 +133,6 @@ function checkValidKnightMove(pointA, pointB){
 
 // DOM events
 function tileClicked(event){
-
-    // let horizontalPos = event.target.getAttribute("horizontal");
-    // let verticalPos = event.target.getAttribute("vertical");
-    // console.log(`horizontal is ${horizontalPos}`, `vertical is ${verticalPos}`);
     if (DOM.currentSelection.length >= 2){        
         //reset display
         DOM.resetTileSelection();
@@ -169,16 +151,13 @@ function tileClicked(event){
         .map(positionArrays => {
             return this.getVertex(positionArrays[0], positionArrays[1]);
         });
-        
+
         const path = this.breadthFirstSearch(tiles[0], tiles[1]);
 
         //display solution
         DOM.highlightPath(path);
     };
 };
-
-
-let currentQuery = [];
 
 // ====== initialize chessboard ===================================
 const chessBoard = Board(4,4);
