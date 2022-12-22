@@ -160,7 +160,7 @@ function tileClicked(event){
 };
 
 // ====== initialize chessboard ===================================
-const chessBoard = Board(4,4);
+const chessBoard = Board(8,8);
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
 
 // ====== initialize DOM ===================================

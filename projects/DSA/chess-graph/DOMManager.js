@@ -53,9 +53,11 @@ function addTileSelection(tile){
     if (currentSelection.indexOf(tile) == 0){
         // start Tile
         tile.classList.add('selected-start');
+        tile.textContent = "start";
     } else {
         // end Tile
         tile.classList.add('selected-end');
+        tile.textContent = "end";
     };
 }
 
@@ -65,6 +67,7 @@ function resetTileDisplay(){
         tile.classList.remove('highlighted');
         tile.classList.remove('selected-start');
         tile.classList.remove('selected-end');
+        tile.textContent = "";
     });
 };
 
@@ -74,6 +77,7 @@ function highlightPath(pathArray){
         let vertical = pathArray[i][1];
         let tile = boardContainer.querySelector(`.board-tile[horizontal='${horizontal}'][vertical='${vertical}']`);
         tile.classList.add('highlighted');
+        tile.textContent = i.toString();
     };
 };
 
