@@ -1,8 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta+Mahee:wght@300;400;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Mukta Mahee', sans-serif;
     box-sizing: border-box;
+    text-decoration: none;
+    font-weight: normal;
 }
 
 :root{
@@ -17,7 +21,19 @@
     --color-selected-start-base: rgb(159, 238, 208);
     --color-selected-end-base: rgb(238, 159, 159);
     --color-selected-highlighted-base: rgb(159, 213, 238);
+
+    --color-bg: rgb(143, 153, 156);
+    --color-font-dark: rgb(39, 42, 43);
+    --color-font-light: rgb(202, 213, 216);
+    --color-bg-footer: rgb(67, 73, 75);
 }
+
+body {
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-bg);
+}
+
 
 .container {
     display: flex;
@@ -25,7 +41,25 @@
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    gap: 30px;
+    width: 100%;
+    gap: 20px;
+}
+
+header {
+    font-size: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    color: var(--color-font-dark);
+}
+
+h2 {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-font-dark);
 }
 
 .content {
@@ -40,18 +74,19 @@
 }
 
 .board-tile {
-    width:75px;
-    height: 75px;
+    width:65px;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
+    color: var(--color-font-dark);
     opacity: 1;
     transition: 0.1s ease-in-out;
 }
 
 .board-tile:hover {
-    opacity: 0.85;
+    opacity: 0.7;
 }
 
 .dark-coloured-tile {
@@ -93,7 +128,10 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
-    gap: 10px;
-    background-color: var(--color-selected-highlighted-base);
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    gap: 4px;
+    background-color: var(--color-bg-footer);
+    color: var(--color-font-light);
 }
