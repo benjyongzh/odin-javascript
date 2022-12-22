@@ -1,3 +1,5 @@
+import * as DOM from "./DOMManager.js";
+
 //factory fn for a chess space
 const Vertex = data => {
     let boardPosition = data;
@@ -10,40 +12,19 @@ const Vertex = data => {
     };
 };
 
-let boardContainer = document.querySelector('.boardContainer');
-
 // factory fn to create board using X and Y cartesian coordinates
 const Board = (horizontal,vertical) => {
 
     let createBoard = (x, y) => {
         let newBoard = [];
-        createBoardDOM(x,y)
         for ( let i = 0; i < y; i++){
-            booleanColor = (i%2 != 0);
             for (let j = 0; j < x; j++){
                 //push a chess space instead of a simple array
                 newBoard.push(Vertex([j,i]));
             };
         };
+        DOM.resetBoard(x,y);
         return newBoard;
-    };
-
-    let createBoardDOM = (x, y) => {
-        boardContainer.replaceChildren();
-        boardContainer.style.gridTemplateColumns = `repeat(${x},1fr)`;
-        boardContainer.style.gridTemplateRows = `repeat(${y},1fr)`;
-        let booleanColor = true;//true = black, false = white
-        let styleColorDark = 'rgb(' + 50 + ',' + 50 + ',' + 50 + ')';
-        let styleColorLight = 'rgb(' + 200 + ',' + 200 + ',' + 200 + ')';
-        for ( let i = 0; i < y; i++){
-            booleanColor = (i%2 != 0);
-            for (let j = 0; j < x; j++){
-                let color = booleanColor ? styleColorDark : styleColorLight;
-                let newTile = createBoardTile('board-tile', j, i, color);
-                boardContainer.appendChild(newTile);
-                booleanColor = !booleanColor;
-            };
-        };
     };
 
     // for each board space, do something
@@ -111,6 +92,7 @@ const Board = (horizontal,vertical) => {
 
     };
 
+
     return {
         get array() {return _array},
         get arrayPositions() {
@@ -163,23 +145,23 @@ function checkValidKnightMove(pointA, pointB){
     return false;
 };
 
-//DOM elements
-function createDiv(className){
-    const element = document.createElement('div');
-    element.classList.add(className);
-    return element;
+// DOM events
+function tileClicked(event){
+    // let horizontalPosition = event.target.getAt
+    console.log("tile clicked");
+    console.log(event.target);
 };
 
-function createBoardTile(className, positionHorizontal, positionVertical, color){
-    let element = createDiv(className);
-    element.setAttribute('horizontal', positionHorizontal);
-    element.setAttribute('vertical', positionVertical);
-    element.style.backgroundColor = color;
-    return element;
-}
 
+let currentQuery = [];
+
+// ====== initialize chessboard ===================================
 const chessBoard = Board(8,8);
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
+
+// ====== initialize DOM ===================================
+DOM.addDOMEventForAllTiles(chessBoard, 'click', tileClicked);
+
 console.log(chessBoard.breadthFirstSearch(
     chessBoard.getVertex(0,0),
     chessBoard.getVertex(2,0)
