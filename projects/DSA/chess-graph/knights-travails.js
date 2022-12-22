@@ -147,9 +147,10 @@ function checkValidKnightMove(pointA, pointB){
 
 // DOM events
 function tileClicked(event){
-    let horizontalPos = event.target.getAttribute("horizontal");
-    let verticalPos = event.target.getAttribute("vertical");
-    console.log(`horizontal is ${horizontalPos}`, `vertical is ${verticalPos}`);
+
+    // let horizontalPos = event.target.getAttribute("horizontal");
+    // let verticalPos = event.target.getAttribute("vertical");
+    // console.log(`horizontal is ${horizontalPos}`, `vertical is ${verticalPos}`);
     if (DOM.currentSelection.length >= 2){        
         //reset display
         DOM.resetTileSelection();
@@ -161,15 +162,15 @@ function tileClicked(event){
     //solve
     if (DOM.currentSelection.length >= 2){
         //give solution
-        const startTilePos = DOM.currentSelection[0];
-        const endTilePos = DOM.currentSelection[1];
-
-        const startTile = this.getVertex(startTilePos[0], startTilePos[1]);
-        const endTile = this.getVertex(endTilePos[0], endTilePos[1]);
-
-        const path = this.breadthFirstSearch(startTile, endTile);
-
-        console.log(path);
+        let tiles = DOM.currentSelection
+        .map(DOMelement => {
+            return [DOMelement.getAttribute("horizontal"), DOMelement.getAttribute("vertical")]
+        })
+        .map(positionArrays => {
+            return this.getVertex(positionArrays[0], positionArrays[1]);
+        });
+        
+        const path = this.breadthFirstSearch(tiles[0], tiles[1]);
 
         //display solution
         DOM.highlightPath(path);
@@ -180,7 +181,7 @@ function tileClicked(event){
 let currentQuery = [];
 
 // ====== initialize chessboard ===================================
-const chessBoard = Board(8,8);
+const chessBoard = Board(4,4);
 chessBoard.forAllVertices(createAdjacencyList.bind(checkValidKnightMove));
 
 // ====== initialize DOM ===================================

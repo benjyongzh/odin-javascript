@@ -72,7 +72,7 @@ function highlightPath(pathArray){
     for (let i = 1; i < pathArray.length-1; i ++){
         let horizontal = pathArray[i][0];
         let vertical = pathArray[i][1];
-        let tile = boardContainer.querySelector(`.board-tile[horizontal=${horizontal}][vertical=${vertical}]`);
+        let tile = boardContainer.querySelector(`.board-tile[horizontal='${horizontal}'][vertical='${vertical}']`);
         tile.classList.add('highlighted');
     };
 };
