@@ -25,3 +25,23 @@
     align-items: center;
     justify-content: center;
 }
+
+.dark-coloured-tile {
+    background-color: rgb(50,50,50);
+}
+
+.light-coloured-tile {
+    background-color: rgb(200,200,200);
+}
+
+.board-tile.highlighted {
+    background-color: aqua;
+}
+
+.board-tile.selected-start {
+    background-color: green;
+}
+
+.board-tile.selected-end {
+    background-color: red;
+}
