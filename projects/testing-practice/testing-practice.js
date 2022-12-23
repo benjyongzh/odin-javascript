@@ -5,6 +5,14 @@ function capitalise(string){
     return firstLetter + remaining;
 };
 
+function reverseString(string){
+    return string.split("")
+    .reverse()
+    .join("");
+    
+};
+
 module.exports = {
-    capitalise
+    capitalise,
+    reverseString
 };
