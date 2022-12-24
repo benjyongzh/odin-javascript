@@ -19,7 +19,7 @@ test("reverses a string", () => {
     .toBe("OP3-C");
 });
 
-test("calculator adds numbers", () => {
+test("calculator adds numbers (a+b)", () => {
     expect(practice.calculator.add(3,6))
     .toEqual(9);
 
@@ -27,7 +27,30 @@ test("calculator adds numbers", () => {
     .toBeCloseTo(187.11);
 });
 
+test("calculator subtracts numbers (a-b)", () => {
+    expect(practice.calculator.subtract(12,2))
+    .toEqual(10);
+
+    expect(practice.calculator.subtract(45.6, 2.7))
+    .toBeCloseTo(42.9);
+});
+
+test("calculator subtraction can go negative", () => {
+    expect(practice.calculator.subtract(5,62))
+    .toEqual(-57);
+
+    expect(practice.calculator.subtract(15.3, 62.7))
+    .toBeCloseTo(-47.4);
+});
+
 test("calculator throws error if input is not number", () => {
     expect(() => practice.calculator.add("15a", 31))
-    .toThrow('One of the inputs is not a number.');
-});
+    .toThrow('Input is not a number.');
+
+    expect(() => practice.calculator.subtract("1a55", 12))
+    .toThrow('Input is not a number.');
+//     expect(() => practice.calculator.multiply("m4re", 8))
+//     .toThrow('One of the inputs is not a number.');
+//     expect(() => practice.calculator.divide(7,"a0sfdv8"))
+//     .toThrow('One of the inputs is not a number.');
+ });

@@ -15,9 +15,15 @@ function reverseString(string){
 const calculator = {
     add: (a,b) => {
         if (isNaN(a) || isNaN(b)) {
-            throw 'One of the inputs is not a number.';
+            throw 'Input is not a number.';
         };
         return Number(a) + Number(b);
+    },
+    subtract: (a,b) => {
+        if (isNaN(a) || isNaN(b)) {
+            throw 'Input is not a number.';
+        };
+        return Number(a) - Number(b);
     },
 };
 
