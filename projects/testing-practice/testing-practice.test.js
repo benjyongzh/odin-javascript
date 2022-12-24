@@ -95,12 +95,18 @@ test("caesarCipher shifts characters by 1 by default", () => {
     expect(practice.caesarCipher("abc")).toStrictEqual("bcd");
 });
 
-test("caesarCipher accepts spaces", () => {
+test("caesarCipher accepts symbols", () => {
     expect(practice.caesarCipher("gh i")).toStrictEqual("hi j");
+    expect(practice.caesarCipher("don't call me back!")).toStrictEqual("epo'u dbmm nf cbdl!");
 });
 
 test("caesarCipher shifts characters according to shift input", () => {
     expect(practice.caesarCipher("klm", 4)).toStrictEqual("opq");
+});
+
+test("caesarCipher wraps character shifting", () => {
+    expect(practice.caesarCipher("wxyzab", 4)).toStrictEqual("abcdef");
+    expect(practice.caesarCipher("wxyzab", 2)).toStrictEqual("yzabcd");
 });
 
 test("caesarCipher maintains casing", () => {
