@@ -85,9 +85,33 @@ function isLowerCase(string){
 
 const alphabets = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
+function analyzeArray(array){
+
+    // check for NaNs
+    for (let i = 0; i < array.length; i++){
+        if (isNaN(array[i]) || array[i] == undefined) throw new Error("Only numbers accepted.");
+    };
+
+    //convert any string-numbers into Numbers()
+    let newArray = array.map(element => Number(element));
+
+    //check for all numbers only
+    let average = newArray.reduce((sum, current) => sum + current, 0)/newArray.length;
+    let min = newArray.sort((a,b) => a-b)[0];
+    let max = newArray.sort((a,b) => b-a)[0];
+    let length = newArray.length;
+    return {
+        average: average,
+        min: min,
+        max: max,
+        length: length
+    };
+};
+
 module.exports = {
     capitalise,
     reverseString,
     calculator,
-    caesarCipher
+    caesarCipher,
+    analyzeArray
 };

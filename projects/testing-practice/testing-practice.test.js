@@ -121,3 +121,31 @@ test("caesarCipher throws error if shift is not an integer", () => {
     expect(() => practice.caesarCipher("def", 1.5)).toThrow("Must shift by an integer.");
     expect(() => practice.caesarCipher("def", "seven")).toThrow("Must shift by an integer.");
 });
+
+test("analyzeArray gives correct average", () => {
+    expect(practice.analyzeArray([1,2,3]).average).toStrictEqual(2);
+    expect(practice.analyzeArray([2,36,7,12,672,76]).average).toBeCloseTo(134.1666);
+    expect(practice.analyzeArray([1.56,2.2,7.3,67]).average).toBeCloseTo(19.515);
+});
+
+test("analyzeArray gives correct minimum", () => {
+    expect(practice.analyzeArray([436,134,784518,845,1346,58741]).min).toStrictEqual(134);
+    expect(practice.analyzeArray([1235,62,-1365,15,-267]).min).toStrictEqual(-1365);
+});
+
+test("analyzeArray gives correct maximum", () => {
+    expect(practice.analyzeArray([2653,378,165,726]).max).toStrictEqual(2653);
+    expect(practice.analyzeArray([-26,-274,-2372,-272]).max).toStrictEqual(-26);
+});
+
+test("analyzeArray gives correct length", () => {
+    expect(practice.analyzeArray([1,2,5,1,3]).length).toStrictEqual(5);
+});
+
+test.only("analyzeArray throws when NaN detected in array", () => {
+    expect(() => practice.analyzeArray([12,62,'1g', 236])).toThrow("Only numbers accepted.");
+});
+
+test("analyzeArray returns Number() if stringNumber detected in array", () => {
+    expect(practice.analyzeArray([12,62,"1"]).min).toStrictEqual(1);
+});
