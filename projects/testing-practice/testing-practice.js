@@ -39,10 +39,9 @@ const calculator = {
 
 function caesarCipher(string, shift = 1){
     let stringArray = string.split("");
-    console.log(stringArray);
     for (let i = 0; i < stringArray.length; i++){
         if (stringArray[i] === " ") continue;
-        if (!alphabets.includes(stringArray[i]) || !alphabets.includes(stringArray[i].toLowerCase())) throw new Error("Alphabets only.");
+        if (!alphabets.includes(stringArray[i].toLowerCase())) throw new Error("Alphabets only.");
     };
 
     if (isNaN(shift) || !Number.isInteger(shift)) throw new Error("Must shift by an integer.");
@@ -51,11 +50,16 @@ function caesarCipher(string, shift = 1){
         if (character === " ") return " ";
         let index = alphabets.indexOf(character.toLowerCase());
         index += shift;
-
-        return alphabets[index]; //need to check casing
-
+        if (isLowerCase(character)){
+            return alphabets[index];
+        } else return alphabets[index].toUpperCase();
     });
+
     return resultArray.join("");
+};
+
+function isLowerCase(string){
+    return string === string.toLowerCase();
 };
 
 const alphabets = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
