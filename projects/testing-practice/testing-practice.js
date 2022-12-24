@@ -25,6 +25,12 @@ const calculator = {
         };
         return Number(a) - Number(b);
     },
+    multiply: (a,b) => {
+        if (isNaN(a) || isNaN(b)) {
+            throw 'Input is not a number.';
+        };
+        return Number(a) * Number(b);
+    },
 };
 
 module.exports = {

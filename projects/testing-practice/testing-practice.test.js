@@ -43,14 +43,38 @@ test("calculator subtraction can go negative", () => {
     .toBeCloseTo(-47.4);
 });
 
+test("calculator multiples numbers (a*b)", () => {
+    expect(practice.calculator.multiply(51,521))
+    .toEqual(26571);
+
+    expect(practice.calculator.multiply(51.56, 895.3))
+    .toBeCloseTo(46161.668);
+});
+
+test("calculator multiply can go negative", () => {
+    expect(practice.calculator.multiply(-3,14))
+    .toEqual(-42);
+
+    expect(practice.calculator.multiply(-4.2, 2.5))
+    .toBeCloseTo(-10.5);
+});
+
+test("calculator multiply 2 negatives to become positive", () => {
+    expect(practice.calculator.multiply(-21,-9))
+    .toEqual(189);
+});
+
+
 test("calculator throws error if input is not number", () => {
     expect(() => practice.calculator.add("15a", 31))
     .toThrow('Input is not a number.');
 
     expect(() => practice.calculator.subtract("1a55", 12))
     .toThrow('Input is not a number.');
-//     expect(() => practice.calculator.multiply("m4re", 8))
-//     .toThrow('One of the inputs is not a number.');
+
+    expect(() => practice.calculator.multiply("m4re", 8))
+    .toThrow('Input is not a number.');
+
 //     expect(() => practice.calculator.divide(7,"a0sfdv8"))
-//     .toThrow('One of the inputs is not a number.');
+//     .toThrow('Input is not a number.');
  });
