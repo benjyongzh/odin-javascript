@@ -12,7 +12,17 @@ function reverseString(string){
     
 };
 
+const calculator = {
+    add: (a,b) => {
+        if (isNaN(a) || isNaN(b)) {
+            throw 'One of the inputs is not a number.';
+        };
+        return Number(a) + Number(b);
+    },
+};
+
 module.exports = {
     capitalise,
-    reverseString
+    reverseString,
+    calculator
 };
