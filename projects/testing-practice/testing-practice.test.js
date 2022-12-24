@@ -64,6 +64,19 @@ test("calculator multiply 2 negatives to become positive", () => {
     .toEqual(189);
 });
 
+test("calculator divides numbers (a/b)", () => {
+    expect(practice.calculator.divide(15,3))
+    .toEqual(5);
+
+    expect(practice.calculator.divide(-59, 78.5))
+    .toBeCloseTo(-0.7516);
+});
+
+test("calculator throws error if divide by zero", () => {
+    expect(() => practice.calculator.divide(256, 0))
+    .toThrow('Cannot divide by zero.');
+});
+
 
 test("calculator throws error if input is not number", () => {
     expect(() => practice.calculator.add("15a", 31))
@@ -75,6 +88,6 @@ test("calculator throws error if input is not number", () => {
     expect(() => practice.calculator.multiply("m4re", 8))
     .toThrow('Input is not a number.');
 
-//     expect(() => practice.calculator.divide(7,"a0sfdv8"))
-//     .toThrow('Input is not a number.');
+    expect(() => practice.calculator.divide(7,"a0sfdv8"))
+    .toThrow('Input is not a number.');
  });

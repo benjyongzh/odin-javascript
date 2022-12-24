@@ -14,22 +14,26 @@ function reverseString(string){
 
 const calculator = {
     add: (a,b) => {
-        if (isNaN(a) || isNaN(b)) {
-            throw 'Input is not a number.';
-        };
+        if (isNaN(a) || isNaN(b)) throw 'Input is not a number.';
+
         return Number(a) + Number(b);
     },
     subtract: (a,b) => {
-        if (isNaN(a) || isNaN(b)) {
-            throw 'Input is not a number.';
-        };
+        if (isNaN(a) || isNaN(b)) throw 'Input is not a number.';
+
         return Number(a) - Number(b);
     },
     multiply: (a,b) => {
-        if (isNaN(a) || isNaN(b)) {
-            throw 'Input is not a number.';
-        };
+        if (isNaN(a) || isNaN(b)) throw 'Input is not a number.';
+
         return Number(a) * Number(b);
+    },
+    divide: (a,b) => {
+        if (b===0) throw new Error('Cannot divide by zero.');
+
+        if (isNaN(a) || isNaN(b)) throw 'Input is not a number.';
+
+        return Number(a) / Number(b);
     },
 };
 
