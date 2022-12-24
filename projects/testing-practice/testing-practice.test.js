@@ -77,8 +77,7 @@ test("calculator throws error if divide by zero", () => {
     .toThrow('Cannot divide by zero.');
 });
 
-
-test("calculator throws error if input is not number", () => {
+test("calculator throws error if an input is not number", () => {
     expect(() => practice.calculator.add("15a", 31))
     .toThrow('Input is not a number.');
 
@@ -91,3 +90,28 @@ test("calculator throws error if input is not number", () => {
     expect(() => practice.calculator.divide(7,"a0sfdv8"))
     .toThrow('Input is not a number.');
  });
+
+test("caesarCipher shifts characters by 1 by default", () => {
+    expect(practice.caesarCipher("abc")).toStrictEqual("bcd");
+});
+
+test("caesarCipher accepts spaces", () => {
+    expect(practice.caesarCipher("gh i")).toStrictEqual("hi j");
+});
+
+test("caesarCipher shifts characters according to shift input", () => {
+    expect(practice.caesarCipher("klm", 4)).toStrictEqual("opq");
+});
+
+test("caesarCipher maintains casing", () => {
+    expect(practice.caesarCipher("oPq")).toStrictEqual("pQr");
+});
+
+test("caesarCipher throws error if there is a NaN in the input string", () => {
+    expect(() => practice.caesarCipher("ab1c")).toThrow("Alphabets only.");
+});
+
+test("caesarCipher throws error if shift is not an integer", () => {
+    expect(() => practice.caesarCipher("def", 1.5)).toThrow("Must shift by an integer.");
+    expect(() => practice.caesarCipher("def", "seven")).toThrow("Must shift by an integer.");
+});
