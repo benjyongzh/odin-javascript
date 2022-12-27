@@ -12,4 +12,4 @@ const gameManager = (() => {
     };
 })();
 
-module.exports = gameManager;
+module.exports = {gameManager};
