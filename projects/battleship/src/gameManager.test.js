@@ -1,11 +1,13 @@
-// const gameManager = require("./gameManager.js");
-import {gameManager} from "./gameManager.js";
+import game from "./gameManager.js";
+
+// jest.mock("./gameManager.js");//still not working
 
 test("gameManager is a singleton", () => {
-    expect(gameManager.getString()).toBe("test 1 string lmao");
+    expect(game.getString()).toStrictEqual("test 1 string lmao");
 });
 
 test("gameManager counter is moving", () => {
-    expect(gameManager.counter).toBe(0);
-    expect(gameManager.counter).toBe(0);
+    expect(game.getCounter()).toBe(1);
+    game.getString();
+    expect(game.getCounter()).toBe(2);
 });
