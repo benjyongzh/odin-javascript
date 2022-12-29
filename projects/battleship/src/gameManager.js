@@ -33,4 +33,5 @@ class gameManager{
 };
 
 const game = new gameManager();
-export default game;
+
+module.exports = {game, gameManager};
