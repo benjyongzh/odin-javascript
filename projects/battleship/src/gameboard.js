@@ -1,34 +1,13 @@
-// import ship from "./ship";
+import ship from "./ship";
 
-export default function gameboard(sizeX, sizeY){
-
-    let _boardSize = [sizeX, sizeY];
-
-    const createBoard = (horizontal, vertical) => {
-        return createGridArray(sizeX, sizeY);
-    };
-
-    const placeShip = (length, startPoint, endPoint) => {
-
-    };
-
-    let _boardArray = createBoard(sizeX, sizeY);
-
-    return {
-        get board(){return _boardArray},
-        get boardSize(){return _boardSize},
-        placeShip,
-    };
-};
-
-function boardSpace(horizontal, vertical){
+function boardSpace(horizontal, vertical){//need to identify if its a ship
     return {
         horizontal: horizontal,
-        vertical: vertical
+        vertical: vertical,
     };
 };
 
-function createGridArray(x,y){
+export function createGridArray(x,y){
     let array = [];
     for (let h = 0; h < x; h++){
         let column = [];
@@ -38,6 +17,33 @@ function createGridArray(x,y){
         array.push(column);
     };
     return array;
+};
+
+export default function gameboard(sizeX, sizeY){
+
+    let _boardSize = [sizeX, sizeY];
+
+    function createBoard(horizontal, vertical){
+        return createGridArray(sizeX, sizeY);
+    };
+
+    function placeShip(length, startPoint, endPoint){
+        const newShip = ship(length);
+        //check if straight ship
+        //check if spaces are existing ships
+        return newShip;
+    };
+
+    function getSpace(x,y) {_boardArray[x][y]};
+
+    let _boardArray = createBoard(sizeX, sizeY);
+
+    return {
+        get board(){return _boardArray},
+        get boardSize(){return _boardSize},
+        placeShip,
+        getSpace,
+    };
 };
 
 // module.exports = {boardSpace, createGridArray};
