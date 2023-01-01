@@ -7,7 +7,7 @@ function boardSpace(horizontal, vertical){//need to identify if its a ship
     };
 };
 
-export function createGridArray(x,y){
+function createGridArray(x,y){
     let array = [];
     for (let h = 0; h < x; h++){
         let column = [];
