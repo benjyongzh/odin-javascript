@@ -75,3 +75,18 @@ describe("ship creation", () => {
         .toThrow("Space is occupied");
     });
 });
+
+describe("board receiveAttack", () => {
+    test("Can hit ship", () => {
+        const mockgameboard = gameboard(5,5);
+        mockgameboard.placeShip([3,3], [3,4]);
+        expect(mockgameboard.receiveAttack(3,4)).toBe(true);
+    });
+
+    test("Can miss", () => {
+        const mockgameboard = gameboard(5,5);
+        mockgameboard.placeShip([3,3], [3,4]);
+        expect(mockgameboard.receiveAttack(2,4)).toBe(false);
+
+    });
+});

@@ -96,6 +96,11 @@ export default function gameboard(sizeX, sizeY){
 
     function getSpace(x,y) {return _boardArray[x][y]};
 
+    function receiveAttack(x,y){
+        const space = this.getSpace(x,y);
+        return space.hasOwnProperty('ship');
+    }
+
     let _boardArray = createBoard(sizeX, sizeY);
 
     return {
@@ -103,5 +108,6 @@ export default function gameboard(sizeX, sizeY){
         get boardSize(){return _boardSize},
         placeShip,
         getSpace,
+        receiveAttack
     };
 };
