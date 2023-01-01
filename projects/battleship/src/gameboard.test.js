@@ -7,7 +7,7 @@ afterEach(() => {
     jest.clearAllMocks();
 });
 
-describe.skip("board creation", () => {
+describe("board creation", () => {
 
     const mockgameboard = gameboard(3,5);
 
@@ -27,9 +27,20 @@ describe.skip("board creation", () => {
                 vertical: 4
         });
     });
+
+    test("gameboard getSpace returns boardspace", () => {
+        expect(mockgameboard.getSpace(1,1)).toStrictEqual(
+            { horizontal: 1,
+                vertical: 1
+        });
+        expect(mockgameboard.getSpace(2,4)).toStrictEqual(
+            { horizontal: 2,
+                vertical: 4
+        });
+    });
 });
 
-describe("ship creation", () => {
+describe.skip("ship creation", () => {
     const mockgameboard = gameboard(3,5);
 
     test("ship() is called", () => {
