@@ -40,11 +40,10 @@ describe("board creation", () => {
     });
 });
 
-const mockgameboard = gameboard(4,6);
-
 describe("ship creation", () => {
 
     test("ship() is called", () => {
+        const mockgameboard = gameboard(4,6);
         ship.default.mockReturnValueOnce("mock ship");
 
         const shiptest = mockgameboard.placeShip([2,1], [2,4]);
@@ -54,6 +53,7 @@ describe("ship creation", () => {
     });
 
     test("ship is created along correct positions", () => {
+        const mockgameboard = gameboard(4,6);
         const shiptest = mockgameboard.placeShip([0,1], [0,5]);
         expect(mockgameboard.getSpace(0,1).ship).toStrictEqual(shiptest);
         expect(mockgameboard.getSpace(0,2).ship).toStrictEqual(shiptest);
@@ -63,14 +63,15 @@ describe("ship creation", () => {
     });
 
     test("ship can only be in horizontal or vertical lines, otherwise throw error", () => {
+        const mockgameboard = gameboard(4,6);
         expect(() => mockgameboard.placeShip([0,0], [1,2]))
         .toThrow("Ship must be laid in a straight line either horizontally or vertically.");
     });
 
     test("ship cannot replace existing ship spaces. Will throw error", () => {
+        const mockgameboard = gameboard(4,6);
+        mockgameboard.placeShip([0,1], [0,5]);
         expect(() => mockgameboard.placeShip([0,1], [0,3]))
         .toThrow("Space is occupied");
     });
-
-
 });
