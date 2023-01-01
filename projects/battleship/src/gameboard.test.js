@@ -77,13 +77,22 @@ describe("ship creation", () => {
 });
 
 describe("board receiveAttack", () => {
+
+    test("Shot coordinate is recorded into shotsTaken array.", () => {
+        const mockgameboard = gameboard(5,5);
+        mockgameboard.placeShip([3,3], [3,4]);
+        mockgameboard.receiveAttack(3,1);
+        mockgameboard.receiveAttack(2,4);
+        expect(mockgameboard.shotsTaken.length).toStrictEqual(2);
+    });
+
     test("Can hit ship", () => {
         const mockgameboard = gameboard(5,5);
         mockgameboard.placeShip([3,3], [3,4]);
         expect(mockgameboard.receiveAttack(3,4)).toBe(true);
     });
 
-    test("ship registers hit", () => {
+    test("target ship registers hit function", () => {
 
         const mockgameboard = gameboard(5,5);
         mockgameboard.placeShip([3,3], [3,4]);
@@ -98,6 +107,13 @@ describe("board receiveAttack", () => {
         const mockgameboard = gameboard(5,5);
         mockgameboard.placeShip([3,3], [3,4]);
         expect(mockgameboard.receiveAttack(2,4)).toBe(false);
+    });
 
+    test("Missed shot is recorded in shotsMissed array.", () => {
+        const mockgameboard = gameboard(5,5);
+        mockgameboard.placeShip([3,3], [3,4]);
+        mockgameboard.receiveAttack(3,1);
+        mockgameboard.receiveAttack(2,4);
+        expect(mockgameboard.shotsMissed.length).toStrictEqual(2);
     });
 });

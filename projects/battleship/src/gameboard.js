@@ -97,6 +97,9 @@ export default function gameboard(sizeX, sizeY){
     function getSpace(x,y) {return _boardArray[x][y]};
 
     function receiveAttack(x,y){
+        //record shot coordinate
+        shotsTaken.push([x,y]);
+
         const space = this.getSpace(x,y);
         if (space.hasOwnProperty('ship')){
             //hit on some ship
@@ -104,9 +107,13 @@ export default function gameboard(sizeX, sizeY){
             ship.hit();
         } else {
             //shot missed
+            shotsMissed.push([x,y]);
         };
         return space.hasOwnProperty('ship');
-    }
+    };
+
+    let shotsTaken = [];
+    let shotsMissed = [];
 
     let _boardArray = createBoard(sizeX, sizeY);
 
@@ -115,6 +122,8 @@ export default function gameboard(sizeX, sizeY){
         get boardSize(){return _boardSize},
         placeShip,
         getSpace,
-        receiveAttack
+        receiveAttack,
+        shotsTaken,
+        shotsMissed
     };
 };
