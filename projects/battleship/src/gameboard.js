@@ -37,42 +37,37 @@ export default function gameboard(sizeX, sizeY){
             exceptionHandler("Ship must be laid in a straight line either horizontally or vertically.");
         };
 
-        /* //check for ship length
-        if (length <= 0){
-            exceptionHandler("Ship length must be more than 1.");
-        };
-
-        //check for shiplength of 1
-        if (length == 1){
-            if (startPoint != endPoint){
-                exceptionHandler("Ship of length 1 should have same head and tail positions.");
-            };
-        }; */
-
         const reservedSpaces = [];
-        let shipDirection = "";
+        let shipOrientation = "";
         let startVariable;
         let endVariable;
 
-        //check ship direction
+        //check ship orientation
         if (startPoint[0] === endPoint[0]){
             //vertical ship
             startVariable = startPoint[1];
             endVariable = endPoint[1];
-            shipDirection = "vertical";
+            shipOrientation = "vertical";
         } else {
             //horizontal ship
             startVariable = startPoint[0];
             endVariable = endPoint[0];
-            shipDirection = "horizontal";
+            shipOrientation = "horizontal";
+        };
+
+        //determine real endpoint based on direction of ship
+        if (startVariable < endVariable){
+            endVariable++;
+        } else {
+            endVariable--;
         };
 
         let counter = startVariable;
-        let length = 1;
+        let length = 0;
         do {
             //get boardSpace
             let space;
-            if (shipDirection === "vertical"){
+            if (shipOrientation === "vertical"){
                 space = this.getSpace(startPoint[0],counter);
             } else {
                 space = this.getSpace(counter,startPoint[1]);
@@ -86,7 +81,7 @@ export default function gameboard(sizeX, sizeY){
             };
 
             //update counter
-            startVariable < endVariable ? counter++ : counter--
+            startVariable < endVariable ? counter++ : counter--;
 
             //check length
             length++;
