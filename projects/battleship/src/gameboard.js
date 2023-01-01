@@ -19,6 +19,10 @@ export function createGridArray(x,y){
     return array;
 };
 
+function exceptionHandler(error){
+    throw error;
+};
+
 export default function gameboard(sizeX, sizeY){
 
     let _boardSize = [sizeX, sizeY];
@@ -31,8 +35,17 @@ export default function gameboard(sizeX, sizeY){
         const newShip = ship(length);
         //check if straight ship
         if (startPoint[0] !== endPoint[0] && startPoint[1] !== endPoint[1]){
-            // throw new Error("Ship must be laid in a straight line either horizontally or vertically.");
-            throw "Ship must be laid in a straight line either horizontally or vertically.";
+            exceptionHandler("Ship must be laid in a straight line either horizontally or vertically.");
+        };
+
+        if (length <= 0){
+            exceptionHandler("Ship length must be more than 1.");
+        };
+
+        if (length == 1){
+            if (startPoint != endPoint){
+                exceptionHandler("Ship of length 1 should have same head and tail positions.");
+            };
         };
         //check if spaces are existing ships
         //define .ship in the boardspaces

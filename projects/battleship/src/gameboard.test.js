@@ -51,14 +51,11 @@ describe("ship creation", () => {
     });
 
     test("ship can only be in horizontal or vertical lines, otherwise throw error", () => {
-        const diagonalShip = mockgameboard.placeShip(3, [0,0], [1,2]);
-        expect(() => mockgameboard.placeShip()).toThrow();
-        // expect(() => mockgameboard.placeShip()).toThrow("Ship must be laid in a straight line either horizontally or vertically.");
+        expect(() => mockgameboard.placeShip(3, [0,0], [1,2]))
+        .toThrow("Ship must be laid in a straight line either horizontally or vertically.");
     });
 
     test.skip("ship cannot replace exsiting ship spaces", () => {
-        const overlapShip = mockgameboard.placeShip(3, [0,2], [2,2]);
-        expect().toThrow();
     });
 
     test.skip("ship is created along correct positions", () => {
