@@ -98,6 +98,13 @@ export default function gameboard(sizeX, sizeY){
 
     function receiveAttack(x,y){
         const space = this.getSpace(x,y);
+        if (space.hasOwnProperty('ship')){
+            //hit on some ship
+            const ship = space.ship;
+            ship.hit();
+        } else {
+            //shot missed
+        };
         return space.hasOwnProperty('ship');
     }
 

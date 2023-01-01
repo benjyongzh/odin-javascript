@@ -83,6 +83,17 @@ describe("board receiveAttack", () => {
         expect(mockgameboard.receiveAttack(3,4)).toBe(true);
     });
 
+    test("ship registers hit", () => {
+
+        const mockgameboard = gameboard(5,5);
+        mockgameboard.placeShip([3,3], [3,4]);
+        const targetShip = mockgameboard.getSpace(3,4).ship;
+        const spyhit = jest.spyOn(targetShip, 'hit');
+        mockgameboard.receiveAttack(3,4);
+        expect(spyhit).toHaveBeenCalled();
+        expect(targetShip.hitsTaken).toStrictEqual(1);
+    });
+
     test("Can miss", () => {
         const mockgameboard = gameboard(5,5);
         mockgameboard.placeShip([3,3], [3,4]);
