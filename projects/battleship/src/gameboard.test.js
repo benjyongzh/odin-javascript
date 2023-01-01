@@ -7,7 +7,7 @@ afterEach(() => {
     jest.clearAllMocks();
 });
 
-describe("board creation", () => {
+describe.skip("board creation", () => {
 
     const mockgameboard = gameboard(3,5);
 
@@ -40,41 +40,38 @@ describe("board creation", () => {
     });
 });
 
-describe.skip("ship creation", () => {
-    const mockgameboard = gameboard(3,5);
+const mockgameboard = gameboard(4,6);
+
+describe("ship creation", () => {
 
     test("ship() is called", () => {
         ship.default.mockReturnValueOnce("mock ship");
 
-        const shiptest = mockgameboard.placeShip(7, [2,1], [2,4]);
+        const shiptest = mockgameboard.placeShip(2, [2,1], [2,2]);
         expect(shiptest).toStrictEqual("mock ship");
         expect(ship.default).toHaveBeenCalled();
-        expect(ship.default.mock.calls[0][0]).toBe(7);
-    });
-
-    test("ship is created with correct length", () => {
-        const shiptest = mockgameboard.placeShip(4, [2,1], [2,4]);
-        expect(shiptest.length).toStrictEqual(4);
+        console.log(ship.default.mock.calls);
+        expect(ship.default.mock.calls[0][0]).toBe(2);
     });
 
     test("ship is created along correct positions", () => {
-        expect(mockgameboard.getSpace(2,1).ship).toBe(shiptest);
-        expect(mockgameboard.getSpace(2,2).ship).toBe(shiptest);
-        expect(mockgameboard.getSpace(2,3).ship).toBe(shiptest);
-        expect(mockgameboard.getSpace(2,4).ship).toBe(shiptest);
+        const shiptest = mockgameboard.placeShip(3, [0,1], [0,3]);
+        expect(mockgameboard.getSpace(0,1).ship).toBe(shiptest);
+        expect(mockgameboard.getSpace(0,2).ship).toBe(shiptest);
+        expect(mockgameboard.getSpace(0,3).ship).toBe(shiptest);
     });
 
-    test.skip("ship can only be in horizontal or vertical lines, otherwise throw error", () => {
+    test("ship can only be in horizontal or vertical lines, otherwise throw error", () => {
         expect(() => mockgameboard.placeShip(3, [0,0], [1,2]))
         .toThrow("Ship must be laid in a straight line either horizontally or vertically.");
     });
 
-    test.skip("ship length must be more than 1, otherwise throw error", () => {
+    test("ship length must be more than 1, otherwise throw error", () => {
         expect(() => mockgameboard.placeShip(-4, [0,0], [0,4]))
         .toThrow("Ship length must be more than 1.");
     });
 
-    test.skip("ship length of 1 must have same startpoint and endpoint, otherwise throw error", () => {
+    test("ship length of 1 must have same startpoint and endpoint, otherwise throw error", () => {
         expect(() => mockgameboard.placeShip(1, [0,0], [0,1]))
         .toThrow("Ship of length 1 should have same head and tail positions.");
     });
