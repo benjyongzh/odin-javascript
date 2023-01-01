@@ -27,6 +27,13 @@ export default function gameboard(sizeX, sizeY){
 
     let _boardSize = [sizeX, sizeY];
 
+    let _ships = [];
+
+    let shotsTaken = [];
+    let shotsMissed = [];
+
+    let _hasAllShipsSunk = false;
+
     function createBoard(horizontal, vertical){
         return createGridArray(sizeX, sizeY);
     };
@@ -91,6 +98,9 @@ export default function gameboard(sizeX, sizeY){
         //define .ship in the boardspaces
         const newShip = ship(length);
         reservedSpaces.forEach(space => {space.ship = newShip});
+
+        //push snewShip into _ships array
+        _ships.push(newShip);
         return newShip;
     };
 
@@ -109,11 +119,24 @@ export default function gameboard(sizeX, sizeY){
             //shot missed
             shotsMissed.push([x,y]);
         };
-        return space.hasOwnProperty('ship');
+
+        //check if all ships have been sunk
+        checkAllShipsHealth();
+
+        return space.hasOwnProperty('ship');y
     };
 
-    let shotsTaken = [];
-    let shotsMissed = [];
+    function checkAllShipsHealth(){
+        let shipsSunk = 0;
+        for (let i = 0; i < _ships.length; i++){
+            if (_ships[i].isSunk) shipsSunk++;
+        };
+        if (shipsSunk >= _ships.length){
+            _hasAllShipsSunk = true;
+        };
+    };
+
+
 
     let _boardArray = createBoard(sizeX, sizeY);
 
@@ -124,6 +147,7 @@ export default function gameboard(sizeX, sizeY){
         getSpace,
         receiveAttack,
         shotsTaken,
-        shotsMissed
+        shotsMissed,
+        get hasAllShipsSunk() {return _hasAllShipsSunk}
     };
 };

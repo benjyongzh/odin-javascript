@@ -116,4 +116,16 @@ describe("board receiveAttack", () => {
         mockgameboard.receiveAttack(2,4);
         expect(mockgameboard.shotsMissed.length).toStrictEqual(2);
     });
+
+    test("After shot, gameboard will report if all ships have been sunk.", () => {
+        const mockgameboard = gameboard(5,5);
+
+        mockgameboard.placeShip([3,2], [3,4]);
+        expect(mockgameboard.hasAllShipsSunk).toBe(false);
+        mockgameboard.receiveAttack(3,2);
+        mockgameboard.receiveAttack(3,3);
+        expect(mockgameboard.hasAllShipsSunk).toBe(false);
+        mockgameboard.receiveAttack(3,4);
+        expect(mockgameboard.hasAllShipsSunk).toBe(true);
+    });
 });
