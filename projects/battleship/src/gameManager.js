@@ -18,20 +18,25 @@ class gameManager{
             return gameManager.instance;
         }
         gameManager.instance = this;
-        this.counter = 0;
-        this.privateString = "test 1 string";
         return this;
+
+        this.players = [];
+        this.currentPlayer;
     };
-    getString() {
-        this.counter++;
-        this.privateString += " lmao";
-        return this.privateString;
+
+    nextPlayer(){
+        let currentIndex = this.players.indexOf(this.currentPlayer);
+        currentIndex++;
+        this.currentPlayer = this.players[currentIndex];
     };
-    getCounter() {
-        return this.counter;
+
+    gameOver(loserPlayerboard){
+        
     };
+
+
 };
 
 const game = new gameManager();
 
-module.exports = {game, gameManager};
+export default game;
