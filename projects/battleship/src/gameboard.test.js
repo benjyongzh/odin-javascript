@@ -1,17 +1,13 @@
 import gameboard from "./gameboard";
-// import { createGridArray } from "./gameboard";
-
 import * as ship from "./ship.js";
 
+ship.default = jest.fn(ship.default);
 
 afterEach(() => {
     jest.clearAllMocks();
 });
 
 describe.skip("board creation", () => {
-
-    // const spy1 = jest.spyOn(gameboardModule, 'createGridArray');
-
 
     const mockgameboard = gameboard(3,5);
     // test("createGridArray is called", () => {
@@ -39,12 +35,9 @@ describe.skip("board creation", () => {
 describe("ship creation", () => {
     const mockgameboard = gameboard(3,5);
 
-    test.only("ship() is called", () => {
-
+    test("ship() is called", () => {
         // jest.mock('./ship.js', () => jest.fn());
-        // service.yourFunction = jest.fn(() => {"mock ship"})
-
-        ship.default = jest.fn().mockReturnValue("mock ship");
+        ship.default.mockReturnValueOnce("mock ship");
 
         const shiptest = mockgameboard.placeShip(7, [2,1], [2,4]);
         expect(shiptest).toStrictEqual("mock ship");
@@ -53,23 +46,26 @@ describe("ship creation", () => {
     });
 
     test("ship is created with correct length", () => {
+        const shiptest = mockgameboard.placeShip(4, [2,1], [2,4]);
         expect(shiptest.length).toStrictEqual(4);
     });
 
-    test("ship is created along correct positions", () => {
+    test("ship can only be in horizontal or vertical lines, otherwise throw error", () => {
+        const diagonalShip = mockgameboard.placeShip(3, [0,0], [1,2]);
+        expect(() => mockgameboard.placeShip()).toThrow();
+        // expect(() => mockgameboard.placeShip()).toThrow("Ship must be laid in a straight line either horizontally or vertically.");
+    });
+
+    test.skip("ship cannot replace exsiting ship spaces", () => {
+        const overlapShip = mockgameboard.placeShip(3, [0,2], [2,2]);
+        expect().toThrow();
+    });
+
+    test.skip("ship is created along correct positions", () => {
         expect(mockgameboard.getSpace(2,1).ship).toBe(shiptest);
         expect(mockgameboard.getSpace(2,2).ship).toBe(shiptest);
         expect(mockgameboard.getSpace(2,3).ship).toBe(shiptest);
         expect(mockgameboard.getSpace(2,4).ship).toBe(shiptest);
     });
 
-    test("ship can only be in horizontal or vertical lines, otherwise throw error", () => {
-        const diagonalShip = mockgameboard.placeShip(3, [0,0], [1,2]);
-        expect().toThrow();
-    });
-
-    test("ship cannot replace exsiting ship spaces", () => {
-        const overlapShip = mockgameboard.placeShip(3, [0,2], [2,2]);
-        expect().toThrow();
-    });
 });

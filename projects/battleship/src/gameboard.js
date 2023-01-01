@@ -30,7 +30,12 @@ export default function gameboard(sizeX, sizeY){
     function placeShip(length, startPoint, endPoint){
         const newShip = ship(length);
         //check if straight ship
+        if (startPoint[0] !== endPoint[0] && startPoint[1] !== endPoint[1]){
+            // throw new Error("Ship must be laid in a straight line either horizontally or vertically.");
+            throw "Ship must be laid in a straight line either horizontally or vertically.";
+        };
         //check if spaces are existing ships
+        //define .ship in the boardspaces
         return newShip;
     };
 
