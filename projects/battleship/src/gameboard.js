@@ -31,28 +31,75 @@ export default function gameboard(sizeX, sizeY){
         return createGridArray(sizeX, sizeY);
     };
 
-    function placeShip(length, startPoint, endPoint){
-        const newShip = ship(length);
+    function placeShip(startPoint, endPoint){
         //check if straight ship
         if (startPoint[0] !== endPoint[0] && startPoint[1] !== endPoint[1]){
             exceptionHandler("Ship must be laid in a straight line either horizontally or vertically.");
         };
 
+        /* //check for ship length
         if (length <= 0){
             exceptionHandler("Ship length must be more than 1.");
         };
 
+        //check for shiplength of 1
         if (length == 1){
             if (startPoint != endPoint){
                 exceptionHandler("Ship of length 1 should have same head and tail positions.");
             };
+        }; */
+
+        const reservedSpaces = [];
+        let shipDirection = "";
+        let startVariable;
+        let endVariable;
+
+        //check ship direction
+        if (startPoint[0] === endPoint[0]){
+            //vertical ship
+            startVariable = startPoint[1];
+            endVariable = endPoint[1];
+            shipDirection = "vertical";
+        } else {
+            //horizontal ship
+            startVariable = startPoint[0];
+            endVariable = endPoint[0];
+            shipDirection = "horizontal";
         };
-        //check if spaces are existing ships
+
+        let counter = startVariable;
+        let length = 1;
+        do {
+            //get boardSpace
+            let space;
+            if (shipDirection === "vertical"){
+                space = this.getSpace(startPoint[0],counter);
+            } else {
+                space = this.getSpace(counter,startPoint[1]);
+            }
+
+            //check if spaces are existing ships
+            if (!space.hasOwnProperty('ship')) {
+                reservedSpaces.push(space);
+            } else {
+                exceptionHandler("Space is occupied");
+            };
+
+            //update counter
+            startVariable < endVariable ? counter++ : counter--
+
+            //check length
+            length++;
+
+        } while (counter != endVariable);
+
         //define .ship in the boardspaces
+        const newShip = ship(length);
+        reservedSpaces.forEach(space => {space.ship = newShip});
         return newShip;
     };
 
-    function getSpace(x,y) {_boardArray[x][y]};
+    function getSpace(x,y) {return _boardArray[x][y]};
 
     let _boardArray = createBoard(sizeX, sizeY);
 
@@ -63,6 +110,3 @@ export default function gameboard(sizeX, sizeY){
         getSpace,
     };
 };
-
-// module.exports = {boardSpace, createGridArray};
-
