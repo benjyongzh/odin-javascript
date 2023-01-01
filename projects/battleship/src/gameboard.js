@@ -1,4 +1,5 @@
 import ship from "./ship";
+import game from "./gameManager";
 
 function boardSpace(horizontal, vertical){//need to identify if its a ship
     return {
@@ -133,6 +134,7 @@ export default function gameboard(sizeX, sizeY){
         };
         if (shipsSunk >= _ships.length){
             _hasAllShipsSunk = true;
+            game.gameOver(this);
         };
     };
 
