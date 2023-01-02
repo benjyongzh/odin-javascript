@@ -41,8 +41,8 @@ let game = (() => {
     const createPlayer = (boardSizeX = 8, boardSizeY = 8, isComputer = false) => {
         const newPlayer = player(boardSizeX, boardSizeY, isComputer);
         players.push(newPlayer);
-        console.log(players);
         if (players.length < 2) setPlayerByIndex(0);
+        return newPlayer;
     };
 
     const setPlayerByIndex = index => {
@@ -56,15 +56,20 @@ let game = (() => {
         setPlayerByIndex(currentIndex);
     };
 
+    const getPlayerByIndex = index => {
+        return players[index];
+    };
+
     const gameOver = loserPlayerboard => {
         console.log(`${loserPlayerboard} has lost.`);
     };
+
 
     return {
         createPlayer,
         nextPlayer,
         gameOver,
-        players
+        getPlayerByIndex
     };
 
 })();

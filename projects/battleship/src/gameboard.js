@@ -1,4 +1,4 @@
-import ship from "./ship.j";
+import ship from "./ship.js";
 import game from "./gameManager.js";
 
 function boardSpace(horizontal, vertical){//need to identify if its a ship

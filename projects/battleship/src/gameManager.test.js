@@ -1,32 +1,36 @@
 import game from "./gameManager.js";
 import * as player from "./player";
 
+player.default = jest.fn(player.default);
+
 afterEach(() => {
     jest.clearAllMocks();
 });
 
 describe.only("create player into game", () => {
-    test("player() are called upon player creation", () => {
-        player.default = jest.fn();
-        game.createPlayer = jest.fn().mockImplementation(() => {const newPlayer = player.default(5,7,true)});
-        game.createPlayer();
+    test("player() is called upon player creation", () => {
+        // player.default.mockReturnValueOnce({mockName: "I am a mock player."});
+        game.createPlayer(5,6,true);
         expect(player.default).toHaveBeenCalled();
     });
 
-    test("nextPlayer() are called upon 1st player creation", () => {
-        game.setPlayerByIndex = jest.fn();
-        game.createPlayer = jest.fn().mockImplementation(() => {
-            const array = [];
-            array.push({string: "this is a player"});
-            if (array.length === 1) game.setPlayerByIndex;
-        });
-        expect(game.setPlayerByIndex).toHaveBeenCalled();
+    test("getPlayerByIndex works", () => {
+        const firstPlayer = game.getPlayerByIndex(0);
+        expect(firstPlayer.isComputer).toBe(true);
+
     });
 
-    test.skip("nextPlayer() is not called after 1st player is added", () => {
-        const spyNextPlayer = jest.spyOn(game, 'nextPlayer');
-        game.createPlayer();
-        expect(spyNextPlayer).not.toHaveBeenCalled();
+    test("createPlayer uses arguments to create player with certain properties", () => {
+        const firstPlayer = game.getPlayerByIndex(0);
+        expect(firstPlayer.isComputer).toBe(true);
+        expect(firstPlayer.board.boardSize).toStrictEqual([5,6]);
+    });
+
+    test("createPlayer() is called with default values", () => {
+        // player.default.mockReturnValueOnce({mockName: "I am a mock player."});
+        const secondPlayer = game.createPlayer();
+        expect(secondPlayer.isComputer).toBe(false);
+        expect(secondPlayer.board.boardSize).toStrictEqual([8,8]);
     });
 
 });
