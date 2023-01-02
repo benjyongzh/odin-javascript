@@ -1,10 +1,13 @@
 import player from "./player";
+import game from "./gameManager";
 
-describe("player's turn", () => {
-
-
-    test("player's turn will swap after attack on other player's board", () => {
-
+describe.only("player's turn", () => {
+    test("Game goes to next player's turn after attack().", () => {
+        const player1 = player();
+        const spy = jest.spyOn(game, 'nextPlayer');
+        player1.attack = jest.fn(() => game.nextPlayer());
+        player1.attack([4,6]);
+        expect(spy).toHaveBeenCalled();
     });
 });
 
