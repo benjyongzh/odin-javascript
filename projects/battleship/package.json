@@ -8,6 +8,7 @@
     "test:ship": "jest src/ship.test.js",
     "test:game": "jest src/gameManager.test.js",
     "test:board": "jest src/gameBoard.test.js",
+    "test:player": "jest src/player.test.js",
     "start": "webpack serve --open",
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
