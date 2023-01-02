@@ -8,11 +8,12 @@ export default function player(boardSizeX = 8, boardSizeY = 8, isComputer = fals
 
     function aimAtGameboard(board){
         _targetGameboard = board;
-    }
+    };
 
     function attack(coordinates){
         //fire receiveAttack on target gameboard
         _targetGameboard.receiveAttack(coordinates[0], coordinates[1]);
+        game.nextPlayer();
     };
 
     function randomAttack(){
@@ -20,17 +21,17 @@ export default function player(boardSizeX = 8, boardSizeY = 8, isComputer = fals
         const enemyPlayer = getRandomPlayer({excludeCurrentPlayer: true});
 
         //select opponent's gameboard
-        _targetGameboard = enemyPlayer.board;
+        aimAtGameboard(enemyPlayer.board);
 
         //select a random point 
         let pointX = getRandomInt(0,_targetGameboard.boardSize[0]);
         let pointY = getRandomInt(0,_targetGameboard.boardSize[1]);
 
         //make sure that random point is not recorded in its shotsTaken array
-        while (_targetGameboard.getSpace(pointX, pointY)){
+        while (_targetGameboard.shotsTaken.includes([pointX, pointY])){
             pointX = getRandomInt(0,_targetGameboard.boardSize[0]);
             pointY = getRandomInt(0,_targetGameboard.boardSize[1]);
-        }
+        };
 
         attack([pointX, pointY]);
     };
@@ -41,6 +42,7 @@ export default function player(boardSizeX = 8, boardSizeY = 8, isComputer = fals
         get board(){return _board},
         get isComputer(){return _isComputer},
         set isComputer(bool){_isComputer = bool},
+        aimAtGameboard,
         attack,
         randomAttack,
     }
