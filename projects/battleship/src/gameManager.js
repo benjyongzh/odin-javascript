@@ -46,7 +46,6 @@ let game = (() => {
     };
 
     const setPlayerByIndex = index => {
-        console.log("im here")
         currentPlayer = players[index]};
 
     const nextPlayer = () => {
