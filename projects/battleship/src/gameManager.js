@@ -1,4 +1,4 @@
-import player from "./player";
+import player from "./player.js";
 
 /* class gameManager{
     constructor(){
@@ -41,10 +41,13 @@ let game = (() => {
     const createPlayer = (boardSizeX = 8, boardSizeY = 8, isComputer = false) => {
         const newPlayer = player(boardSizeX, boardSizeY, isComputer);
         players.push(newPlayer);
-        if (players.length === 1) setPlayerByIndex(0);
+        console.log(players);
+        if (players.length < 2) setPlayerByIndex(0);
     };
 
-    const setPlayerByIndex = index => currentPlayer = players[index];
+    const setPlayerByIndex = index => {
+        console.log("im here")
+        currentPlayer = players[index]};
 
     const nextPlayer = () => {
         let currentIndex = players.indexOf(currentPlayer);
@@ -61,8 +64,8 @@ let game = (() => {
         createPlayer,
         nextPlayer,
         gameOver,
-        setPlayerByIndex
-    }
+        players
+    };
 
 })();
 

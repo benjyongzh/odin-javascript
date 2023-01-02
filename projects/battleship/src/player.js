@@ -1,5 +1,5 @@
-import gameboard from "./gameboard";
-import game from "./gameManager";
+import gameboard from "./gameboard.js";
+import game from "./gameManager.js";
 
 export default function player(boardSizeX = 8, boardSizeY = 8, isComputer = false){
 
