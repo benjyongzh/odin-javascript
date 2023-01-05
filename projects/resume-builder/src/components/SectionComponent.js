@@ -22,19 +22,21 @@ class SectionComponent extends Component{
     render(){
         const {section, addable} = this.props;
 
-        const contentInfo = section.content.map(item => {
-            
-        })
+        if (section.fixedInputs != []){
 
+        };
+
+        if (section.content != []){
+            
+        };
 
 
         return(
             <div className="section-container">
                 <header className="section-title">{section.title}</header>
                 <div className="section-content">
-                    {
-                        
-                    }
+
+
                 </div>
                 <ContentButtonAdd enabled={addable} />
             </div>
