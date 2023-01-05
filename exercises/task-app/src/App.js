@@ -1,13 +1,17 @@
 import Overview from "./components/Overview";
 // import FormComponent from "./components/FormComponent";
 import React, { Component } from "react";
+import uniqid from "uniqid";
 
 class App extends Component {
   constructor(props){
     super(props);
 
     this.state = {
-      taskInput:"",
+      taskInput:{
+        text: "",
+        id: uniqid()
+      },
       taskList: [],
     };
 
@@ -18,7 +22,11 @@ class App extends Component {
 
   onInputChange(event){
     this.setState({
-        taskInput: event.target.value,
+      taskInput:
+        {
+          text: event.target.value,
+          id: this.state.taskInput.id
+        }
     });
   };
 
@@ -27,6 +35,10 @@ class App extends Component {
     //clear input textContent
     event.preventDefault();
     this.setState({
+      taskInput:{
+        text: "",
+        id: uniqid()
+      },
       taskList: [...this.state.taskList, this.state.taskInput],
     });
   };
@@ -39,7 +51,7 @@ class App extends Component {
         {/* <FormComponent taskInput={this.state.taskInput} onSubmitButtonClicked={this.onSubmit} /> */}
         <form>
             {/* <input type="text" placeholder="type task here" value={taskInput} onChange={event => {setTaskInput(event.target.value)}} /> */}
-            <input type="text" placeholder="type task here" onChange={this.onInputChange} />
+            <input type="text" placeholder="type task here" onChange={this.onInputChange} value={this.state.taskInput.text}/>
             <button className="submitButton" onClick={this.onSubmit}>Submit</button>
         </form>
         <Overview taskList={this.state.taskList}/>
