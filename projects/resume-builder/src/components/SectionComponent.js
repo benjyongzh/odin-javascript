@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ContentButtonAdd from "./ContentButtonAdd";
+import InputComponent from "./InputComponent";
 
 class SectionComponent extends Component{
     constructor(props){
@@ -22,21 +23,26 @@ class SectionComponent extends Component{
     render(){
         const {section, addable} = this.props;
 
-        if (section.fixedInputs != []){
+        const fixedInputs = section.fixedInputs.map(input => 
+            <InputComponent
+            id={input.name}
+            name={input.name}
+            textLabel={input.title}
+            inputType={input.type}
+            />
+        );
 
-        };
-
-        if (section.content != []){
-            
-        };
+        const subSections = section.subSections.map(subsection => 
+            {}//<li key={task.id}>{task.text}</li>
+        );
 
 
         return(
             <div className="section-container">
                 <header className="section-title">{section.title}</header>
                 <div className="section-content">
-
-
+                    {fixedInputs}
+                    {subSections}
                 </div>
                 <ContentButtonAdd enabled={addable} />
             </div>

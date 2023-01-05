@@ -16,18 +16,18 @@ class App extends Component{
       general: {
         title: "General Information",
         fixedInputs: [
-          {title: "First Name", type: "text"},
-          {title: "Last Name", type: "text"},
-          {title: "Age", type: "number"},
-          {title: "Summary", type: "text"},
+          {title: "First Name", type: "text", name: "firstName"},
+          {title: "Last Name", type: "text", name: "lastName"},
+          {title: "Age", type: "number", name: "age"},
+          {title: "Summary", type: "text", name: "summary"},
         ],
-        content: [],
+        subSections: [],
       },
 
       education: {
         title: "Education",
         fixedInputs: [],
-        content: [
+        subSections: [
           // {title: "Institute", type: "text"},
           // {title: "Qualification", type: "text"},
           // {title: "Start Year", type: "number"},
@@ -38,7 +38,7 @@ class App extends Component{
       experience: {
         title: "Experience",
         fixedInputs: [],
-        content: [
+        subSections: [
           // {title: "Workplace", type: "text"},
           // {title: "Job Title", type: "text"},
           // {title: "Start Year", type: "number"},
