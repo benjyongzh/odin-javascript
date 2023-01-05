@@ -22,11 +22,12 @@ class App extends Component {
     });
   };
 
-  onSubmit(){
+  onSubmit(event){
     //take Form and put into taskList
     //clear input textContent
+    event.preventDefault();
     this.setState({
-      taskList: this.state.taskList.push(this.state.taskInput),
+      taskList: [...this.state.taskList, this.state.taskInput],
     });
   };
 

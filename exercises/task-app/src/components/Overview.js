@@ -8,7 +8,7 @@ export default class Overview extends Component{
 
     render(){
         const {taskList} = this.props;
-        const listItems = taskList.map(task => <li>{task}</li>);
+        const listItems = taskList.map(task => <li key={taskList.indexOf(task)}>{task}</li>);
 
         return(
             <ul>
