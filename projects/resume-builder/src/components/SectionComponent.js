@@ -1,27 +1,36 @@
 import React, { Component } from "react";
 import ContentButtonAdd from "./ContentButtonAdd";
 import InputComponent from "./InputComponent";
+import SubSectionComponent from "./SubSectionComponent.js";
 
 class SectionComponent extends Component{
     constructor(props){
-      super(props);
+        super(props);
 
-    //   this.onInputChange = this.onInputChange.bind(this);
+        this.createSubSection = this.createSubSection.bind(this);
 
-    //   this.state = {
-    //     value: "",
-    //   };
+        this.state = {
+            subSections: [],
+        };
 
     };
 
-    // onInputChange(event){
-    //     this.setState({
-    //         value: event.target.value
-    //     });
-    // };
+    createSubSection(event){
+        event.preventDefault();
+        this.setState({
+            subSections: [...this.state.subSections, {
+                organisation: "",
+                title: "",
+                startYear: "",
+                endYear: ""
+            }]
+        });
+    };
     
     render(){
         const {section, addable} = this.props;
+
+        const {subSections} = this.state;
 
         const fixedInputs = section.fixedInputs.map(input => 
             <InputComponent
@@ -32,26 +41,34 @@ class SectionComponent extends Component{
             />
         );
 
-        const subSections = section.subSections.map(subsection => 
-            {}//<li key={task.id}>{task.text}</li>
-        );
-
-
         return(
             <div className="section-container">
                 <header className="section-title">{section.title}</header>
                 <div className="section-content">
+
                     {fixedInputs}
-                    {subSections}
+
+                    {
+                        subSections.map(item => {
+                            return (
+                                <SubSectionComponent
+                                    organisation={item.organisation}
+                                    title={item.title}
+                                    startYear={item.startYear}
+                                    endYear={item.endYear}
+                                />
+                            )
+                        })
+                    }
+
                 </div>
-                <ContentButtonAdd enabled={addable} />
+                <ContentButtonAdd enabled={addable} onClick={this.createSubSection} />
             </div>
             
         );
-    }
-  
+    };
     
-  };
-  
-  export default SectionComponent;
+};
+
+export default SectionComponent;
   

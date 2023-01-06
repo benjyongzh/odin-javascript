@@ -9,7 +9,7 @@ class ContentButtonAdd extends Component{
         if (!this.props.enabled) return null;
 
         return(
-            <button className="button content-add">Add
+            <button className="button content-add" onClick={event => event.preventDefault()}>Add
             </button>
         );
     }

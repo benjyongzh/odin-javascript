@@ -19,12 +19,12 @@ class InputComponent extends Component{
     };
     
     render(){
-        const {id, textLabel, inputType, name} = this.props;
+        const {id, textLabel, inputType, inputName} = this.props;
 
         return(
             <div>
                 <label htmlFor={id}>{textLabel}</label>
-                <input id={id} name={name} type={inputType} onChange={this.onInputChange} value={this.state.value}/>
+                <input id={id} name={inputName} type={inputType} onChange={this.onInputChange} value={this.state.value}/>
             </div>
             
         );
