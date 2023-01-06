@@ -1,7 +1,8 @@
 // import './App.css';
 import React, {Component} from "react";
-import InputComponent from "./components/InputComponent";
+// import InputComponent from "./components/InputComponent";
 import SectionComponent from "./components/SectionComponent";
+import uniqid from "uniqid";
 
 class App extends Component{
   constructor(props){
@@ -16,10 +17,10 @@ class App extends Component{
       general: {
         title: "General Information",
         fixedInputs: [
-          {title: "First Name", type: "text", name: "firstName"},
-          {title: "Last Name", type: "text", name: "lastName"},
-          {title: "Age", type: "number", name: "age"},
-          {title: "Summary", type: "text", name: "summary"},
+          {title: "First Name", type: "text", name: "firstName", key: uniqid()},
+          {title: "Last Name", type: "text", name: "lastName", key: uniqid()},
+          {title: "Age", type: "number", name: "age", key: uniqid()},
+          {title: "Summary", type: "text", name: "summary", key: uniqid()},
         ],
         subSections: [],
       },

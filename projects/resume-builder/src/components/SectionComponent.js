@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ContentButtonAdd from "./ContentButtonAdd";
 import InputComponent from "./InputComponent";
 import SubSectionComponent from "./SubSectionComponent.js";
+import uniqid from "uniqid";
 
 class SectionComponent extends Component{
     constructor(props){
@@ -17,12 +18,14 @@ class SectionComponent extends Component{
 
     createSubSection(event){
         event.preventDefault();
+        console.log("create subsection")
         this.setState({
             subSections: [...this.state.subSections, {
                 organisation: "",
                 title: "",
                 startYear: "",
-                endYear: ""
+                endYear: "",
+                key: uniqid(),
             }]
         });
     };
@@ -38,6 +41,7 @@ class SectionComponent extends Component{
             name={input.name}
             textLabel={input.title}
             inputType={input.type}
+            key={input.key}
             />
         );
 
@@ -56,13 +60,14 @@ class SectionComponent extends Component{
                                     title={item.title}
                                     startYear={item.startYear}
                                     endYear={item.endYear}
+                                    key={item.key}
                                 />
                             )
                         })
                     }
 
                 </div>
-                <ContentButtonAdd enabled={addable} onClick={this.createSubSection} />
+                <ContentButtonAdd enabled={addable} onButtonClick={this.createSubSection} />
             </div>
             
         );
