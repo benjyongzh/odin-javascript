@@ -1,6 +1,5 @@
-// import './App.css';
+import './styles/App.css';
 import React, {Component} from "react";
-// import InputComponent from "./components/InputComponent";
 import SectionComponent from "./components/SectionComponent";
 import uniqid from "uniqid";
 
@@ -49,11 +48,8 @@ class App extends Component{
     }
 
     return(
-      <div>
+      <div className="App">
         <form>
-          {/* <InputComponent textLabel="First Name" id="first-name" inputType="text" />
-          <InputComponent textLabel="Last Name" id="last-name" inputType="text" />
-          <InputComponent textLabel="Age" id="age" inputType="number" /> */}
           <SectionComponent section={sections.general} addable={false} />
           <SectionComponent section={sections.education} addable={true} />
           <SectionComponent section={sections.experience} addable={true} />

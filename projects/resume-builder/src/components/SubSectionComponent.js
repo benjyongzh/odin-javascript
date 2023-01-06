@@ -18,6 +18,27 @@ class SubSectionComponent extends Component{
                     inputName="organisation"
                     children={organisation}
                 />
+                <InputComponent
+                    id="title"
+                    textLabel="Title"
+                    inputType="text"
+                    inputName="title"
+                    children={title}
+                />
+                <InputComponent
+                    id="startYear"
+                    textLabel="Start Year"
+                    inputType="number"
+                    inputName="startYear"
+                    children={startYear}
+                />
+                <InputComponent
+                    id="endYear"
+                    textLabel="End Year"
+                    inputType="number"
+                    inputName="endYear"
+                    children={endYear}
+                />
             </div>
             
         );
