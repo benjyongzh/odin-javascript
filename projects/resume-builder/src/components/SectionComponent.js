@@ -3,6 +3,7 @@ import ContentButtonAdd from "./ContentButtonAdd";
 import InputComponent from "./InputComponent";
 import SubSectionComponent from "./SubSectionComponent.js";
 import uniqid from "uniqid";
+import SubSectionComponent from "../styles/SectionComponent";
 
 class SectionComponent extends Component{
     constructor(props){
@@ -48,6 +49,9 @@ class SectionComponent extends Component{
         return(
             <div className="section-container">
                 <header className="section-title">{section.title}</header>
+                
+                <ContentButtonAdd enabled={addable} onButtonClick={this.createSubSection} />
+
                 <div className="section-content">
 
                     {fixedInputs}
@@ -67,7 +71,6 @@ class SectionComponent extends Component{
                     }
 
                 </div>
-                <ContentButtonAdd enabled={addable} onButtonClick={this.createSubSection} />
             </div>
             
         );
