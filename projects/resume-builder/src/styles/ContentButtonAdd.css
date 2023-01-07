@@ -1,0 +1,9 @@
+.content-add {
+    padding: 0.5em 1.2em;
+    font-size: 16px;
+    background-color: rgb(81, 206, 206);
+    border-radius: 8px;
+    border-width: 0px;
+    width: 100px;
+    align-self: end;
+}

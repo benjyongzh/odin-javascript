@@ -11,8 +11,12 @@ class SectionComponent extends Component{
 
         this.createSubSection = this.createSubSection.bind(this);
 
+        this.showAddButton = this.showAddButton.bind(this);
+        this.hideAddButton = this.hideAddButton.bind(this);
+
         this.state = {
             subSections: [],
+            showAddButton: false
         };
 
     };
@@ -28,6 +32,18 @@ class SectionComponent extends Component{
                 endYear: "",
                 key: uniqid(),
             }]
+        });
+    };
+
+    showAddButton(){
+        this.setState({
+            showAddButton: true
+        });
+    };
+
+    hideAddButton(){
+        this.setState({
+            showAddButton: false
         });
     };
     
@@ -47,10 +63,10 @@ class SectionComponent extends Component{
         );
 
         return(
-            <div className="section-container">
+            <div className="section-container" onMouseOver={this.showAddButton} onMouseOut={this.hideAddButton}>
                 <header className="section-title">{section.title}</header>
 
-                <ContentButtonAdd enabled={addable} onButtonClick={this.createSubSection} />
+                <ContentButtonAdd enabled={addable} visible={this.state.showAddButton} onButtonClick={this.createSubSection} />
 
                 <div className="section-content">
 

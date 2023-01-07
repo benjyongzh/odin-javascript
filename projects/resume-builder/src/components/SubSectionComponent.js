@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import InputComponent from "./InputComponent";
+import "../styles/SubSectionComponent.css";
 
 class SubSectionComponent extends Component{
     constructor(props){

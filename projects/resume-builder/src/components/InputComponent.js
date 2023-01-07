@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../styles/InputComponent.css";
 
 class InputComponent extends Component{
     constructor(props){
@@ -22,7 +23,7 @@ class InputComponent extends Component{
         const {id, textLabel, inputType, inputName} = this.props;
 
         return(
-            <div>
+            <div className="input-component">
                 <label htmlFor={id}>{textLabel}</label>
                 <input id={id} name={inputName} type={inputType} onChange={this.onInputChange} value={this.state.value}/>
             </div>
