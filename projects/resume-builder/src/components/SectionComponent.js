@@ -29,7 +29,6 @@ class SectionComponent extends Component{
 
     createSubSection(event){
         event.preventDefault();
-        console.log("creating sub section");
         //check if education or experience
         if (this.state.sectionType === "education"){
             this.createEducationSection();
@@ -39,7 +38,6 @@ class SectionComponent extends Component{
     };
 
     createEducationSection(){
-        console.log("create education section");
         this.setState({
             subSections: [...this.state.subSections, {
                 institute: "",
@@ -52,7 +50,6 @@ class SectionComponent extends Component{
     };
 
     createExperienceSection(){
-        console.log("create experience section");
         this.setState({
             subSections: [...this.state.subSections, {
                 company: "",

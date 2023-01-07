@@ -1,9 +1,10 @@
 .section-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid black;
+    gap: 20px;
+    padding-bottom:  50px;
+    /* border-bottom: 1px solid black; */
+    position: relative;
 }
 
 .section-container:last-of-type {
@@ -24,5 +25,6 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+    gap: 10px;
 
 }

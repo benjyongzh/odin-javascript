@@ -12,6 +12,7 @@ class SubSectionComponent extends Component{
 
         return(
             <div className="subsection-container">
+                
                 <InputComponent
                     id="organisation"
                     textLabel="Organisation"

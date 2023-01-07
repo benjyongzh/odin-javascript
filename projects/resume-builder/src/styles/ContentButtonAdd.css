@@ -5,5 +5,8 @@
     border-radius: 8px;
     border-width: 0px;
     width: 100px;
-    align-self: end;
+    position: absolute;
+    top:0%;
+    right: 0%;
+    /* align-self: end; */
 }

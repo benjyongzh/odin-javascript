@@ -4,7 +4,11 @@
     align-items: flex-start;
     justify-content: center;
     gap: 5px;
-    padding-bottom: 20px;
+    padding-bottom: 40px;
+}
+
+.input-component:last-of-type {
+    padding-bottom: 0px;
 }
 
 label {

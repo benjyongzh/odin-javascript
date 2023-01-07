@@ -18,32 +18,20 @@ class App extends Component{
         fixedInputs: [
           {title: "First Name", type: "text", name: "firstName", key: uniqid()},
           {title: "Last Name", type: "text", name: "lastName", key: uniqid()},
-          {title: "Age", type: "number", name: "age", key: uniqid()},
+          {title: "Email", type: "email", name: "email", key: uniqid()},
           {title: "Summary", type: "text", name: "summary", key: uniqid()},
+          {title: "Birthdate", type: "date", name: "birthdate", key: uniqid()},
         ],
-        subSections: [],
       },
 
       education: {
         title: "Education",
         fixedInputs: [],
-        educationSections: [
-          // {title: "Institute", type: "text"},
-          // {title: "Qualification", type: "text"},
-          // {title: "Start Year", type: "number"},
-          // {title: "End Year", type: "number"},
-        ],
       },
 
       experience: {
         title: "Experience",
         fixedInputs: [],
-        experienceSections: [
-          // {title: "Workplace", type: "text"},
-          // {title: "Job Title", type: "text"},
-          // {title: "Start Year", type: "number"},
-          // {title: "End Year", type: "number"},
-        ],
       },
     }
 
