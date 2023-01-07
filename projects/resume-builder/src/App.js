@@ -27,7 +27,7 @@ class App extends Component{
       education: {
         title: "Education",
         fixedInputs: [],
-        subSections: [
+        educationSections: [
           // {title: "Institute", type: "text"},
           // {title: "Qualification", type: "text"},
           // {title: "Start Year", type: "number"},
@@ -38,7 +38,7 @@ class App extends Component{
       experience: {
         title: "Experience",
         fixedInputs: [],
-        subSections: [
+        experienceSections: [
           // {title: "Workplace", type: "text"},
           // {title: "Job Title", type: "text"},
           // {title: "Start Year", type: "number"},
@@ -50,9 +50,9 @@ class App extends Component{
     return(
       <div className="App">
         <form>
-          <SectionComponent section={sections.general} addable={false} />
-          <SectionComponent section={sections.education} addable={true} />
-          <SectionComponent section={sections.experience} addable={true} />
+          <SectionComponent section={sections.general} sectionType="general" addable={false} />
+          <SectionComponent section={sections.education} sectionType="education" addable={true} />
+          <SectionComponent section={sections.experience} sectionType="experience" addable={true} />
         </form>
 
       </div>

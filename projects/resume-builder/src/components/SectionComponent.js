@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import ContentButtonAdd from "./ContentButtonAdd";
 import InputComponent from "./InputComponent";
-import SubSectionComponent from "./SubSectionComponent.js";
+// import SubSectionComponent from "./SubSectionComponent.js";
+import EducationSectionComponent from "./EducationSectionComponent";
+import ExperienceSectionComponent from "./ExperienceSectionComponent";
+
 import uniqid from "uniqid";
 import "../styles/SectionComponent.css";
 
@@ -10,11 +13,14 @@ class SectionComponent extends Component{
         super(props);
 
         this.createSubSection = this.createSubSection.bind(this);
+        this.createEducationSection = this.createEducationSection.bind(this);
+        this.createExperienceSection = this.createExperienceSection.bind(this);
 
         this.showAddButton = this.showAddButton.bind(this);
         this.hideAddButton = this.hideAddButton.bind(this);
 
         this.state = {
+            sectionType: this.props.sectionType,
             subSections: [],
             showAddButton: false
         };
@@ -23,11 +29,34 @@ class SectionComponent extends Component{
 
     createSubSection(event){
         event.preventDefault();
-        console.log("create subsection")
+        console.log("creating sub section");
+        //check if education or experience
+        if (this.state.sectionType === "education"){
+            this.createEducationSection();
+        } else if (this.state.sectionType === "experience"){
+            this.createExperienceSection();
+        };
+    };
+
+    createEducationSection(){
+        console.log("create education section");
         this.setState({
             subSections: [...this.state.subSections, {
-                organisation: "",
-                title: "",
+                institute: "",
+                level: "",
+                startYear: "",
+                endYear: "",
+                key: uniqid(),
+            }]
+        });
+    };
+
+    createExperienceSection(){
+        console.log("create experience section");
+        this.setState({
+            subSections: [...this.state.subSections, {
+                company: "",
+                position: "",
                 startYear: "",
                 endYear: "",
                 key: uniqid(),
@@ -50,7 +79,7 @@ class SectionComponent extends Component{
     render(){
         const {section, addable} = this.props;
 
-        const {subSections} = this.state;
+        const {subSections, sectionType} = this.state;
 
         const fixedInputs = section.fixedInputs.map(input => 
             <InputComponent
@@ -61,6 +90,7 @@ class SectionComponent extends Component{
             key={input.key}
             />
         );
+
 
         return(
             <div className="section-container" onMouseOver={this.showAddButton} onMouseOut={this.hideAddButton}>
@@ -74,15 +104,28 @@ class SectionComponent extends Component{
 
                     {
                         subSections.map(item => {
-                            return (
-                                <SubSectionComponent
-                                    organisation={item.organisation}
-                                    title={item.title}
-                                    startYear={item.startYear}
-                                    endYear={item.endYear}
-                                    key={item.key}
-                                />
-                            )
+                            if (sectionType === "education"){
+                                return (
+                                    <EducationSectionComponent
+                                        institute={item.institute}
+                                        level={item.level}
+                                        startYear={item.startYear}
+                                        endYear={item.endYear}
+                                        key={item.key}
+                                    />
+                                )    
+                            } else if (sectionType === "experience"){
+                                return (
+                                    <ExperienceSectionComponent
+                                        company={item.company}
+                                        position={item.position}
+                                        startYear={item.startYear}
+                                        endYear={item.endYear}
+                                        key={item.key}
+                                    />
+                                );
+                            };
+                            
                         })
                     }
 
