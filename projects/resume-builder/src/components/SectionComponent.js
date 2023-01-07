@@ -15,6 +15,7 @@ class SectionComponent extends Component{
         this.createSubSection = this.createSubSection.bind(this);
         this.createEducationSection = this.createEducationSection.bind(this);
         this.createExperienceSection = this.createExperienceSection.bind(this);
+        this.removeSubSection = this.removeSubSection.bind(this);
 
         this.showAddButton = this.showAddButton.bind(this);
         this.hideAddButton = this.hideAddButton.bind(this);
@@ -58,6 +59,21 @@ class SectionComponent extends Component{
                 endYear: "",
                 key: uniqid(),
             }]
+        });
+    };
+
+    removeSubSection(event){
+        event.preventDefault();
+        //find parent of event.target
+        console.log(event.target.parentElement);
+        const targetSection = event.target.parentElement;
+        //find key
+        const sectionKey = targetSection.getAttribute('key');
+
+        //traverse this.state.subSection
+        //use keyID to detect which item to remove from this.state.subSection
+        this.setState({
+            subSections: this.state.subSections.filter(subSection => subSection.key !== sectionKey)
         });
     };
 
@@ -109,6 +125,7 @@ class SectionComponent extends Component{
                                         startYear={item.startYear}
                                         endYear={item.endYear}
                                         key={item.key}
+                                        removeSection={this.removeSubSection}
                                     />
                                 )    
                             } else if (sectionType === "experience"){
@@ -119,6 +136,7 @@ class SectionComponent extends Component{
                                         startYear={item.startYear}
                                         endYear={item.endYear}
                                         key={item.key}
+                                        removeSection={this.removeSubSection}
                                     />
                                 );
                             };

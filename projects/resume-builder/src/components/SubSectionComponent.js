@@ -5,14 +5,16 @@ import "../styles/SubSectionComponent.css";
 class SubSectionComponent extends Component{
     constructor(props){
         super(props);
-    }
+    };
+
+    
     
     render(){
         const {organisation, title, startYear, endYear} = this.props;
 
         return(
             <div className="subsection-container">
-                
+
                 <InputComponent
                     id="organisation"
                     textLabel="Organisation"

@@ -1,0 +1,11 @@
+.content-remove {
+    padding: 0.5em 1.2em;
+    font-size: 16px;
+    background-color: rgb(196, 97, 97);
+    border-radius: 8px;
+    border-width: 0px;
+    width: 100px;
+    position: absolute;
+    top:20px;
+    right: 20px;
+}
