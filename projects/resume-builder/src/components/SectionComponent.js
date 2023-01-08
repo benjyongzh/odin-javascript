@@ -48,6 +48,7 @@ class SectionComponent extends Component{
                 key: uniqid(),
             }]
         });
+        console.log("ed sect created");
     };
 
     createExperienceSection(){
@@ -60,18 +61,20 @@ class SectionComponent extends Component{
                 key: uniqid(),
             }]
         });
+        console.log("exp sect created");
     };
 
-    removeSubSection(event){
-        event.preventDefault();
-        //find parent of event.target
-        console.log(event.target.parentElement);
-        const targetSection = event.target.parentElement;
-        //find key
-        const sectionKey = targetSection.getAttribute('key');
+    removeSubSection(sectionKey){
+                //find parent of event.target
+        // console.log(event.target.parentElement);
+        // const targetSection = event.target.parentElement;
+        // //find key
+        // const sectionKey = targetSection.getAttribute('key');
 
         //traverse this.state.subSection
         //use keyID to detect which item to remove from this.state.subSection
+        console.log("remove button clicked");
+        console.log(sectionKey);
         this.setState({
             subSections: this.state.subSections.filter(subSection => subSection.key !== sectionKey)
         });
@@ -125,6 +128,7 @@ class SectionComponent extends Component{
                                         startYear={item.startYear}
                                         endYear={item.endYear}
                                         key={item.key}
+                                        sectionKey={item.key}
                                         removeSection={this.removeSubSection}
                                     />
                                 )    
@@ -136,6 +140,7 @@ class SectionComponent extends Component{
                                         startYear={item.startYear}
                                         endYear={item.endYear}
                                         key={item.key}
+                                        sectionKey={item.key}
                                         removeSection={this.removeSubSection}
                                     />
                                 );

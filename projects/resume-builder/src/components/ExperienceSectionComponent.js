@@ -27,12 +27,12 @@ class ExperienceSectionComponent extends Component{
     };
     
     render(){
-        const {company, position, startYear, endYear, removeSection} = this.props;
+        const {company, position, startYear, endYear, removeSection, sectionKey} = this.props;
 
         return(
             <div className="subsection-container" onMouseOver={this.showRemoveButton} onMouseOut={this.hideRemoveButton}>
 
-                <ContentButtonRemove  visible={this.state.showRemoveButton} onButtonClick={removeSection} />
+                <ContentButtonRemove  visible={this.state.showRemoveButton} onButtonClick={removeSection} sectionKey={sectionKey} />
 
                 <InputComponent
                     id="company"

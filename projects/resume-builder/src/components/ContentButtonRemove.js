@@ -12,7 +12,12 @@ class ContentButtonRemove extends Component{
         if (!this.props.visible) return null;
 
         return(
-            <button className="button content-remove" onClick={this.props.onButtonClick}>Remove
+            <button className="button content-remove" onClick={
+                event => {
+                    event.preventDefault();
+                    this.props.onButtonClick(this.props.sectionKey);
+                }
+                }>Remove
             </button>
         );
     }
