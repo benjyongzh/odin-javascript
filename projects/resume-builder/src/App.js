@@ -7,6 +7,12 @@ class App extends Component{
   constructor(props){
     super(props);
 
+    this.onSubmit = this.onSubmit.bind(this);
+
+  };
+
+  onSubmit(){
+    console.log("form submitted");
   };
 
 
@@ -41,6 +47,11 @@ class App extends Component{
           <SectionComponent section={sections.general} sectionType="general" addable={false} />
           <SectionComponent section={sections.education} sectionType="education" addable={true} />
           <SectionComponent section={sections.experience} sectionType="experience" addable={true} />
+          <button onClick={event => {
+            event.preventDefault();
+            this.onSubmit();
+          }
+          }>Submit</button>
         </form>
 
       </div>
