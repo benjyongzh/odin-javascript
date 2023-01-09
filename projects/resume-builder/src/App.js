@@ -1,9 +1,56 @@
 import './styles/App.css';
-import React, {Component} from "react";
+import React from "react";
 import SectionComponent from "./components/SectionComponent";
 import uniqid from "uniqid";
 
-class App extends Component{
+const App = () => {
+
+  const sections = {
+    general: {
+      title: "General Information",
+      fixedInputs: [
+        {title: "First Name", type: "text", name: "firstName", key: uniqid()},
+        {title: "Last Name", type: "text", name: "lastName", key: uniqid()},
+        {title: "Email", type: "email", name: "email", key: uniqid()},
+        {title: "Summary", type: "text", name: "summary", key: uniqid()},
+        {title: "Birthdate", type: "date", name: "birthdate", key: uniqid()},
+      ],
+    },
+
+    education: {
+      title: "Education",
+      fixedInputs: [],
+    },
+
+    experience: {
+      title: "Experience",
+      fixedInputs: [],
+    },
+  }
+  
+  const onSubmit = () => {
+    console.log("form submitted");
+  };
+    
+
+  return(
+    <div className="App">
+      <form>
+        <SectionComponent section={sections.general} sectionType="general" addable={false} />
+        <SectionComponent section={sections.education} sectionType="education" addable={true} />
+        <SectionComponent section={sections.experience} sectionType="experience" addable={true} />
+        <button onClick={event => {
+          event.preventDefault();
+          onSubmit();
+        }
+        }>Submit</button>
+      </form>
+
+    </div>
+  );
+}
+
+/* class App extends Component{
   constructor(props){
     super(props);
 
@@ -57,6 +104,6 @@ class App extends Component{
       </div>
     );
   };
-};
+}; */
 
 export default App;
