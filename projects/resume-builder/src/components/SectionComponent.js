@@ -1,14 +1,123 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ContentButtonAdd from "./ContentButtonAdd";
 import InputComponent from "./InputComponent";
-// import SubSectionComponent from "./SubSectionComponent.js";
 import EducationSectionComponent from "./EducationSectionComponent";
 import ExperienceSectionComponent from "./ExperienceSectionComponent";
 
 import uniqid from "uniqid";
 import "../styles/SectionComponent.css";
 
-class SectionComponent extends Component{
+const SectionComponent = props => {
+
+    const {section, addable} = this.props;
+
+    const [showAddButton, setShowAddButton] = useState(false);
+
+    const [sectionType, setSectionType] = useState(props.sectionType);
+
+    const [subSections, setSubSections] = useState([]);
+
+    const createSubSection = event => {
+        event.preventDefault();
+        //check if education or experience
+        if (sectionType === "education"){
+            createEducationSection();
+        } else if (sectionType === "experience"){
+            createExperienceSection();
+        };
+    };
+
+    const createEducationSection = () => {
+        const newSection = {
+            institute: "",
+            level: "",
+            startYear: "",
+            endYear: "",
+            key: uniqid(),
+        };
+        setSubSections([...subSections, newSection]);
+        console.log("ed sect created");
+    };
+
+    const createExperienceSection = () => {
+        const newSection = {
+            company: "",
+            position: "",
+            startYear: "",
+            endYear: "",
+            key: uniqid(),
+        };
+        setSubSections([...subSections, newSection]);
+        console.log("exp sect created");
+    };
+
+    const removeSubSection = sectionKey => {
+        console.log("remove button clicked");
+        console.log(sectionKey);
+        // this.setState({
+        //     subSections: this.state.subSections.filter(subSection => subSection.key !== sectionKey)
+        // });
+        setSubSections(subSections.filter(subSection => subSection.key !== sectionKey));
+    };
+
+    const fixedInputs = section.fixedInputs.map(input => 
+        <InputComponent
+        id={input.name}
+        name={input.name}
+        textLabel={input.title}
+        inputType={input.type}
+        key={input.key}
+        />
+    );
+
+    return(
+        <div className="section-container" onMouseOver={setShowAddButton(true)} onMouseOut={setShowAddButton(false)}>
+            <header className="section-title">{section.title}</header>
+
+            <ContentButtonAdd enabled={addable} visible={showAddButton} onButtonClick={createSubSection} />
+
+            <div className="section-content">
+
+                {fixedInputs}
+
+                {
+                    subSections.map(item => {
+                        if (sectionType === "education"){
+                            return (
+                                <EducationSectionComponent
+                                    institute={item.institute}
+                                    level={item.level}
+                                    startYear={item.startYear}
+                                    endYear={item.endYear}
+                                    key={item.key}
+                                    sectionKey={item.key}
+                                    removeSection={removeSubSection}
+                                />
+                            )    
+                        } else if (sectionType === "experience"){
+                            return (
+                                <ExperienceSectionComponent
+                                    company={item.company}
+                                    position={item.position}
+                                    startYear={item.startYear}
+                                    endYear={item.endYear}
+                                    key={item.key}
+                                    sectionKey={item.key}
+                                    removeSection={removeSubSection}
+                                />
+                            );
+                        };
+                        
+                    })
+                }
+
+            </div>
+        </div>
+        
+    );
+};
+
+/* class SectionComponent extends Component{
     constructor(props){
         super(props);
 
@@ -155,7 +264,7 @@ class SectionComponent extends Component{
         );
     };
     
-};
+}; */
 
 export default SectionComponent;
   
