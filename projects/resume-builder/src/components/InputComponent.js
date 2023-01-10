@@ -1,7 +1,26 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "../styles/InputComponent.css";
 
-class InputComponent extends Component{
+const InputComponent = props => {
+    const {id, textLabel, inputType, inputName} = props;
+
+    const [inputValue , setInputValue] = useState("");
+
+    const onInputChange = event => {
+
+        setInputValue(event.target.value)
+    };
+
+    return(
+        <div className="input-component">
+            <label htmlFor={id}>{textLabel}</label>
+            <input id={id} name={inputName} type={inputType} onChange={onInputChange} value={inputValue}/>
+        </div>
+        
+    );
+}
+
+/* class InputComponent extends Component{
     constructor(props){
       super(props);
 
@@ -32,7 +51,7 @@ class InputComponent extends Component{
     }
   
     
-  };
+  }; */
   
   export default InputComponent;
   
