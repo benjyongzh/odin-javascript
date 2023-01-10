@@ -1,7 +1,24 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "../styles/ContentButtonRemove.css";
 
-class ContentButtonRemove extends Component{
+const ContentButtonRemove = props => {
+
+    const {visible, sectionKey, onButtonClick} = props;
+
+    if (!visible) return null;
+     
+    return(
+        <button className="button content-remove" onClick={
+            event => {
+                event.preventDefault();
+                onButtonClick(sectionKey);
+            }
+            }>Remove
+        </button>
+    );
+}
+
+/* class ContentButtonRemove extends Component{
     constructor(props){
       super(props);
     }
@@ -22,6 +39,6 @@ class ContentButtonRemove extends Component{
         );
     }
     
-};
+}; */
   
 export default ContentButtonRemove;
