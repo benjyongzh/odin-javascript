@@ -1,7 +1,20 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "../styles/ContentButtonAdd.css";
 
-class ContentButtonAdd extends Component{
+const ContentButtonAdd = props => {
+    const {enabled, visible, onButtonClick} = props;
+
+    if (!enabled) return null;
+
+    if (!visible) return null;
+
+    return(
+        <button className="button content-add" onClick={onButtonClick}>Add</button>
+    );
+};
+
+
+/* class ContentButtonAdd extends Component{
     constructor(props){
       super(props);
     }
@@ -19,6 +32,6 @@ class ContentButtonAdd extends Component{
         );
     }
     
-};
+}; */
   
 export default ContentButtonAdd;
