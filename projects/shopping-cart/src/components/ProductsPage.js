@@ -1,17 +1,14 @@
-import { Routes, Route, Link } from "react-router-dom";
-import CityBikesProducts from "./CityBikesProducts";
-import MountainBikesProducts from "./MountainBikesProducts";
+import { NavLink, Outlet } from "react-router-dom";
 
 function ProductsPage() {
     return (
       <div className="ProductsPage">
         This is a Products page
-        <Link to="/citybikes">City Bikes</Link>
-        <Link to="/mountainbikes">Mountain Bikes</Link>
-        <Routes>
-          <Route path="/citybikes" element={<CityBikesProducts />} />
-          <Route path="/mountainbikes" element={<MountainBikesProducts />} />
-        </Routes>
+        <navbar>
+        <NavLink to="citybikes">City Bikes</NavLink>
+        <NavLink to="mountainbikes">Mountain Bikes</NavLink>
+        </navbar>
+        <Outlet/>
       </div>
     );
   }
