@@ -1,10 +1,15 @@
+import { useState } from "react";
+
 function MouintainBikesProducts() {
-    return (
-      <div className="MouintainBikesProducts">
-        This is mouintainbikes
-      </div>
-    );
-  }
+
+  const {products, setProducts} = useState({});
+
+  return (
+    <div className="MouintainBikesProducts">
+      This is mouintainbikes
+    </div>
+  );
+}
   
   export default MouintainBikesProducts;
   
