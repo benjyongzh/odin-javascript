@@ -2,7 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 
 import Navbar from "./components/Navbar";
-import Tester from "./components/Tester";
+import HomePage from "./components/HomePage";
+import ProductsPage from "./components/ProductsPage";
 
 // import RouteSwitch from "./components/RouteSwitch";
 
