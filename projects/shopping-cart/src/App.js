@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import { useState, useEffect } from "react";
-
 
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
@@ -11,11 +9,58 @@ import MountainBikesProducts from "./components/MountainBikesProducts";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCartBar from "./components/ShoppingCartBar";
 
-// import RouteSwitch from "./components/RouteSwitch";
+/* const allProducts = {
+  citybikes: [
+    {
+      name: "BMX200",
+      price: 300,
+      id: "citybike1"
+    },
+    {
+      name: "BMX150X",
+      price: 160,
+      id: "citybike2"
+    },
+    {
+      name: "Lame Bike",
+      price: 47,
+      id: "citybike3"
+    },
+    {
+      name: "Bike For Rich",
+      price: 800,
+      id: "citybike4"
+    }
+  ],
+  mountainbikes: [
+    {
+      name: "BMX200",
+      price: 300,
+      id: "mountainbike1"
+    },
+    {
+      name: "BMX150X",
+      price: 160,
+      id: "mountainbike2"
+    },
+    {
+      name: "Lame Bike",
+      price: 47,
+      id: "mountainbike3"
+    },
+    {
+      name: "Bike For Rich",
+      price: 800,
+      id: "mountainbike4"
+    }
+  ],
+}; */
 
 function App() {
 
   const {cartValue, setCartValue} = useState(0);
+  // const {products, setProducts} = useState(allProducts);
+  // const {cartItems, setCartItems} = useState({});
 
   return (
     <BrowserRouter className="App">
@@ -27,13 +72,9 @@ function App() {
 
         <Route path="products" element={<ProductsPage />}>
           <Route index element={<CityBikesProducts />} />
-
           <Route path="citybikes" element={<CityBikesProducts />} />
-
           <Route path="mountainbikes" element={<MountainBikesProducts />} />
-
           <Route path=":productId" element={<ProductDetails />} />
-
         </Route>
 
       </Routes>

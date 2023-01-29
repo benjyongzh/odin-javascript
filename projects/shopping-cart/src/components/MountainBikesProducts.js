@@ -26,7 +26,7 @@ const allProducts = [
 
 function MountainBikesProducts() {
 
-  const {products, setProducts} = useState(allProducts);
+  const [products, setProducts] = useState(allProducts);
 
 
   return (

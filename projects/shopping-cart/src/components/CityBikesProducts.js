@@ -26,7 +26,7 @@ const allProducts = [
 
 function CityBikesProducts() {
 
-  const {products, setProducts} = useState([]);
+  const [products, setProducts] = useState(allProducts);
 
 
   return (

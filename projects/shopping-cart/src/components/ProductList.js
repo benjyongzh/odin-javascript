@@ -9,7 +9,7 @@ function ProductList({products}) {
   return (
     <div className="product-list">
     this is the product list
-    {/* {
+    {
       products.map(item => {
         return (
           <ItemCard
@@ -19,7 +19,7 @@ function ProductList({products}) {
           />
         )
       })
-    } */}
+    }
     </div>
   );
 }
