@@ -9,58 +9,61 @@ import MountainBikesProducts from "./components/MountainBikesProducts";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCartBar from "./components/ShoppingCartBar";
 
-/* const allProducts = {
+const allProducts = {
   citybikes: [
     {
       name: "BMX200",
-      price: 300,
+      price: 280,
       id: "citybike1"
     },
     {
-      name: "BMX150X",
-      price: 160,
+      name: "Gazelle 4T9",
+      price: 510,
       id: "citybike2"
     },
     {
-      name: "Lame Bike",
-      price: 47,
+      name: "Giant type 5",
+      price: 230,
       id: "citybike3"
     },
     {
-      name: "Bike For Rich",
-      price: 800,
+      name: "Gazelle junior",
+      price: 120,
       id: "citybike4"
-    }
+    },
+    {
+      name: "Shimano 1290",
+      price: 760,
+      id: "citybike5"
+    },
   ],
   mountainbikes: [
     {
-      name: "BMX200",
-      price: 300,
+      name: "BMX400",
+      price: 450,
       id: "mountainbike1"
     },
     {
-      name: "BMX150X",
-      price: 160,
+      name: "BMX129C",
+      price: 340,
       id: "mountainbike2"
     },
     {
-      name: "Lame Bike",
-      price: 47,
+      name: "Shimano 908B",
+      price: 880,
       id: "mountainbike3"
     },
     {
-      name: "Bike For Rich",
-      price: 800,
+      name: "Snake series 14",
+      price: 1100,
       id: "mountainbike4"
-    }
+    },
   ],
-}; */
+};
 
 function App() {
-
   const {cartValue, setCartValue} = useState(0);
-  // const {products, setProducts} = useState(allProducts);
-  // const {cartItems, setCartItems} = useState({});
+  const {cartItems, setCartItems} = useState({});
 
   return (
     <BrowserRouter className="App">
@@ -72,14 +75,14 @@ function App() {
 
         <Route path="products" element={<ProductsPage />}>
           <Route index element={<CityBikesProducts />} />
-          <Route path="citybikes" element={<CityBikesProducts />} />
-          <Route path="mountainbikes" element={<MountainBikesProducts />} />
+          <Route path="citybikes" element={<CityBikesProducts products={allProducts.citybikes} />} />
+          <Route path="mountainbikes" element={<MountainBikesProducts products={allProducts.mountainbikes} />} />
           <Route path=":productId" element={<ProductDetails />} />
         </Route>
 
       </Routes>
 
-      <ShoppingCartBar />
+      <ShoppingCartBar cartValue={cartValue} cartItems={cartItems} />
 
     </BrowserRouter>
   );
