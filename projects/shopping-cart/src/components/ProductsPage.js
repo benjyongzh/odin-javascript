@@ -4,10 +4,10 @@ function ProductsPage() {
     return (
       <div className="ProductsPage">
         This is a Products page
-        <navbar>
-        <NavLink to="citybikes">City Bikes</NavLink>
-        <NavLink to="mountainbikes">Mountain Bikes</NavLink>
-        </navbar>
+        <nav>
+          <NavLink to="citybikes">City Bikes</NavLink>
+          <NavLink to="mountainbikes">Mountain Bikes</NavLink>
+        </nav>
         <Outlet/>
       </div>
     );

@@ -8,7 +8,7 @@ import HomePage from "./components/HomePage";
 import ProductsPage from "./components/ProductsPage";
 import CityBikesProducts from "./components/CityBikesProducts";
 import MountainBikesProducts from "./components/MountainBikesProducts";
-import ProductPage from "./components/ProductPage";
+import ProductDetails from "./components/ProductDetails";
 import ShoppingCartBar from "./components/ShoppingCartBar";
 
 // import RouteSwitch from "./components/RouteSwitch";
@@ -26,11 +26,16 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route path="products" element={<ProductsPage />}>
+          <Route index element={<CityBikesProducts />} />
+
           <Route path="citybikes" element={<CityBikesProducts />} />
+
           <Route path="mountainbikes" element={<MountainBikesProducts />} />
+
+          <Route path=":productId" element={<ProductDetails />} />
+
         </Route>
 
-        <Route path="product" element={<ProductPage />} />
       </Routes>
 
       <ShoppingCartBar />
