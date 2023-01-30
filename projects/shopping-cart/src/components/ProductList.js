@@ -16,8 +16,8 @@ function ProductList({products}) {
             return (
               <ItemCard
                 itemName={item.name}
-                itemPrice={item.price}
-                key={item.id}
+                /* itemPrice={item.price}
+                key={item.id} */
               />
             )
           })

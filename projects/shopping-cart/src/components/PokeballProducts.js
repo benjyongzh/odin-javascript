@@ -33,12 +33,13 @@ const api = "https://pokeapi.co/api/v2/item?limit=16";
 
 function PokeballProducts({products}) {
 
-  const [pokeballs, setPokeballs] = useState({});
+  const [pokeballs, setPokeballs] = useState([]);
 
   const fetchData = async () => {
     const data = await fetch(api);
     const items = await data.json();
-    console.log(items);
+    console.log(items.results);
+    setPokeballs(items.results);
   };
 
   useEffect(() => {
@@ -46,10 +47,9 @@ function PokeballProducts({products}) {
   }, []);
 
   return (
-    <div className="Pokeball
-  Products">
+    <div className="PokeballProducts">
       This is Pokeballs
-      {/* <ProductList products={pokeballs}/> */}
+      <ProductList products={pokeballs}/>
     </div>
   );
 };

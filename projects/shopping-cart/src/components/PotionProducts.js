@@ -28,7 +28,7 @@ const api = "https://pokeapi.co/api/v2/item?offset=16&limit=13";
 
 function PotionProducts({products}) {
 
-  const [potions, setPotions] = useState({});
+  const [potions, setPotions] = useState([]);
 
   const fetchData = async () => {
     const data = await fetch(api);
