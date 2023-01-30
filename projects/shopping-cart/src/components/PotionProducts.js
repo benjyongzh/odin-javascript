@@ -30,17 +30,23 @@ function PotionProducts({products}) {
 
   const [potions, setPotions] = useState({});
 
-  useEffect(() => {
+  const fetchData = async () => {
+    const data = await fetch(api);
+    const items = await data.json();
+    console.log(items);
+  };
 
-  });
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="PotionProducts">
       This is Potions
-      <ProductList products={potions}/>
+      {/* <ProductList products={potions}/> */}
     </div>
   );
 }
   
-  export default PotionProducts;
+export default PotionProducts;
   

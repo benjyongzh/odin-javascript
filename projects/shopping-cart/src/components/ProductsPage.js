@@ -5,8 +5,8 @@ function ProductsPage() {
       <div className="ProductsPage">
         This is a Products page
         <nav>
-          <NavLink to="citybikes">City Bikes</NavLink>
-          <NavLink to="mountainbikes">Mountain Bikes</NavLink>
+          <NavLink to="pokeballs">Pokeballs</NavLink>
+          <NavLink to="potions">Potions</NavLink>
         </nav>
         <Outlet/>
       </div>

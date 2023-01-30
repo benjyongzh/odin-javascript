@@ -35,19 +35,24 @@ function PokeballProducts({products}) {
 
   const [pokeballs, setPokeballs] = useState({});
 
-  useEffect(() => {
+  const fetchData = async () => {
+    const data = await fetch(api);
+    const items = await data.json();
+    console.log(items);
+  };
 
-  });
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <div className="Pokeball
   Products">
       This is Pokeballs
-      <ProductList products={pokeballs}/>
+      {/* <ProductList products={pokeballs}/> */}
     </div>
   );
-}
+};
   
-  export default Pokeball
-Products;
+export default PokeballProducts;
   
