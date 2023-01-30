@@ -13,7 +13,7 @@ function ItemCard({itemName, itemPrice}) {
       <div className="item-name">{itemName}</div>
       <div className="item-price">${itemPrice}</div>
       <button className="item-quickadd-button" onClick={() => addToCart}>Quick Add</button>
-      <Link to=":productId" className="item-details-button">Details</Link>
+      <Link to={`/products/${itemName}`} className="item-details-button">Details</Link>
     </div>
   );
 }

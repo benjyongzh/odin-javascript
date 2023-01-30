@@ -1,4 +1,5 @@
 import ProductList from "./ProductList";
+import { useState, useEffect } from "react";
 
 /* const allProducts = [
   {
@@ -23,15 +24,23 @@ import ProductList from "./ProductList";
   },
 ] */
 
-function MountainBikesProducts({products}) {
+const api = "https://pokeapi.co/api/v2/item?offset=16&limit=13";
+
+function PotionProducts({products}) {
+
+  const [potions, setPotions] = useState({});
+
+  useEffect(() => {
+
+  });
 
   return (
-    <div className="MountainBikesProducts">
-      This is Mountainbikes
-      <ProductList products={products}/>
+    <div className="PotionProducts">
+      This is Potions
+      <ProductList products={potions}/>
     </div>
   );
 }
   
-  export default MountainBikesProducts;
+  export default PotionProducts;
   

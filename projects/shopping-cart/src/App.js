@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
 import ProductsPage from "./components/ProductsPage";
-import CityBikesProducts from "./components/CityBikesProducts";
-import MountainBikesProducts from "./components/MountainBikesProducts";
+import PokeballProducts from "./components/PokeballProducts";
+import PotionProducts from "./components/PotionProducts";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCartBar from "./components/ShoppingCartBar";
 
-const allProducts = {
+/* const allProducts = {
   citybikes: [
     {
       name: "BMX200",
@@ -59,7 +59,7 @@ const allProducts = {
       id: "mountainbike4"
     },
   ],
-};
+}; */
 
 function App() {
   const {cartValue, setCartValue} = useState(0);
@@ -73,10 +73,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        <Route path="products" element={<ProductsPage />}>
-          <Route index element={<CityBikesProducts />} />
-          <Route path="citybikes" element={<CityBikesProducts products={allProducts.citybikes} />} />
-          <Route path="mountainbikes" element={<MountainBikesProducts products={allProducts.mountainbikes} />} />
+        <Route path="products" exact element={<ProductsPage />}>
+          <Route index element={<PokeballProducts />} />
+          <Route path="pokeballs" element={<PokeballProducts />} />
+          <Route path="potions" element={<PotionProducts />} />
           <Route path=":productId" element={<ProductDetails />} />
         </Route>
 

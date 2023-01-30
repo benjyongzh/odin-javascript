@@ -1,4 +1,5 @@
 import ProductList from "./ProductList";
+import { useState, useEffect } from "react";
 
 /* const allProducts = [
   {
@@ -28,17 +29,25 @@ import ProductList from "./ProductList";
   },
 ]; */
 
-function CityBikesProducts({products}) {
+const api = "https://pokeapi.co/api/v2/item?limit=16";
 
+function PokeballProducts({products}) {
 
+  const [pokeballs, setPokeballs] = useState({});
+
+  useEffect(() => {
+
+  });
 
   return (
-    <div className="CityBikesProducts">
-      This is citybikes
-      <ProductList products={products}/>
+    <div className="Pokeball
+  Products">
+      This is Pokeballs
+      <ProductList products={pokeballs}/>
     </div>
   );
 }
   
-  export default CityBikesProducts;
+  export default Pokeball
+Products;
   
