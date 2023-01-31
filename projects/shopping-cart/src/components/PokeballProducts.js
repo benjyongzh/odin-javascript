@@ -38,7 +38,6 @@ function PokeballProducts({products}) {
   const fetchData = async () => {
     const data = await fetch(api);
     const items = await data.json();
-    console.log(items.results);
     setPokeballs(items.results);
   };
 

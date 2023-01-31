@@ -33,7 +33,7 @@ function PotionProducts({products}) {
   const fetchData = async () => {
     const data = await fetch(api);
     const items = await data.json();
-    console.log(items);
+    setPotions(items.results);
   };
 
   useEffect(() => {
@@ -43,7 +43,7 @@ function PotionProducts({products}) {
   return (
     <div className="PotionProducts">
       This is Potions
-      {/* <ProductList products={potions}/> */}
+      {<ProductList products={potions}/>}
     </div>
   );
 }
