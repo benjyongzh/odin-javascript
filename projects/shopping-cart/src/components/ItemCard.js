@@ -10,7 +10,7 @@ function ItemCard({itemName, itemURL}) {
     const itemInfo = await data.json();
     setInfo({
       name: itemInfo.names[7].name,
-      // id: itemInfo.id,
+      id: itemInfo.id,
       cost: itemInfo.cost,
       // description: itemInfo.effect_entries[0].effect,
       image: itemInfo.sprites.default,
@@ -31,8 +31,8 @@ function ItemCard({itemName, itemURL}) {
       <img className="item-image" alt={info.name} src={info.image} />
       <div className="item-name">{info.name}</div>
       <div className="item-price">$ {info.cost}</div>
-      <button className="item-quickadd-button" onClick={() => addToCart}>Quick Add</button>
-      <Link to={`/products/${itemName}`} className="item-details-button">Details</Link>
+      <button className="item-quickadd-button" onClick={() => addToCart()}>Quick Add</button>
+      <Link to={`/products/${info.id}`} className="item-details-button">Details</Link>
     </div>
   );
 }

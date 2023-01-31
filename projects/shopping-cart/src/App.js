@@ -73,7 +73,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
 
-        <Route path="products" exact element={<ProductsPage />}>
+        <Route path="products" element={<ProductsPage />}>
           <Route index element={<PokeballProducts />} />
           <Route path="pokeballs" element={<PokeballProducts />} />
           <Route path="potions" element={<PotionProducts />} />
