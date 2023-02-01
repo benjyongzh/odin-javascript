@@ -23,6 +23,11 @@ function ProductDetails() {
     console.log(itemInfo);
   };
 
+  const quantityChange = value => {
+    setQuantity(value);
+    console.log(`quantity in product details is now ${value}`);
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -32,7 +37,7 @@ function ProductDetails() {
       <h1>{info.name}</h1>
       <img className="item-image" alt={info.name} src={info.image} />
       <div className="description">{info.description}</div>
-      <QuantityController min={1} max={99}/>
+      <QuantityController min={1} max={99} onQuantityChange={quantityChange}/>
       
     </div>
   );

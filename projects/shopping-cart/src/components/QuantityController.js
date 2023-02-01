@@ -1,28 +1,29 @@
 
 import { useState, useEffect } from "react";
 
-function QuantityController({min, max}) {
+function QuantityController({min, max, onQuantityChange}) {
 
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(min);
 
   const editQuantity = change => {
-    setQuantity(value => value + change);
+    if (checkWithinBounds(quantity + change)) setQuantity(value => value + change);
   };
 
   const valueChanged = event => {
-    setQuantity(event.target.value);
-  };
-
-  const clampValue = () => {
-    if (quantity < min){
-      setQuantity(min);
-    } else if (quantity > max){
-      setQuantity(max);
+    const value = event.target.value;
+    if (checkWithinBounds(value)){
+      setQuantity(value);
+    } else {
+      value<min ? setQuantity(min) : setQuantity(max)
     };
   };
 
+  const checkWithinBounds = value => {
+    return (value >= min && value <= max);
+  }
+
   useEffect(() => {
-    clampValue();
+    onQuantityChange(quantity);
   }, [quantity]);
 
   return (
