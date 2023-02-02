@@ -24,9 +24,12 @@ function ProductDetails() {
   };
 
   const quantityChange = value => {
-    setQuantity(value);
-    console.log(`quantity in product details is now ${value}`);
+    setQuantity(value); 
   }
+
+  useEffect(() => {
+    console.log(`quantity in product details is now ${quantity}`);
+  }, [quantity]);
 
   useEffect(() => {
     fetchData();
