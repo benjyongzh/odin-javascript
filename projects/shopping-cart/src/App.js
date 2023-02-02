@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
@@ -32,25 +32,16 @@ function App() {
         tempCart[i].quantity += newItem.quantity;
 
         setCartItems(tempCart);
-
-        console.log(cartItems);
-
         return;
-
-
-        // tempCart[i].quantity += newItem.quantity;
-        // if (tempCart[i].quantity <= 0){
-        //   tempCart.splice(i, 1);
-        // } /* else {
-        //   tempCart.splice(i, 1, tempCart[i]);
-        // }; */
       };
-    }
+    };
 
     setCartItems([...cartItems, {name: newItem.name, price: newItem.price, quantity: newItem.quantity, id: newItem.id}]);
-
-    console.log(cartItems);
   };
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems]);
 
   return (
     <BrowserRouter className="App">
