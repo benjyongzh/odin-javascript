@@ -31,7 +31,7 @@ import { useState, useEffect } from "react";
 
 const api = "https://pokeapi.co/api/v2/item?limit=16";
 
-function PokeballProducts({products}) {
+function PokeballProducts({addItemToCart}) {
 
   const [pokeballs, setPokeballs] = useState([]);
 
@@ -41,6 +41,10 @@ function PokeballProducts({products}) {
     setPokeballs(items.results);
   };
 
+  const addItem = item => {
+    addItemToCart(item);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -48,7 +52,7 @@ function PokeballProducts({products}) {
   return (
     <div className="PokeballProducts">
       This is Pokeballs
-      <ProductList products={pokeballs}/>
+      <ProductList products={pokeballs} addItemToCart={addItem}/>
     </div>
   );
 };

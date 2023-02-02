@@ -1,7 +1,10 @@
-function ShoppingCartBar() {
+
+
+function ShoppingCartBar({cartItems}) {
+
   return (
     <div className="ShoppingCartBar">
-      This is shopping cart
+      The shopping cart is: {cartItems}
     </div>
   );
 }

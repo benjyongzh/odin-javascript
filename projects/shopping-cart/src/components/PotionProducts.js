@@ -26,7 +26,7 @@ import { useState, useEffect } from "react";
 
 const api = "https://pokeapi.co/api/v2/item?offset=16&limit=13";
 
-function PotionProducts({products}) {
+function PotionProducts({addItemToCart}) {
 
   const [potions, setPotions] = useState([]);
 
@@ -36,6 +36,10 @@ function PotionProducts({products}) {
     setPotions(items.results);
   };
 
+  const addItem = item => {
+    addItemToCart(item);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -43,7 +47,7 @@ function PotionProducts({products}) {
   return (
     <div className="PotionProducts">
       This is Potions
-      {<ProductList products={potions}/>}
+      {<ProductList products={potions} addItemToCart={addItem}/>}
     </div>
   );
 }

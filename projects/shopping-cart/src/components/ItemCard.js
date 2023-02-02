@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-function ItemCard({itemName, itemURL}) {
+function ItemCard({itemName, itemURL, addItemToCart}) {
 
   const [info, setInfo] = useState({});
 
@@ -23,7 +23,8 @@ function ItemCard({itemName, itemURL}) {
 
   const addToCart = event => {
     event.preventDefault();
-    console.log(`${info.name} added to cart. Value = $${info.price}.`)
+    addItemToCart({name: info.name, price: info.cost, quantity: 1})
+    console.log(`${info.name} added to cart. Value = $${info.cost}.`)
   };
 
   return (
@@ -31,7 +32,7 @@ function ItemCard({itemName, itemURL}) {
       <img className="item-image" alt={info.name} src={info.image} />
       <div className="item-name">{info.name}</div>
       <div className="item-price">$ {info.cost}</div>
-      <button className="item-quickadd-button" onClick={() => addToCart()}>Quick Add</button>
+      <button className="item-quickadd-button" onClick={event => addToCart(event)}>Quick Add</button>
       <Link to={`/products/${info.id}`} className="item-details-button">Details</Link>
     </div>
   );

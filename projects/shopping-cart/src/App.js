@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import Navbar from "./components/Navbar";
 import HomePage from "./components/HomePage";
@@ -9,61 +9,48 @@ import PotionProducts from "./components/PotionProducts";
 import ProductDetails from "./components/ProductDetails";
 import ShoppingCartBar from "./components/ShoppingCartBar";
 
-/* const allProducts = {
-  citybikes: [
-    {
-      name: "BMX200",
-      price: 280,
-      id: "citybike1"
-    },
-    {
-      name: "Gazelle 4T9",
-      price: 510,
-      id: "citybike2"
-    },
-    {
-      name: "Giant type 5",
-      price: 230,
-      id: "citybike3"
-    },
-    {
-      name: "Gazelle junior",
-      price: 120,
-      id: "citybike4"
-    },
-    {
-      name: "Shimano 1290",
-      price: 760,
-      id: "citybike5"
-    },
-  ],
-  mountainbikes: [
-    {
-      name: "BMX400",
-      price: 450,
-      id: "mountainbike1"
-    },
-    {
-      name: "BMX129C",
-      price: 340,
-      id: "mountainbike2"
-    },
-    {
-      name: "Shimano 908B",
-      price: 880,
-      id: "mountainbike3"
-    },
-    {
-      name: "Snake series 14",
-      price: 1100,
-      id: "mountainbike4"
-    },
-  ],
-}; */
-
 function App() {
-  const {cartValue, setCartValue} = useState(0);
-  const {cartItems, setCartItems} = useState({});
+  // const {cartValue, setCartValue} = useState(0);
+  const [cartItems, setCartItems] = useState([]);
+
+  const updateCartItems = newItem => {
+    console.log(newItem);
+    console.log("updateCartItems called");
+
+    if (cartItems.length <= 0) {
+      setCartItems([newItem]);
+      return;
+    };
+
+    let tempCart = Array.from(cartItems);
+
+    for (let i = 0; i < tempCart.length; i++){
+      if (tempCart[i].name === newItem.name){
+
+        (tempCart[i].quantity + newItem.quantity <= 0) ?
+        tempCart.splice(i, 1) :
+        tempCart[i].quantity += newItem.quantity;
+
+        setCartItems(tempCart);
+
+        console.log(cartItems);
+
+        return;
+
+
+        // tempCart[i].quantity += newItem.quantity;
+        // if (tempCart[i].quantity <= 0){
+        //   tempCart.splice(i, 1);
+        // } /* else {
+        //   tempCart.splice(i, 1, tempCart[i]);
+        // }; */
+      };
+    }
+
+    setCartItems([...cartItems, {name: newItem.name, price: newItem.price, quantity: newItem.quantity}]);
+
+    console.log(cartItems);
+  };
 
   return (
     <BrowserRouter className="App">
@@ -74,17 +61,18 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         <Route path="products" element={<ProductsPage />}>
-          <Route index element={<PokeballProducts />} />
-          <Route path="pokeballs" element={<PokeballProducts />} />
-          <Route path="potions" element={<PotionProducts />} />
-          <Route path=":productId" element={<ProductDetails />} />
+          <Route index element={<PokeballProducts addItemToCart={updateCartItems} />} />
+          <Route path="pokeballs" element={<PokeballProducts addItemToCart={updateCartItems} />} />
+          <Route path="potions" element={<PotionProducts addItemToCart={updateCartItems} />} />
+          <Route path=":productId" element={<ProductDetails addItemToCart={updateCartItems} />} />
         </Route>
 
       </Routes>
 
-      <ShoppingCartBar cartValue={cartValue} cartItems={cartItems} />
+      <ShoppingCartBar cartItems={cartItems} />
 
     </BrowserRouter>
+
   );
 }
 

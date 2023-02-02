@@ -2,7 +2,11 @@
 import ItemCard from "./ItemCard";
 
 
-function ProductList({products}) {
+function ProductList({products, addItemToCart}) {
+
+  const addItem = item => {
+    addItemToCart(item);
+  };
   
   return (
     <div className="product-list">
@@ -18,6 +22,7 @@ function ProductList({products}) {
                 itemName={item.name}
                 key={item.name}
                 itemURL={item.url}
+                addItemToCart={addItem}
               />
             )
           })
