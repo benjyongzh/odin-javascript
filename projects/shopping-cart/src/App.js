@@ -47,7 +47,7 @@ function App() {
       };
     }
 
-    setCartItems([...cartItems, {name: newItem.name, price: newItem.price, quantity: newItem.quantity}]);
+    setCartItems([...cartItems, {name: newItem.name, price: newItem.price, quantity: newItem.quantity, id: newItem.id}]);
 
     console.log(cartItems);
   };

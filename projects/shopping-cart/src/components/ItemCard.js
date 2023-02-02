@@ -23,7 +23,7 @@ function ItemCard({itemName, itemURL, addItemToCart}) {
 
   const addToCart = event => {
     event.preventDefault();
-    addItemToCart({name: info.name, price: info.cost, quantity: 1})
+    addItemToCart({name: info.name, price: info.cost, quantity: 1, id: info.id})
     console.log(`${info.name} added to cart. Value = $${info.cost}.`)
   };
 
