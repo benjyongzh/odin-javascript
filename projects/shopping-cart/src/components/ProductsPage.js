@@ -1,12 +1,13 @@
 import { NavLink, Outlet } from "react-router-dom";
+import "../styles/ProductsPage.css";
 
 function ProductsPage() {
     return (
       <div className="ProductsPage">
-        This is a Products page
+        <div className="header">Products</div>
         <nav>
-          <NavLink to="pokeballs">Pokeballs</NavLink>
-          <NavLink to="potions">Potions</NavLink>
+          <NavLink className="navlink" to="pokeballs">Pokeballs</NavLink>
+          <NavLink className="navlink" to="potions">Potions</NavLink>
         </nav>
         <Outlet/>
       </div>

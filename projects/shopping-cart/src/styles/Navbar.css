@@ -1,0 +1,17 @@
+.navbar {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 30px 60px;
+}
+
+.navbar>.navlink,
+.navbar>.cart-button {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
