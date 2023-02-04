@@ -1,6 +1,5 @@
 .ProductsPage {
     width: 100%;
-    height: 60px;
     display: grid;
     grid-template-columns: 1fr 5fr;
 }

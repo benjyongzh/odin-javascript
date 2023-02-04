@@ -1,5 +1,6 @@
 // import { useState, useEffect } from "react";
 import ItemCard from "./ItemCard";
+import "../styles/ProductList.css";
 
 
 function ProductList({products, addItemToCart}) {
