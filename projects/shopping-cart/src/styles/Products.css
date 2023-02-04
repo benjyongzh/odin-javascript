@@ -1,0 +1,16 @@
+.PokeballProducts,
+.PotionProducts {
+    width: 100%;
+    height: 60px;
+    display: grid;
+    grid-template-rows: 1fr 7fr;
+}
+
+.PokeballProducts>.header,
+.PotionProducts>.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    padding: 20px;
+}

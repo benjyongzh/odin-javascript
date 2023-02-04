@@ -1,28 +1,7 @@
 import ProductList from "./ProductList";
 import { useState, useEffect } from "react";
+import "../styles/Products.css";
 
-/* const allProducts = [
-  {
-    name: "BMX400",
-    price: 450,
-    id: "mountainbike1"
-  },
-  {
-    name: "BMX129C",
-    price: 340,
-    id: "mountainbike2"
-  },
-  {
-    name: "Shimano 908B",
-    price: 880,
-    id: "mountainbike3"
-  },
-  {
-    name: "Snake series 14",
-    price: 1100,
-    id: "mountainbike4"
-  },
-] */
 
 const api = "https://pokeapi.co/api/v2/item?offset=16&limit=13";
 
@@ -46,7 +25,7 @@ function PotionProducts({addItemToCart}) {
 
   return (
     <div className="PotionProducts">
-      This is Potions
+      <div className="header">Potions</div>
       {<ProductList products={potions} addItemToCart={addItem}/>}
     </div>
   );
