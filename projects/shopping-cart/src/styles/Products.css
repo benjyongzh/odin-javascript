@@ -2,7 +2,7 @@
 .PotionProducts {
     width: 100%;
     display: grid;
-    grid-template-rows: 80px 7fr;
+    grid-template-rows: 80px auto;
 }
 
 .PokeballProducts>.header,
@@ -11,5 +11,5 @@
     align-items: center;
     justify-content: center;
     font-size: 30px;
-    padding: 40px;
+    padding: 15px;
 }
