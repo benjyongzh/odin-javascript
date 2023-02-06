@@ -1,0 +1,38 @@
+.item-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 15px;
+    gap: 8px;
+}
+
+.item-card>div,
+.item-card>button,
+.item-card>a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.item-card>.item-name {
+    font-size: 18px;
+}
+
+.item-card>button,
+.item-card>a {
+    background-color: cadetblue;
+    color: rgb(247, 247, 247);
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.item-card>a {
+    background-color: rgb(236, 236, 236);
+    color: rgb(0, 0, 0);
+}

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "../styles/ItemCard.css";
 
 function ItemCard({itemName, itemURL, addItemToCart}) {
 
