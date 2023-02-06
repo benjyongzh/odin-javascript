@@ -1,15 +1,13 @@
 .product-list {
     width: 100%;
     display: grid;
-    grid-template-rows: 50px auto;
-    overflow:hidden;
 }
 
 .product-list>.heading {
     display: flex;
     gap: 40px;
-    padding: 30px;
-    margin-bottom:20px;
+    padding: 10px;
+    margin-bottom: 20px;
     align-items: center;
     justify-content: center;
 }
@@ -33,5 +31,4 @@
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     grid-auto-rows: minmax(300px, 1fr);
     margin-top: 0px;
-    
 }
