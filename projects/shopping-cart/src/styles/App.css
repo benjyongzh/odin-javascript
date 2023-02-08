@@ -1,9 +1,16 @@
 .App {
     display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    background-color: var(--color-light-bg);
+}
+
+.App-Content {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    width: min(100vw, 800px);
-    margin: 0;
-    background-color: #eeeeef;
+    
+    width: min(100vw, 1200px);
+
 }

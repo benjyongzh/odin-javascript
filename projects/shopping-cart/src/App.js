@@ -45,25 +45,29 @@ function App() {
   }, [cartItems]);
 
   return (
-    <BrowserRouter className="App">
+    <div className="App">
+      <div className="App-Content">
+        <BrowserRouter>
 
-      <Navbar/>
+          <Navbar/>
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
 
-        <Route path="products" element={<ProductsPage />}>
-          <Route index element={<PokeballProducts addItemToCart={updateCartItems} />} />
-          <Route path="pokeballs" element={<PokeballProducts addItemToCart={updateCartItems} />} />
-          <Route path="potions" element={<PotionProducts addItemToCart={updateCartItems} />} />
-          <Route path=":productId" element={<ProductDetails addItemToCart={updateCartItems} />} />
-        </Route>
+            <Route path="products" element={<ProductsPage />}>
+              <Route index element={<PokeballProducts addItemToCart={updateCartItems} />} />
+              <Route path="pokeballs" element={<PokeballProducts addItemToCart={updateCartItems} />} />
+              <Route path="potions" element={<PotionProducts addItemToCart={updateCartItems} />} />
+              <Route path=":productId" element={<ProductDetails addItemToCart={updateCartItems} />} />
+            </Route>
 
-      </Routes>
+          </Routes>
 
-      <ShoppingCartBar cartItems={cartItems} />
+          <ShoppingCartBar cartItems={cartItems} />
 
-    </BrowserRouter>
+        </BrowserRouter>
+      </div>
+    </div>
 
   );
 }
