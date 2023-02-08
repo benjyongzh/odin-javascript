@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
+import "../styles/HomePage.css";
 
 function HomePage() {
     return (
       <div className="HomePage">
-        This is a Home page
-        <Link to="/products">Products</Link>
+        <img className="homepage-icon" src="#" alt="Pokemon Store"/>
+        <div className="header">Always near you</div>
+        <Link className="navlink" to="/products">Store</Link>
         
       </div>
     );
