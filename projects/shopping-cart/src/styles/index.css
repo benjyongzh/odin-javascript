@@ -6,9 +6,11 @@
     list-style: none;
     box-sizing: border-box;
     font-family: Tahoma, sans-serif;
+    --color-accent-light: #ffd06b;
     --color-accent: #febd2f;
+    --color-accent-dark: #a8770c;
     --color-light-bg: #eeeeef;
-    --color-dark-bg: #7f7d82;
+    --color-dark-bg: #a2a1a5;
     --color-dark-bg-shadow: #7f7d8231;
     --color-light-shade: #c4bfbd;
     --color-dark-shade: #68615f;

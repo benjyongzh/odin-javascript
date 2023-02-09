@@ -14,4 +14,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--color-black);
+    border-width: 0px;
+}
+
+.navbar>.navlink:hover,
+.navbar>.cart-button:hover {
+    color: var(--color-accent-dark);
 }

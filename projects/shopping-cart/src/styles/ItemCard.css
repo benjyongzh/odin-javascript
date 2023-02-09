@@ -41,3 +41,23 @@
     background-color: #ffffff;
     border: 2px solid var(--color-dark-bg);
 }
+
+.item-card>button:hover {
+    background-color: var(--color-accent-light);
+    border-color: var(--color-accent-light);
+}
+
+.item-card>a:hover {
+    background-color: var(--color-light-bg);
+    border-color: var(--color-light-bg);
+}
+
+.item-card>button:active {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+}
+
+.item-card>a:active {
+    background-color: var(--color-dark-bg);
+    border-color: var(--color-dark-bg);
+}

@@ -2,7 +2,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    background-color: var(--color-light-bg);
+    background: linear-gradient(180deg, var(--color-light-bg), var(--color-dark-bg) 130vh);
 }
 
 .App-Content {
@@ -10,7 +10,5 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
-    
     width: min(100vw, 1200px);
-
 }
