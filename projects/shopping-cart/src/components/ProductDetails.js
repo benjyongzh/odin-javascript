@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import QuantityController from "./QuantityController";
+import "../styles/ProductDetails.css";
 
 function ProductDetails({addItemToCart}) {
 
@@ -44,10 +45,12 @@ function ProductDetails({addItemToCart}) {
   return (
     <div className="ProductDetails">
       <h1>{info.name}</h1>
-      <img className="item-image" alt={info.name} src={info.image} />
-      <div className="description">{info.description}</div>
-      <QuantityController min={1} max={99} onQuantityChange={quantityChange}/>
-      <button className="purchase-button" onClick={event => addToCart(event)}>Add to Cart</button>
+      <img alt={info.name} src={info.image} />
+      <div className="info">
+        <div className="description">{info.description}</div>
+        <QuantityController min={1} max={99} onQuantityChange={quantityChange}/>
+        <button className="purchase-button" onClick={event => addToCart(event)}>Add To Cart</button>
+      </div>
     </div>
   );
 }
