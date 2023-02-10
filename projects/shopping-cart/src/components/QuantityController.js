@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import "../styles/QuantityController.css";
 
 function QuantityController({min, max, onQuantityChange}) {
 
@@ -28,9 +29,9 @@ function QuantityController({min, max, onQuantityChange}) {
 
   return (
     <div className="QuantityController">
-      <div className="button subtract" onClick={() => editQuantity(-1)}>-</div>
+      <button className="button subtract" onClick={() => editQuantity(-1)}>-</button>
       <input type="number" onChange={event => {valueChanged(event)}} value={quantity}/>
-      <div className="button add" onClick={() => editQuantity(1)}>+</div>
+      <button className="button add" onClick={() => editQuantity(1)}>+</button>
     </div>
   );
 }

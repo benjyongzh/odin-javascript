@@ -1,0 +1,39 @@
+.QuantityController {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 10px;
+}
+
+.QuantityController>button,
+.QuantityController>input {
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--color-black);
+    border-radius: 5px;
+    font-size: 16px;
+    border-width: 0px;
+    background-color: var(--color-accent);
+}
+
+.QuantityController>button {
+    padding: 0.5rem 1rem;
+}
+
+.QuantityController>button:hover {
+    background-color: var(--color-accent-light);
+}
+
+.QuantityController>button:active {
+    background-color: var(--color-accent-dark);
+}
+
+.QuantityController>input {
+    width: auto;
+    outline: none;
+    background-color: var(--color-light-bg);
+    -webkit-appearance: none;
+    margin:0;
+}
