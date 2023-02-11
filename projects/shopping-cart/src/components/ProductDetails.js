@@ -48,7 +48,9 @@ function ProductDetails({addItemToCart}) {
       <img alt={info.name} src={info.image} />
       <div className="info">
         <div className="description">{info.description}</div>
-        <QuantityController min={1} max={99} onQuantityChange={quantityChange}/>
+        <div className="quantity-controller">
+          <QuantityController min={1} max={99} onQuantityChange={quantityChange}/>
+        </div>
         <button className="purchase-button" onClick={event => addToCart(event)}>Add To Cart</button>
       </div>
     </div>
