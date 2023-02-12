@@ -12,7 +12,7 @@ function CartItem({quantity, id}) {
       name: itemInfo.names[7].name,
       // id: itemInfo.id,
       price: itemInfo.cost,
-      description: itemInfo.effect_entries[0].effect,
+      description: itemInfo.effect_entries[0].short_effect,
       image: itemInfo.sprites.default,
     });
   }
