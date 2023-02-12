@@ -1,6 +1,6 @@
 .QuantityController {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: inline-grid;
+    grid-template-columns: 35px minmax(20%, 70%) 35px;
     gap: 10px;
     width: 100%;
 }
