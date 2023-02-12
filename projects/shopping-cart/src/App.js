@@ -49,7 +49,7 @@ function App() {
       <div className="App-Content">
         <BrowserRouter>
 
-          <Navbar/>
+          <Navbar cartItems={cartItems} />
 
           <Routes>
             <Route path="/" element={<HomePage />} />
