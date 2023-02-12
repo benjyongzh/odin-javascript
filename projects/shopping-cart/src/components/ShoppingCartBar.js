@@ -7,8 +7,10 @@ function ShoppingCartBar({cartItems}) {
   const [cartValue, setCartValue] = useState(0);
 
   useEffect(() => {
-    let value = cartItems.map(item => item.quantity * item.price)
-                        .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    let value = cartItems
+    .map(item => item.quantity * item.price)
+    .reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+
     setCartValue(value);
   });
 
