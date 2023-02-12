@@ -50,3 +50,20 @@
                 2px 2px 6px 3px var(--color-dark-bg-shadow),
                 4px 4px 16px 8px var(--color-dark-bg-shadow);
 }
+
+
+.HomePage>.side-area>.navlink:hover {
+    background-color: var(--color-accent-light);
+    border-color: var(--color-accent-light);
+    box-shadow: 1px 1px 4px 1px var(--color-dark-bg-shadow),
+                4px 4px 12px 3px var(--color-dark-bg-shadow),
+                8px 8px 32px 8px var(--color-dark-bg-shadow);
+}
+
+.HomePage>.side-area>.navlink:active {
+    background-color: var(--color-accent-dark);
+    border-color: var(--color-accent-dark);
+    box-shadow: 1px 1px 1px 2px var(--color-dark-bg-shadow),
+                1px 1px 1px 2px var(--color-dark-bg-shadow),
+                2px 2px 4px 2px var(--color-dark-bg-shadow);
+}
