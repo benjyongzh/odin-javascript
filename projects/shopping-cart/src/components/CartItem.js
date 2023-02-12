@@ -36,9 +36,9 @@ function CartItem({quantity, id}) {
         <div className="description">{info.description}</div>
       </div>
       
-      <div className="price-unit" >$ {info.price}</div>
-      <div className="quantity" >{quantity} pcs.</div>
-      <div className="price-total" >$ {quantity*info.price}</div>
+      <div className="price-unit" >{info.price}</div>
+      <div className="quantity" >{quantity}</div>
+      <div className="price-total" >{quantity*info.price}</div>
     </div>
   );
 }
