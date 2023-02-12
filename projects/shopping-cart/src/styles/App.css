@@ -3,6 +3,7 @@
     align-items: flex-start;
     justify-content: center;
     background: linear-gradient(180deg, var(--color-light-bg), var(--color-dark-bg) 130vh);
+    position: relative;
 }
 
 .App-Content {

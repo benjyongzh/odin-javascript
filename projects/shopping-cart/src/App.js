@@ -63,10 +63,10 @@ function App() {
 
           </Routes>
 
-          <ShoppingCartBar cartItems={cartItems} />
-
         </BrowserRouter>
       </div>
+
+      <ShoppingCartBar cartItems={cartItems} />
     </div>
 
   );

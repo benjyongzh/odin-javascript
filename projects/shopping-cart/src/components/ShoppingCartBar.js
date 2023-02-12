@@ -1,18 +1,17 @@
-
+import "../styles/ShoppingCartBar.css";
+import CartItem from "./CartItem";
 
 function ShoppingCartBar({cartItems}) {
-
   return (
     <div className="ShoppingCartBar">
-      The shopping cart is: {cartItems.map(item => {
-      return (
-        <div key={item.id}>
-          <div>{item.name}</div>
-          <div>$ {item.price}</div>
-          <div>{item.quantity} pcs.</div>
-        </div>
-      )
-      })}
+      <div className="header">Cart</div>
+      <div className="cart-content">
+        {cartItems.map(item => {
+          return (
+            <CartItem key={item.id} quantity={item.quantity} id={item.id}/>
+          )
+        })}
+      </div>
     </div>
   );
 }
