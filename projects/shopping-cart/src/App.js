@@ -13,6 +13,7 @@ import ShoppingCartBar from "./components/ShoppingCartBar";
 function App() {
   // const {cartValue, setCartValue} = useState(0);
   const [cartItems, setCartItems] = useState([]);
+  const [showCart, setShowCart] = useState(false);
 
   const updateCartItems = newItem => {
     console.log(newItem);
@@ -49,7 +50,7 @@ function App() {
       <div className="App-Content">
         <BrowserRouter>
 
-          <Navbar cartItems={cartItems} />
+          <Navbar cartItems={cartItems} showCartState={state => setShowCart(state)} />
 
           <Routes>
             <Route path="/" element={<HomePage />} />
@@ -66,7 +67,7 @@ function App() {
         </BrowserRouter>
       </div>
 
-      <ShoppingCartBar cartItems={cartItems} />
+      <ShoppingCartBar cartItems={cartItems} visibility={showCart} />
     </div>
 
   );

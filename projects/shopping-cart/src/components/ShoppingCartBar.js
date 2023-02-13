@@ -2,7 +2,7 @@ import "../styles/ShoppingCartBar.css";
 import CartItem from "./CartItem";
 import { useState, useEffect } from "react";
 
-function ShoppingCartBar({cartItems}) {
+function ShoppingCartBar({cartItems, visibility}) {
 
   const [cartValue, setCartValue] = useState(0);
 
@@ -19,8 +19,10 @@ function ShoppingCartBar({cartItems}) {
     console.log('checked out');
   }
 
+  let visibleStyle = visibility ? "visible" : "hidden";
+
   return (
-    <div className="ShoppingCartBar">
+    <div className="ShoppingCartBar" style={{visibility: `${visibleStyle}`}}>
       <div className="header">Cart</div>
       <div className="sections">
         <div className="section-name">Item</div>
