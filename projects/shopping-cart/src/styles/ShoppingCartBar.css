@@ -7,7 +7,8 @@
     height: 100vh;
     width: 750px;
     overflow: auto;
-    position: sticky;
+    flex-shrink: 0;
+    position: static;
 }
 
 .ShoppingCartBar>* {
@@ -31,6 +32,7 @@
     border-top: 1px solid var(--color-light-shade);
     border-bottom: 1px solid var(--color-light-shade);
     padding: 20px 0px;
+    margin-bottom: 20px;
 }
 
 .ShoppingCartBar>.sections>.section-name {

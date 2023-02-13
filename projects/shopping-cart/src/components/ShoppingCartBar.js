@@ -19,10 +19,10 @@ function ShoppingCartBar({cartItems, visibility}) {
     console.log('checked out');
   }
 
-  let visibleStyle = visibility ? "visible" : "hidden";
+  let displayStyle = visibility ? "initial" : "none";
 
   return (
-    <div className="ShoppingCartBar" style={{visibility: `${visibleStyle}`}}>
+    <div className="ShoppingCartBar" style={{display: `${displayStyle}`}}>
       <div className="header">Cart</div>
       <div className="sections">
         <div className="section-name">Item</div>
