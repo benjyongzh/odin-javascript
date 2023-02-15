@@ -41,13 +41,20 @@ function App() {
     setCartItems([...cartItems, {name: newItem.name, price: newItem.price, quantity: newItem.quantity, id: newItem.id}]);
   };
 
+  const appContentClick = event => {
+    console.log(event);
+    if (event.target){
+      setShowCart(false);
+    };
+  };
+
   useEffect(() => {
     console.log(cartItems);
   }, [cartItems]);
 
   return (
     <div className="App">
-      <div className="App-Content">
+      <div className="App-Content" /* onClick={event => appContentClick(event)} */>
         <BrowserRouter>
 
           <Navbar cartItems={cartItems} showCartState={state => setShowCart(state)} />
