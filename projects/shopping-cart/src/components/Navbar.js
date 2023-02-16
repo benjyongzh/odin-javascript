@@ -5,7 +5,7 @@ import { useState } from "react";
 function Navbar({cartItems, showCartState}) {
   const [showCart, setShowCart] = useState(false);
 
-  let cartNumber = cartItems.length > 0 ? ` (${cartItems.length})` : ""
+  // let cartNumber = cartItems.length > 0 ? ` (${cartItems.length})` : ""
 
   const toggleShowCart = () => {
     setShowCart(state => !state);
@@ -17,7 +17,9 @@ function Navbar({cartItems, showCartState}) {
         <NavLink className="navlink" to="/">Home</NavLink>
         <NavLink className="navlink" to="products">Products</NavLink>
         <button className="cart-button" onClick={() => toggleShowCart()}>
-          Cart{cartNumber}
+          Cart{
+            cartItems.length > 0 ? ` (${cartItems.length})` : ""
+          }
         </button>
     </nav>
   );

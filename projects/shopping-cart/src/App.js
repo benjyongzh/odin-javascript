@@ -48,9 +48,9 @@ function App() {
     };
   };
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log(cartItems);
-  }, [cartItems]);
+  }, [cartItems]); */
 
   return (
     <div className="App">
