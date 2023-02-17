@@ -6,13 +6,22 @@ import HomePage from "./HomePage";
 
 afterEach(cleanup);
 
-test('check texts', () => {
+const mockfn = jest.fn();
+
+const renderHomePage = () => {
     render(
         <BrowserRouter>
             <HomePage />
         </BrowserRouter>
     );
-    expect(screen.getByText('Pok-e-Mart')).toBeInTheDocument();
-    expect(screen.getByRole('link')).toHaveTextContent('Store');
-    expect(screen.getAllByRole('img').length).toStrictEqual(1);
+}
+
+describe('Home Page', () => {
+    it('renders correct texts', () => {
+        renderHomePage();
+        expect(screen.getByText('Pok-e-Mart')).toBeInTheDocument();
+        expect(screen.getByRole('link')).toHaveTextContent('Store');
+        expect(screen.getAllByRole('img').length).toStrictEqual(1);
+    })
+    
 });
