@@ -13,4 +13,6 @@ test('check texts', () => {
         </BrowserRouter>
     );
     expect(screen.getByText('Pok-e-Mart')).toBeInTheDocument();
+    expect(screen.getByRole('link')).toHaveTextContent('Store');
+    expect(screen.getAllByRole('img').length).toStrictEqual(1);
 });
