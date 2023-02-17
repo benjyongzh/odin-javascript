@@ -1,21 +1,15 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "../styles/ItemCard.css";
+import { fetchItemInfo } from "../api";
 
 function ItemCard({itemName, itemURL, addItemToCart}) {
 
   const [info, setInfo] = useState({});
 
   const fetchData = async () => {
-    const data = await fetch(itemURL);
-    const itemInfo = await data.json();
-    setInfo({
-      name: itemInfo.names[7].name,
-      id: itemInfo.id,
-      cost: itemInfo.cost,
-      // description: itemInfo.effect_entries[0].effect,
-      image: itemInfo.sprites.default,
-    });
+    const itemInfo = await fetchItemInfo(itemURL);
+    setInfo(itemInfo);
   }
 
   useEffect(() => {
