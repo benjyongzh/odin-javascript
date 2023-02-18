@@ -1,6 +1,7 @@
 import React from "react";
 import { render, cleanup, screen, act, waitFor} from "@testing-library/react";
-import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
+import { createMemoryHistory } from "history";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -16,9 +17,9 @@ jest.mock("../api");
 const renderCard = () => {
     act(() => {
         render(
-            <MemoryRouter>
+            <BrowserRouter>
                 <ItemCard itemName="mockItem" itemURL="#" addItemToCart={mockfn} />
-            </MemoryRouter>
+            </BrowserRouter>
         );
     });
 }
@@ -68,7 +69,7 @@ describe('item card', () => {
         renderCard();
 
         const button = screen.getByRole("link", { name: "Details" });
-        userEvent.click(button);
+        act(() => {userEvent.click(button)});
 
         await waitFor(() => {
             expect(history.push).toHaveBeenCalledWith(`/products/27`);
