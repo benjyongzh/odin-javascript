@@ -5,7 +5,7 @@ export const fetchItemInfo = async url => {
         name: itemInfo.names[7].name,
         id: itemInfo.id,
         cost: itemInfo.cost,
-        // description: itemInfo.effect_entries[0].effect,
+        description: itemInfo.effect_entries[0].effect,
         image: itemInfo.sprites.default,
     };
 };

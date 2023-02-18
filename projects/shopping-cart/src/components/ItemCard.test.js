@@ -11,7 +11,7 @@ import { fetchItemInfo as api } from "../api";
 afterEach(cleanup);
 
 const mockfn = jest.fn();
-jest.mock("../api")
+jest.mock("../api");
 
 const renderCard = () => {
     act(() => {
