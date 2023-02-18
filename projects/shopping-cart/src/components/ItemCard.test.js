@@ -1,6 +1,6 @@
 import React from "react";
 import { render, cleanup, screen, act, waitFor} from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import "@testing-library/jest-dom";
 import userEvent from "@testing-library/user-event";
 
@@ -16,16 +16,16 @@ jest.mock("../api");
 const renderCard = () => {
     act(() => {
         render(
-            <BrowserRouter>
+            <MemoryRouter>
                 <ItemCard itemName="mockItem" itemURL="#" addItemToCart={mockfn} />
-            </BrowserRouter>
+            </MemoryRouter>
         );
     });
 }
 
 describe('item card', () => {
 
-    it('has correct texts', () => {
+    it('has correct fixed texts', () => {
         renderCard();
         expect(screen.getByRole('button')).toHaveTextContent('Quick Add');
         expect(screen.getByRole('link')).toHaveTextContent('Details');
@@ -44,6 +44,7 @@ describe('item card', () => {
             name: "mockItemName",
             id: 27,
             cost: 723,
+            description: "mock description",
             image: "http://image.png",
         });
 
@@ -54,6 +55,23 @@ describe('item card', () => {
         });
         await waitFor(() => {
             expect(screen.getByText("$ 723")).toBeInTheDocument();
+        });
+    });
+
+    it('link points to correct product id', async () => {
+        api.mockResolvedValue({
+            id: 27,
+        });
+        const history = createMemoryHistory();
+        history.push = jest.fn();
+
+        renderCard();
+
+        const button = screen.getByRole("link", { name: "Details" });
+        userEvent.click(button);
+
+        await waitFor(() => {
+            expect(history.push).toHaveBeenCalledWith(`/products/27`);
         });
     });
 });
