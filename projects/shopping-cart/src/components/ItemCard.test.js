@@ -1,6 +1,5 @@
 import React from "react";
 import { render, cleanup, screen, act, waitFor} from "@testing-library/react";
-import { createMemoryHistory } from "history";
 import "@testing-library/jest-dom";
 
 import { fetchItemInfo as api } from "../api";
@@ -27,7 +26,7 @@ afterEach(cleanup);
 //tests
 describe('item card', () => {
 
-    it('has correct fixed texts', async () => {
+    it('renders correct fixed texts', async () => {
         const {user} = renderWithRouter(<ItemCard />);
         await waitFor(() => {
             expect(screen.getByRole('button')).toHaveTextContent('Quick Add');
