@@ -38,11 +38,13 @@ describe('ProductDetails', () => {
         expect(screen.getByTestId("mockQC")).toBeInTheDocument();
     });
 
-    it.only('renders fetched info', () => {
+    it('renders fetched info', async () => {
         const {user} = renderWithRouter(<ProductDetails addItemToCart={mockAddToCart}/>);
-        expect(screen.getByText('mockItemName')).toBeInTheDocument();
-        expect(screen.getByText('mock description')).toBeInTheDocument();
-        expect(screen.getByRole('img')).toHaveAttribute('alt', 'mockItemName');
+        await waitFor(() => {
+            expect(screen.getByText('mockItemName')).toBeInTheDocument();
+            expect(screen.getByText('mock description')).toBeInTheDocument();
+            expect(screen.getByRole('img')).toHaveAttribute('alt', 'mockItemName');
+        });
 
     });
 
