@@ -33,7 +33,7 @@ describe('QuantityController', () => {
         });
     });
 
-    it('quantity is correct upon onQuantityChange()', async () => {
+    it('quantity is correct upon typing into input', async () => {
         const {user} = renderWithRouter(<QuantityController min={1} max={99} onQuantityChange={mockfn} />);
         const input = screen.getByTestId('input-number');
         act(() => {
@@ -41,7 +41,42 @@ describe('QuantityController', () => {
         });
 
         await waitFor(() => {
-            expect(input.value).toBe("7");
+            expect(input.value).toBe("17");
+        });
+    });
+
+    it('quantity is correctly capped by min and max', async () => {
+        const {user} = renderWithRouter(<QuantityController min={4} max={9} onQuantityChange={mockfn} />);
+        const input = screen.getByTestId('input-number');
+
+        //test appending to existing number
+        act(() => {
+            user.type(input, "2")
+        });
+        await waitFor(() => {
+            expect(input.value).toBe("9");
+        });
+
+        //test replacing existing number. hit max limit
+        act(() => {
+            user.type(input, "1", {
+                initialSelectionStart: 0,
+                initialSelectionEnd: 1
+              })
+        });
+        await waitFor(() => {
+            expect(input.value).toBe("4");
+        });
+
+        //test replacing existing number. hit min limit
+        act(() => {
+            user.type(input, "-3", {
+                initialSelectionStart: 0,
+                initialSelectionEnd: 1
+              })
+        });
+        await waitFor(() => {
+            expect(input.value).toBe("4");
         });
     });
 
@@ -58,12 +93,24 @@ describe('QuantityController', () => {
         });
     });
 
-    it.skip('renders correct cart item quantity', async () => {
-        const {user} = renderWithRouter(<QuantityController cartItems={["item 1", "item 2", "item 3"]} showCartState={mockfn} />);
-        const button = screen.getByRole('button');
-
+    it('quantity is set correctly', async () => {
+        const {user} = renderWithRouter(<QuantityController min={4} max={8} onQuantityChange={mockfn} />);
+        const buttonAdd = screen.getByText('+');
+        const input = screen.getByTestId('input-number');
+        act(() => {
+            user.click(buttonAdd)
+        });
         await waitFor(() => {
-            expect(button).toHaveTextContent("Cart (3)");
+            expect(input.value).toBe("5");
+        });
+
+
+        const buttonSubtract = screen.getByText('-');
+        act(() => {
+            user.click(buttonSubtract)
+        });
+        await waitFor(() => {
+            expect(input.value).toBe("4");
         });
     });
 });
