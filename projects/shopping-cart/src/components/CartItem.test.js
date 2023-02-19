@@ -15,8 +15,8 @@ beforeEach(() => {
     api.mockResolvedValue({
         name: "mockItemName",
         id: 27,
-        cost: 723,
-        description: "mock description",
+        cost: 26,
+        shortDescription: "mock short description",
         image: "http://image.png",
     });
 })
@@ -25,44 +25,20 @@ afterEach(cleanup);
 
 //tests
 describe('item card', () => {
-
-    it('renders correct fixed texts', async () => {
-        const {user} = renderWithRouter(<CartItem />);
-        await waitFor(() => {
-            expect(screen.getByRole('button')).toHaveTextContent('Quick Add');
-            expect(screen.getByRole('link')).toHaveTextContent('Details');
-            expect(screen.getAllByRole('img').length).toStrictEqual(1);
-        });
-    });
-
-    it('Quick Add Button adds to cart', async () => {
+    it('displays quantity', async () => {
         const {user} = renderWithRouter(<CartItem quantity={4} id={62} />);
-        const button = screen.getByRole("button", { name: "Quick Add" });
-
-        user.click(button);
-
-        await waitFor(() => {
-            expect(mockfn).toHaveBeenCalled();
-        });
+        expect(screen.getByText('4')).toBeInTheDocument();
     });
 
     it('displays fetched data', async () => {
         const {user} = renderWithRouter(<CartItem quantity={4} id={62} />);
 
         await waitFor(() => {
-            expect(screen.getByText("mockItemName")).toBeInTheDocument();
+            expect(screen.getByText('mockItemName')).toBeInTheDocument();
+            expect(screen.getByText('mock short description')).toBeInTheDocument();
+            expect(screen.getByText('26')).toBeInTheDocument();
+            expect(screen.getByText('104')).toBeInTheDocument();
+            expect(screen.getByRole('img')).toHaveAttribute('alt', 'mockItemName');
         });
-        await waitFor(() => {
-            expect(screen.getByText("$ 723")).toBeInTheDocument();
-        });
-    });
-
-    it('link points to correct product id', async () => {
-        const {user} = renderWithRouter(<CartItem quantity={4} id={62} />);
-        const button = screen.getByRole("link", { name: "Details" });
-        await waitFor(() => {
-            expect(button).toHaveAttribute('href', '/products/27')
-        });
-
     });
 });
