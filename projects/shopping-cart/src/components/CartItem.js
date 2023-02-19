@@ -21,7 +21,7 @@ function CartItem({quantity, id}) {
 
       <div className="item-info">
         <img className="info-image" alt={info.name} src={info.image} />
-        <div className="description">{info.description}</div>
+        <div className="description">{info.shortDescription}</div>
       </div>
       
       <div className="price-unit" >{info.cost}</div>

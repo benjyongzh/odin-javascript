@@ -6,6 +6,7 @@ export const fetchItemInfo = async url => {
         id: itemInfo.id,
         cost: itemInfo.cost,
         description: itemInfo.effect_entries[0].effect,
+        shortDescription: itemInfo.effect_entries[0].short_effect,
         image: itemInfo.sprites.default,
     };
 };
