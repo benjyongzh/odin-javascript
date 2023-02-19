@@ -12,7 +12,7 @@ function ProductList({products, addItemToCart}) {
   return (
     <div className="product-list">
       <div className="heading">
-        <input type='search' placeholder="search for item"></input>
+        <input type='text' placeholder="search for item"></input>
       </div>
 
       <div className="catalogue">
