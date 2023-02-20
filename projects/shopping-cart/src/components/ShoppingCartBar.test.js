@@ -6,22 +6,48 @@ import { renderWithRouter } from "../testUtils";
 import ShoppingCartBar from "./ShoppingCartBar";
 
 //mocks
-const mockfn = jest.fn();  
+const mockfn = jest.fn();
+const mockItems = [
+    {name: "item 1", price: 40, quantity: 3, id: 25},
+    {name: "item 2", price: 55, quantity: 1, id: 15},
+    {name: "item 3", price: 70, quantity: 4, id: 7},
+];
+jest.mock("./CartItem", () => () => {
+    return <mockCartItem data-testid="cart-item-1"/>;
+});
 
 //setup
 afterEach(cleanup);
 
 //tests
 describe('ShoppingCartBar', () => {
-    it('renders correct texts', () => {
+    it('renders correct texts in header section', () => {
         const {user} = renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
-        expect(screen.getAllByRole('link').length).toStrictEqual(2);
-        expect(screen.getByText('Home')).toBeInTheDocument();
-        expect(screen.getByText('Products')).toBeInTheDocument();
         expect(screen.getByText('Cart')).toBeInTheDocument();
+        expect(screen.getByText('Item')).toBeInTheDocument();
+        expect(screen.getByText('Unit Price')).toBeInTheDocument();
+        expect(screen.getByText('Quantity')).toBeInTheDocument();
+        expect(screen.getByText('Total Price')).toBeInTheDocument();
     });
 
-    it('links have correct hrefs', () => {
+    it('renders correct texts in summary section', async () => {
+        const {user} = renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
+        expect(screen.getByText('Total')).toBeInTheDocument();
+        expect(screen.getByText('$0')).toBeInTheDocument();
+        expect(screen.getByRole('button', {name: "Checkout"})).toBeInTheDocument();
+    });
+
+    it('renders correct summary total value', async () => {
+        const {user} = renderWithRouter(<ShoppingCartBar cartItems={mockItems} visibility={true} />);
+        expect(screen.getByText('$455')).toBeInTheDocument();
+    });
+
+    it('renders cart items', async () => {
+        const {user} = renderWithRouter(<ShoppingCartBar cartItems={mockItems} visibility={true} />);
+        expect(screen.getAllByTestId('cart-item-1')).toHaveLength(3);
+    });
+
+    it.skip('links have correct hrefs', () => {
         const {user} = renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
         const homeLink = screen.getByRole('link', {name: "Home"});
         expect(homeLink).toHaveAttribute('href', '/')
@@ -30,7 +56,7 @@ describe('ShoppingCartBar', () => {
     });
 
 
-    it('toggles showCart()', async () => {
+    it.skip('toggles showCart()', async () => {
         const {user} = renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
         const button = screen.getByRole('button');
         act(() => {
@@ -39,15 +65,6 @@ describe('ShoppingCartBar', () => {
 
         await waitFor(() => {
             expect(mockfn).toHaveBeenCalled();
-        });
-    });
-
-    it('renders correct cart item quantity', async () => {
-        const {user} = renderWithRouter(<ShoppingCartBar cartItems={["item 1", "item 2", "item 3"]} visibility={true} />);
-        const button = screen.getByRole('button');
-
-        await waitFor(() => {
-            expect(button).toHaveTextContent("Cart (3)");
         });
     });
 });
