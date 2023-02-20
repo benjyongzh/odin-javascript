@@ -30,41 +30,28 @@ describe('ShoppingCartBar', () => {
         expect(screen.getByText('Total Price')).toBeInTheDocument();
     });
 
-    it('renders correct texts in summary section', async () => {
+    it('renders correct texts in summary section', () => {
         const {user} = renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
         expect(screen.getByText('Total')).toBeInTheDocument();
         expect(screen.getByText('$0')).toBeInTheDocument();
         expect(screen.getByRole('button', {name: "Checkout"})).toBeInTheDocument();
     });
 
-    it('renders correct summary total value', async () => {
+    it('renders correct summary total value', () => {
         const {user} = renderWithRouter(<ShoppingCartBar cartItems={mockItems} visibility={true} />);
         expect(screen.getByText('$455')).toBeInTheDocument();
     });
 
-    it('renders cart items', async () => {
+    it('renders cart items', () => {
         const {user} = renderWithRouter(<ShoppingCartBar cartItems={mockItems} visibility={true} />);
         expect(screen.getAllByTestId('cart-item-1')).toHaveLength(3);
     });
 
-    it.skip('links have correct hrefs', () => {
-        const {user} = renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
-        const homeLink = screen.getByRole('link', {name: "Home"});
-        expect(homeLink).toHaveAttribute('href', '/')
-        const productsLink = screen.getByRole('link', {name: "Products"});
-        expect(productsLink).toHaveAttribute('href', '/products')
-    });
-
-
-    it.skip('toggles showCart()', async () => {
-        const {user} = renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
-        const button = screen.getByRole('button');
-        act(() => {
-            user.click(button)
-        });
-
-        await waitFor(() => {
-            expect(mockfn).toHaveBeenCalled();
-        });
+    it('visibility style depends on visibility prop', () => {
+        renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={false} />);
+        expect(screen.getByText('Cart').parentElement).toHaveStyle('display: none');
+        cleanup();
+        renderWithRouter(<ShoppingCartBar cartItems={[]} visibility={true} />);
+        expect(screen.getByText('Cart').parentElement).toHaveStyle('display: initial');
     });
 });
